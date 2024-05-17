@@ -18,6 +18,7 @@ import static jakarta.persistence.GenerationType.AUTO;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
+@Table(name="\"user\"")
 public class User {
 
     @Id

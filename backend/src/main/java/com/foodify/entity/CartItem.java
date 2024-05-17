@@ -20,6 +20,9 @@ public class CartItem {
     @GeneratedValue(strategy = AUTO)
     private Long id;
 
+    private int quantity;
+    private Long totalPrice;
+
     @JsonIgnore
     @ManyToOne
     private Cart cart;
@@ -27,9 +30,6 @@ public class CartItem {
     @ManyToOne
     private Food item;
 
-    private int quantity;
-
     private List<String> ingredients;
 
-    private Long totalPrice;
 }

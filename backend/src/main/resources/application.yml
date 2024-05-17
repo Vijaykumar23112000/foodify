@@ -5,5 +5,13 @@ spring:
     url: jdbc:postgresql://${POSTGRESQL_HOST}:${POSTGRESQL_PORT}/${POSTGRESQL_DATABASE}
     username: ${POSTGRESQL_USERNAME}
     password: ${POSTGRESQL_PASSWORD}
+  jpa:
+#    generate-ddl: true
+#    show-sql: true
+    hibernate:
+      ddl-auto: create-drop
+#    properties:
+#      hibernate:
+#        format_sql: true
 server:
   port: 8080
