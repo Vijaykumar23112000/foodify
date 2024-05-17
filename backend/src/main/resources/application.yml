@@ -1,0 +1,9 @@
+spring:
+  profiles:
+    active: ${ACTIVE_PROFILE}
+  datasource:
+    url: jdbc:postgresql://${POSTGRESQL_HOST}:${POSTGRESQL_PORT}/${POSTGRESQL_DATABASE}
+    username: ${POSTGRESQL_USERNAME}
+    password: ${POSTGRESQL_PASSWORD}
+server:
+  port: 8080

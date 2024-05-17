@@ -1,0 +1,167 @@
+Entities :
+
+|======================================================================================================================|
+|
+|    ⚽ User: ✅
+|
+|       ⭐ Long id; -> { @Id , @GeneratedValue(strategy = AUTO) }
+|
+|        ⭐ String fullName;
+|        ⭐ String email;
+|        ⭐ String password;
+|
+|        ⭐ USER_ROLE role; -> enum -> ROLE_CUSTOMER , ROLE_RESTAURANT_OWNER , ROLE_ADMIN
+|
+|        ⭐ List<Order> orders; -> { @JsonIgnore , @OneToMany(cascade = ALL , mappedBy = "customer") }
+|        ⭐ List<RestaurantDto> favorites; -> { @ElementCollection } -> RestaurantDto
+|
+|                ⭐⭐ RestaurantDto:
+|                        Long id;
+|                        String title;
+|                        List<String> images; -> { @Column(length=1000) }
+|                        String description;
+|
+|       ⭐ List<Address> addresses: -> { @OneToMany(cascade = All , orphanRemoval=true }
+|
+|======================================================================================================================|
+|
+|    ⚽ Address:
+|
+|        ⭐ Long id; -> { @Id , @GeneratedValue(strategy = AUTO) }
+|
+|======================================================================================================================|
+|
+|    ⚽ Order: ->{ name=orders } ✅
+|
+|        ⭐ Long id; -> { @Id , @GeneratedValue(strategy = AUTO) }
+|
+|        ⭐ Long totalMount;
+|        ⭐ String orderStatus;
+|        ⭐ Date createdAt;
+|        ⭐ int totalItem;
+|        ⭐ int totalPrize;
+|
+|        ⭐ User customer; -> { @ManyToOne }
+|        ⭐ Restaurant restaurant; -> { @ManyToOne , @JsonIgnore }
+|       ⭐ Address deliveryAddress; -> { @ManyToOne }
+|       ⭐ List<OrderItem> items; -> { @OneToMany }
+|   //  ⭐ Payment payment;
+|
+|======================================================================================================================|
+|
+|    ⚽ Restaurant: ✅
+|
+|        ⭐ Long id; -> { @Id , @GeneratedValue(strategy = AUTO) }
+|
+|        ⭐ String name;
+|        ⭐ String description
+|        ⭐ String cuisineType;
+|        ⭐ String openingHours;
+|        ⭐ LocalDateTime registrationDate;
+|        ⭐ boolean open;
+|
+|        ⭐ Address address; -> { @OneToOne }
+|        ⭐ ContactInformation contactInformation; -> { @Embedded }
+|
+|                ⭐⭐ ContactInformation:
+|                        String email;
+|                        String mobile;
+|                        String twitter;
+|                        String instagram;
+|
+|        ⭐ User owner; -> { @OneToOne }
+|        ⭐ List<Order> orders; -> { @OneToMany(mappedBy = "restaurant" , cascade = ALL , orphanRemoval = true) }
+|        ⭐ List<String> images; -> { @ElementCollection , @Column(length = 1000) }
+|        ⭐ List<Food> foods; -> { @oneToMany(mappedBy = "restaurant" , cascade = ALL) , @JsonIgnore }
+|
+|======================================================================================================================|
+|
+|    ⚽ OrderItem: ✅
+|
+|        ⭐ Long id; -> { @Id , @GeneratedValue(strategy = AUTO) }
+|
+|        ⭐ int quantity;
+|        ⭐ Long totalPrize;
+|
+|        ⭐ List<String> ingredients;
+|        ⭐ Food food; -> { @ManyToOnne }
+|
+|======================================================================================================================|
+|
+|    ⚽ Food: ✅
+|
+|        ⭐ Long id; -> { @Id , @GeneratedValue(strategy = AUTO) }
+|
+|        ⭐ String name;
+|        ⭐ String description;
+|        ⭐ Long price;
+|        ⭐ boolean isVegetarian
+|        ⭐ boolean isSeasonable;
+|        ⭐ boolean available;
+|        ⭐ Date creationDate
+|
+|        ⭐ Category foodCategory; -> { @ManyToOne }
+|        ⭐ List<String> images; -> { @Column(length = 1000) , @ElementCollection }
+|        ⭐ Restaurant restaurant; -> { @ManyToOne }
+|        ⭐ List<IngredientsItem> ingredients; -> { @ManyToMany }
+|
+|======================================================================================================================|
+|
+|    ⚽ IngredientsItem: ✅
+|
+|       ⭐ Long id; -> { @Id , @GeneratedValue(strategy = AUTO) }
+|
+|        ⭐ String name;
+|        ⭐ boolean isStock = true;
+|
+|        ⭐ IngredientCategory category; -> { @ManyToOne }
+|        ⭐ Restaurant restaurant; -> { @ManyToOne , @JsonIgnore }
+|
+|======================================================================================================================|
+|
+|    ⚽ IngredientsCategory: ✅
+|
+|        ⭐ Long id; -> { @Id , @GeneratedValue(strategy = AUTO) }
+|
+|        ⭐ String name;
+|
+|        ⭐ Restaurant restaurant; -> { @ManyToOne , @JsonIgnore }
+|        ⭐ List<IngredientsItem> ingredients; -> { @OneToMany(mappedBy = "category" , cascade = ALL) }
+|
+|
+|======================================================================================================================|
+|
+|    ⚽ Category: ✅
+|
+|        ⭐ Long id; -> { @Id , @GeneratedValue(strategy = AUTO) }
+|
+|        ⭐ String name;
+|
+|        ⭐ Restaurant restaurant; -> { @ManyToOne , @JsonIgnore }
+|
+|======================================================================================================================|
+|
+|    ⚽ Cart: ✅
+|
+|        ⭐ Long id; -> { @Id , @GeneratedValue(strategy = AUTO) }
+|
+|        ⭐ Long total;
+|
+|        ⭐ User customer; -> { @OneToOne }
+|        ⭐ List<CartItem> item; -> { @OneToMany(mappedBy = "cart" , cascade = ALL , orphanRemoval = true) }
+|
+|======================================================================================================================|
+|
+|
+|    ⚽ CartItem: ✅
+|
+|        ⭐ Long id; -> { @Id , @GeneratedValue(strategy = AUTO) }
+|
+|        ⭐ int quality;
+|        ⭐ Long totalPrize;
+|
+|        ⭐ Cart cart; -> { @ManyToOne , @JsonIgnore }
+|        ⭐ Food item; -> { @ManyToOne }
+|        ⭐ List<String> ingredients;
+|
+|======================================================================================================================|
