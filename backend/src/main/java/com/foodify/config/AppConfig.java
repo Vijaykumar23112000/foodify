@@ -1,5 +1,6 @@
 package com.foodify.config;
 
+import com.foodify.filter.JwtAuthenticationFilter;
 import com.foodify.service.UserDetailsServiceImpl;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
@@ -35,16 +36,20 @@ public class AppConfig {
         return http
                 .csrf(AbstractHttpConfigurer::disable)
                 .cors(cors->cors.configurationSource(corsConfigurationSource()))
-                .sessionManagement(session -> session
-                        .sessionCreationPolicy(STATELESS)
-                )
                 .authorizeHttpRequests(request -> request
                         .requestMatchers("/api/admin/**")
                         .hasAnyRole("ADMIN" , "RESTAURANT_OWNER")
+                        .requestMatchers("/admin_only")
+                        .hasAuthority("ADMIN")
                         .requestMatchers("/api/**")
+                        .authenticated()
+                        .requestMatchers("/secured")
                         .authenticated()
                         .anyRequest()
                         .permitAll()
+                )
+                .sessionManagement(session -> session
+                        .sessionCreationPolicy(STATELESS)
                 )
                 .userDetailsService(userDetailsService)
                 .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class)

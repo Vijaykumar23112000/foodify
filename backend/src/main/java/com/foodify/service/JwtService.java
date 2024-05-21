@@ -18,7 +18,7 @@ import static io.jsonwebtoken.io.Decoders.BASE64URL;
 @Service
 public class JwtService {
 
-    private final String SECRET_KEY = "";
+    private final String SECRET_KEY = "this is highly encrypted";
 
     private final Supplier<SecretKey> getSignInKey = () -> Keys.hmacShaKeyFor(BASE64URL.decode(SECRET_KEY));
 
