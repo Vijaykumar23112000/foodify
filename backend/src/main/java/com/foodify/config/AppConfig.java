@@ -39,11 +39,7 @@ public class AppConfig {
                 .authorizeHttpRequests(request -> request
                         .requestMatchers("/api/admin/**")
                         .hasAnyRole("ADMIN" , "RESTAURANT_OWNER")
-                        .requestMatchers("/admin_only")
-                        .hasAuthority("ADMIN")
                         .requestMatchers("/api/**")
-                        .authenticated()
-                        .requestMatchers("/secured")
                         .authenticated()
                         .anyRequest()
                         .permitAll()

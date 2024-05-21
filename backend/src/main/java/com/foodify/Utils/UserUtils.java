@@ -11,9 +11,9 @@ public class UserUtils {
                 .fullName(request.getFullName())
                 .email(request.getEmail())
                 .role(request.getRole())
-                .orders(null)
+                /*.orders(null)
                 .favorites(null)
-                .addresses(null)
+                .addresses(null)*/
                 .build();
     }
 }

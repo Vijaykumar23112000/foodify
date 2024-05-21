@@ -18,7 +18,7 @@ import static io.jsonwebtoken.io.Decoders.BASE64URL;
 @Service
 public class JwtService {
 
-    private final String SECRET_KEY = "this is highly encrypted";
+    private final String SECRET_KEY = "";
 
     private final Supplier<SecretKey> getSignInKey = () -> Keys.hmacShaKeyFor(BASE64URL.decode(SECRET_KEY));
 
@@ -26,8 +26,8 @@ public class JwtService {
                 Jwts
                     .builder()
                     .subject(user.getUsername())
-                    .issuedAt(new Date(System.currentTimeMillis()))
-                    .expiration(new Date(System.currentTimeMillis() + 24*60*60*1000))
+                    .issuedAt(new Date())
+                    .expiration(new Date(new Date().getTime() + 86400000))
                     .signWith(getSignInKey.get())
                     .compact();
 
