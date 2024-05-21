@@ -27,10 +27,8 @@ public class AuthenticationServiceImpl implements AuthenticationService {
 
     @Override
     public AuthenticationResponse register(UserDto request) throws Exception {
-        User isUser = userRepository.findByEmail(request.getEmail());
-        if(isUser!=null){
-            throw new Exception("Email Already Exists");
-        }
+
+        if(userRepository.findByEmail(request.getEmail())!=null) throw new Exception("Email Already Exists");
         User user = UserUtils.createUser(request);
         user.setPassword(encoder.encode(request.getPassword()));
         User savedUser = userRepository.save(user);
@@ -39,15 +37,18 @@ public class AuthenticationServiceImpl implements AuthenticationService {
         cartRepository.save(cart);
         String token = jwtService.generateToken.apply(user);
         return new AuthenticationResponse(token , "Registration Success" , savedUser.getRole());
+
     }
 
     @Override
     public AuthenticationResponse login(LoginRequestDto request){
+
         var unauthenticated = new UsernamePasswordAuthenticationToken(request.getEmail() , request.getPassword());
         authenticationManager.authenticate(unauthenticated);
         User user = userRepository.findByEmail(request.getEmail());
         String token = jwtService.generateToken.apply(user);
         return new AuthenticationResponse(token , "Login Success" , user.getRole());
+
     }
 
 }

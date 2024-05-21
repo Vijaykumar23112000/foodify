@@ -6,4 +6,5 @@ public interface UserService {
 
     User findUserByJwtToken(String token) throws Exception;
     User findUserByEmail(String email) throws Exception;
+
 }

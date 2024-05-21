@@ -4,6 +4,7 @@ import com.foodify.entity.User;
 import com.foodify.repository.UserRepository;
 import com.foodify.service.UserService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -14,15 +15,25 @@ public class UserServiceImpl implements UserService {
     private final JwtServiceImpl jwtService;
 
     @Override
-    public User findUserByJwtToken(String token) throws Exception {
+    public User findUserByJwtToken(String token) {
+
         String email = jwtService.extractUsername.apply(token);
-        return findUserByEmail(email);
+        if(email!=null){
+            User user = userRepository.findByEmail(email);
+            if(user!=null) return user;
+            else throw new UsernameNotFoundException("User not found with email : "+email);
+        }
+        else throw new IllegalArgumentException("Invalid Token");
+
     }
 
     @Override
     public User findUserByEmail(String email) throws Exception {
+
         User user = userRepository.findByEmail(email);
         if(user==null) throw new Exception("User Not Found Exception");
         return user;
+
     }
+
 }

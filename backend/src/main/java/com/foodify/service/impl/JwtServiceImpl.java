@@ -5,6 +5,7 @@ import com.foodify.myimpl.TriFunction;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.security.Keys;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
@@ -18,14 +19,15 @@ import static io.jsonwebtoken.io.Decoders.BASE64URL;
 @Service
 public class JwtServiceImpl {
 
-    private final String SECRET_KEY = "Highly Encrypted Bruh";
+    @Value("${jwt.secret}")
+    private String SECRET_KEY;
 
     private final Supplier<SecretKey> getSignInKey = () -> Keys.hmacShaKeyFor(BASE64URL.decode(SECRET_KEY));
 
     public final Function<User , String> generateToken = user ->
                 Jwts
                     .builder()
-                    .subject(user.getUsername())
+                    .subject(user.getEmail())
                     .issuedAt(new Date())
                     .expiration(new Date(System.currentTimeMillis() + 86400000))
                     .signWith(getSignInKey.get())

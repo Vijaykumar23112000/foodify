@@ -10,8 +10,10 @@ import lombok.Setter;
 @Setter
 @Builder
 public class UserDto {
+
     private String fullName;
     private String email;
     private String password;
     private Role role;
+
 }

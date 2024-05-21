@@ -8,4 +8,5 @@ public interface AuthenticationService {
 
     AuthenticationResponse register(UserDto request) throws Exception;
     AuthenticationResponse login(LoginRequestDto request);
+
 }
