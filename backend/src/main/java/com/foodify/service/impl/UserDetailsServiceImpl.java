@@ -1,4 +1,4 @@
-package com.foodify.service;
+package com.foodify.service.impl;
 
 import com.foodify.repository.UserRepository;
 import lombok.RequiredArgsConstructor;

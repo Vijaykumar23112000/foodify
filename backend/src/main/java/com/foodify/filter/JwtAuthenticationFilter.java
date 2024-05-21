@@ -1,7 +1,7 @@
 package com.foodify.filter;
 
-import com.foodify.service.JwtService;
-import com.foodify.service.UserDetailsServiceImpl;
+import com.foodify.service.impl.JwtServiceImpl;
+import com.foodify.service.impl.UserDetailsServiceImpl;
 import jakarta.annotation.Nonnull;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
@@ -21,7 +21,7 @@ import java.io.IOException;
 @RequiredArgsConstructor
 public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
-    private final JwtService jwtService;
+    private final JwtServiceImpl jwtService;
     private final UserDetailsServiceImpl userDetailsService;
 
     @Override
@@ -30,23 +30,27 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
             @Nonnull HttpServletResponse response,
             @Nonnull FilterChain filterChain)
                         throws ServletException, IOException {
+
         String authHeader = request.getHeader("Authorization");
         if(authHeader == null || !authHeader.startsWith("Bearer ")){
             filterChain.doFilter(request,response);
             return;
         }
-        String token = authHeader.substring(7);
-        String username = jwtService.extractUsername.apply(token);
-        if((username != null) && (SecurityContextHolder.getContext().getAuthentication() == null)){
-            UserDetails userDetails = userDetailsService.loadUserByUsername(username);
-            if (jwtService.isValid.apply(token, userDetails)) {
-                UsernamePasswordAuthenticationToken authToken = new UsernamePasswordAuthenticationToken(
-                        userDetails , null , userDetails.getAuthorities()
-                );
-                authToken.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
-                SecurityContextHolder.getContext().setAuthentication(authToken);
+        try{
+            String token = authHeader.substring(7);
+            String username = jwtService.extractUsername.apply(token);
+            if((username != null) && (SecurityContextHolder.getContext().getAuthentication() == null)){
+                UserDetails userDetails = userDetailsService.loadUserByUsername(username);
+                if (jwtService.isValid.apply(token, userDetails)) {
+                    UsernamePasswordAuthenticationToken authToken = new UsernamePasswordAuthenticationToken(
+                            userDetails , null , userDetails.getAuthorities()
+                    );
+                    authToken.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
+                    SecurityContextHolder.getContext().setAuthentication(authToken);
+                }
             }
-        }
+        } catch(Exception e){logger.error("Error Processing Jwt Token : " , e);}
         filterChain.doFilter(request,response);
+
     }
 }

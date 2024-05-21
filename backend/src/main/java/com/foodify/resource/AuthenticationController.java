@@ -3,7 +3,7 @@ package com.foodify.resource;
 import com.foodify.dto.LoginRequestDto;
 import com.foodify.dto.UserDto;
 import com.foodify.response.AuthenticationResponse;
-import com.foodify.service.AuthenticationService;
+import com.foodify.service.impl.AuthenticationServiceImpl;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/auth")
 public class AuthenticationController {
 
-    private final AuthenticationService authenticationService;
+    private final AuthenticationServiceImpl authenticationService;
 
     @PostMapping(value = "/signup", produces = "application/json")
     public ResponseEntity<AuthenticationResponse> register(@RequestBody UserDto request) throws Exception {

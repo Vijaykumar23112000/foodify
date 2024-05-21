@@ -1,4 +1,4 @@
-package com.foodify.service;
+package com.foodify.service.impl;
 
 import com.foodify.entity.User;
 import com.foodify.myimpl.TriFunction;
@@ -16,9 +16,9 @@ import java.util.function.Supplier;
 import static io.jsonwebtoken.io.Decoders.BASE64URL;
 
 @Service
-public class JwtService {
+public class JwtServiceImpl {
 
-    private final String SECRET_KEY = "";
+    private final String SECRET_KEY = "Highly Encrypted Bruh";
 
     private final Supplier<SecretKey> getSignInKey = () -> Keys.hmacShaKeyFor(BASE64URL.decode(SECRET_KEY));
 
@@ -27,7 +27,7 @@ public class JwtService {
                     .builder()
                     .subject(user.getUsername())
                     .issuedAt(new Date())
-                    .expiration(new Date(new Date().getTime() + 86400000))
+                    .expiration(new Date(System.currentTimeMillis() + 86400000))
                     .signWith(getSignInKey.get())
                     .compact();
 
