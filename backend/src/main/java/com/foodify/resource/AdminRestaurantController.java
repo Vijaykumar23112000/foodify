@@ -20,8 +20,7 @@ public class AdminRestaurantController {
     private final RestaurantServiceImpl restaurantService;
     private final UserServiceImpl userService;
     private final UserAndUserResponseDtoMapper mapper;
-
-    @PostMapping
+    @PostMapping()
     public ResponseEntity<Restaurant> createRestaurant(
             @RequestBody RestaurantRequestDto request,
             @RequestHeader("Authorization") String token
@@ -39,7 +38,7 @@ public class AdminRestaurantController {
             @PathVariable Long id
     ) throws Exception
     {
-        User user = mapper.toENTITY(userService.findUserByJwtToken(token));
+//        User user = mapper.toENTITY(userService.findUserByJwtToken(token));
         Restaurant restaurant = restaurantService.updateRestaurant(id , request);
         return ResponseEntity.status(HttpStatus.OK).body(restaurant);
     }
@@ -50,7 +49,7 @@ public class AdminRestaurantController {
             @PathVariable Long id
     ) throws Exception
     {
-        User user = mapper.toENTITY(userService.findUserByJwtToken(token));
+//        User user = mapper.toENTITY(userService.findUserByJwtToken(token));
         restaurantService.deleteRestaurant(id);
         MessageResponse msg = new MessageResponse("Restaurant Deleted Successfully");
         return ResponseEntity.status(HttpStatus.OK).body(msg);
@@ -62,7 +61,7 @@ public class AdminRestaurantController {
             @PathVariable Long id
     ) throws Exception
     {
-        User user = mapper.toENTITY(userService.findUserByJwtToken(token));
+//        User user = mapper.toENTITY(userService.findUserByJwtToken(token));
         Restaurant restaurant = restaurantService.updateRestaurantStatus(id);
         return ResponseEntity.status(HttpStatus.OK).body(restaurant);
     }

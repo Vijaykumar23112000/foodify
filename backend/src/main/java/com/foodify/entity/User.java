@@ -1,7 +1,6 @@
 package com.foodify.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonProperty;
 import com.foodify.dto.RestaurantDto;
 import com.foodify.enumeration.Role;
 import jakarta.persistence.*;
@@ -32,6 +31,7 @@ public class User implements UserDetails {
     private String fullName;
     private String email;
     private String password;
+    @Enumerated(EnumType.STRING)
     private Role role;
 
     @JsonIgnore

@@ -28,7 +28,7 @@ public class RestaurantController {
             @RequestParam String keyWord
     ) throws Exception
     {
-        User user = mapper.toENTITY(userService.findUserByJwtToken(token));
+//        User user = mapper.toENTITY(userService.findUserByJwtToken(token));
         List<Restaurant> restaurants = restaurantService.searchRestaurant(keyWord);
         return ResponseEntity.status(HttpStatus.OK).body(restaurants);
     }
@@ -38,7 +38,7 @@ public class RestaurantController {
             @RequestHeader("Authorization") String token
     ) throws Exception
     {
-        User user = mapper.toENTITY(userService.findUserByJwtToken(token));
+//        User user = mapper.toENTITY(userService.findUserByJwtToken(token));
         List<Restaurant> restaurants = restaurantService.getAllRestaurant();
         return ResponseEntity.status(HttpStatus.OK).body(restaurants);
     }
@@ -49,7 +49,7 @@ public class RestaurantController {
             @PathVariable Long id
     ) throws Exception
     {
-        User user = mapper.toENTITY(userService.findUserByJwtToken(token));
+//        User user = mapper.toENTITY(userService.findUserByJwtToken(token));
         Restaurant restaurant = restaurantService.findRestaurantById(id);
         return ResponseEntity.status(HttpStatus.OK).body(restaurant);
     }

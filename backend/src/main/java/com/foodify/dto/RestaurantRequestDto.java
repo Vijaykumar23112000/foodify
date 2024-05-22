@@ -11,7 +11,7 @@ import java.util.List;
 @Getter
 @Setter
 @Builder
-public class RestaurantRequestDto { // CreateRestaurantRequest
+public class RestaurantRequestDto {
 
     private Long id;
     private String name;

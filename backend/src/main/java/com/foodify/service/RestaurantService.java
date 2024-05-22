@@ -9,7 +9,7 @@ import java.util.List;
 
 public interface RestaurantService {
 
-    Restaurant createRestaurant(RestaurantRequestDto restaurantRequest , User userRequest); // CreateRestaurantRequest
+    Restaurant createRestaurant(RestaurantRequestDto restaurantRequest , User userRequest);
     Restaurant updateRestaurant(Long restaurantId , RestaurantRequestDto updatedRestaurantRequest) throws Exception;
     void deleteRestaurant(Long restaurantId) throws Exception;
     List<Restaurant> getAllRestaurant();   // -> Only Available For Non-Customer

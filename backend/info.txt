@@ -25,9 +25,15 @@ Entities :
 |
 |======================================================================================================================|
 |
-|    ⚽ Address:
+|    ⚽ Address: ✅
 |
 |        ⭐ Long id; -> { @Id , @GeneratedValue(strategy = AUTO) }
+|
+|        ⭐ String streetAddress;
+|        ⭐ String city;
+|        ⭐ String stateProvince;
+|        ⭐ String postalCode;
+|        ⭐ String country;
 |
 |======================================================================================================================|
 |
@@ -165,3 +171,22 @@ Entities :
 |        ⭐ List<String> ingredients;
 |
 |======================================================================================================================|
+
+
+EndPoints :
+
+    /auth/signup                                        -> Everyone can access
+    /auth/signin                                        -> Everyone can access
+
+    /api/admin/**                                       -> Only ADMIN & RESTAURANT_OWNER can access
+    /api/**                                             -> authenticated
+
+    /api/restaurants                                    -> authenticated
+    /api/restaurants/search                             -> authenticated
+    /api/restaurants/{id}                               -> authenticated
+    /api/restaurants/{id}/add-favorites                 -> authenticated
+
+    /api/admin/restaurants                              -> authenticated and ADMIN & RESTAURANT_OWNER only
+    /api/admin/restaurants/{id}                         -> authenticated and ADMIN & RESTAURANT_OWNER only
+    /api/admin/restaurants/{id}/status                  -> authenticated and ADMIN & RESTAURANT_OWNER only
+    /api/admin/restaurants/{id}/user                    -> authenticated and ADMIN & RESTAURANT_OWNER only
