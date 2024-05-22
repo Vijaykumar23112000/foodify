@@ -3,9 +3,7 @@ package com.foodify.entity;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.foodify.domain.ContactInformation;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -15,7 +13,9 @@ import static jakarta.persistence.CascadeType.ALL;
 import static jakarta.persistence.GenerationType.AUTO;
 
 @Entity
-@Data
+@Getter
+@Setter
+@Builder
 @AllArgsConstructor
 @NoArgsConstructor
 public class Restaurant {

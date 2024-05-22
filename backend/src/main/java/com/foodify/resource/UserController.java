@@ -1,6 +1,6 @@
 package com.foodify.resource;
 
-import com.foodify.entity.User;
+import com.foodify.dto.UserResponseDto;
 import com.foodify.service.impl.UserServiceImpl;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -14,7 +14,7 @@ public class UserController {
     private final UserServiceImpl userService;
 
     @GetMapping("/profile")
-    public ResponseEntity<User> findByJwtToken( @RequestHeader("Authorization") String token ) {
+    public ResponseEntity<UserResponseDto> findByJwtToken(@RequestHeader("Authorization") String token ) {
         return ResponseEntity.ok(userService.findUserByJwtToken(token.substring(7).trim()));
     }
 

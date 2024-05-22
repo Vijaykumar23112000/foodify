@@ -1,7 +1,7 @@
 package com.foodify.resource;
 
 import com.foodify.dto.LoginRequestDto;
-import com.foodify.dto.UserDto;
+import com.foodify.dto.UserRequestDto;
 import com.foodify.response.AuthenticationResponse;
 import com.foodify.service.impl.AuthenticationServiceImpl;
 import lombok.RequiredArgsConstructor;
@@ -20,7 +20,7 @@ public class AuthenticationController {
     private final AuthenticationServiceImpl authenticationService;
 
     @PostMapping(value = "/signup", produces = "application/json")
-    public ResponseEntity<AuthenticationResponse> register(@RequestBody UserDto request) throws Exception {
+    public ResponseEntity<AuthenticationResponse> register(@RequestBody UserRequestDto request) throws Exception {
         return ResponseEntity.status(HttpStatus.CREATED).body(authenticationService.register(request));
     }
 

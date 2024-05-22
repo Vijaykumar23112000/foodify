@@ -2,7 +2,7 @@ package com.foodify.service.impl;
 
 import com.foodify.Utils.UserUtils;
 import com.foodify.dto.LoginRequestDto;
-import com.foodify.dto.UserDto;
+import com.foodify.dto.UserRequestDto;
 import com.foodify.entity.Cart;
 import com.foodify.entity.User;
 import com.foodify.repository.CartRepository;
@@ -26,7 +26,7 @@ public class AuthenticationServiceImpl implements AuthenticationService {
     private final CartRepository cartRepository;
 
     @Override
-    public AuthenticationResponse register(UserDto request) throws Exception {
+    public AuthenticationResponse register(UserRequestDto request) throws Exception {
 
         if(userRepository.findByEmail(request.getEmail())!=null) throw new Exception("Email Already Exists");
         User user = UserUtils.createUser(request);

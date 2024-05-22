@@ -1,10 +1,10 @@
 package com.foodify.service;
 
-import com.foodify.entity.User;
+import com.foodify.dto.UserResponseDto;
 
 public interface UserService {
 
-    User findUserByJwtToken(String token) throws Exception;
-    User findUserByEmail(String email) throws Exception;
+    UserResponseDto findUserByJwtToken(String token) throws Exception;
+    UserResponseDto findUserByEmail(String email) throws Exception;
 
 }

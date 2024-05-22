@@ -1,11 +1,11 @@
 package com.foodify.Utils;
 
-import com.foodify.dto.UserDto;
+import com.foodify.dto.UserRequestDto;
 import com.foodify.entity.User;
 
 public class UserUtils {
 
-    public static User createUser(UserDto request){
+    public static User createUser(UserRequestDto request){
 
         return User
                 .builder()
