@@ -6,6 +6,7 @@ import com.foodify.entity.Restaurant;
 import com.foodify.entity.User;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 
 public class RestaurantUtil {
 
@@ -13,15 +14,18 @@ public class RestaurantUtil {
 
         return Restaurant
                 .builder()
-                .address(address)
-                .contactInformation(restaurantRequest.getContactInformation())
-                .cuisineType(restaurantRequest.getCuisineType())
-                .description(restaurantRequest.getDescription())
-                .images(restaurantRequest.getImages())
                 .name(restaurantRequest.getName())
+                .description(restaurantRequest.getDescription())
+                .cuisineType(restaurantRequest.getCuisineType())
                 .openingHours(restaurantRequest.getOpeningHours())
                 .registrationDate(LocalDateTime.now())
+                .open(true)
+                .address(address)
+                .contactInformation(restaurantRequest.getContactInformation())
                 .owner(userRequest)
+                .orders(new ArrayList<>())
+                .images(restaurantRequest.getImages())
+                .foods(new ArrayList<>())
                 .build();
 
     }

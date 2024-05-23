@@ -26,7 +26,7 @@ public class AdminRestaurantController {
             @RequestHeader("Authorization") String token
             )
     {
-        User user = mapper.toENTITY(userService.findUserByJwtToken(token));
+        User user = mapper.toENTITY(userService.findUserByJwtToken(token.substring(7).trim()));
         Restaurant restaurant = restaurantService.createRestaurant(request , user);
         return ResponseEntity.status(HttpStatus.CREATED).body(restaurant);
     }
@@ -38,7 +38,7 @@ public class AdminRestaurantController {
             @PathVariable Long id
     ) throws Exception
     {
-//        User user = mapper.toENTITY(userService.findUserByJwtToken(token));
+//        User user = mapper.toENTITY(userService.findUserByJwtToken(token.substring(7).trim()));
         Restaurant restaurant = restaurantService.updateRestaurant(id , request);
         return ResponseEntity.status(HttpStatus.OK).body(restaurant);
     }
@@ -49,7 +49,7 @@ public class AdminRestaurantController {
             @PathVariable Long id
     ) throws Exception
     {
-//        User user = mapper.toENTITY(userService.findUserByJwtToken(token));
+//        User user = mapper.toENTITY(userService.findUserByJwtToken(token.substring(7).trim()));
         restaurantService.deleteRestaurant(id);
         MessageResponse msg = new MessageResponse("Restaurant Deleted Successfully");
         return ResponseEntity.status(HttpStatus.OK).body(msg);
@@ -61,7 +61,7 @@ public class AdminRestaurantController {
             @PathVariable Long id
     ) throws Exception
     {
-//        User user = mapper.toENTITY(userService.findUserByJwtToken(token));
+//        User user = mapper.toENTITY(userService.findUserByJwtToken(token.substring(7).trim()));
         Restaurant restaurant = restaurantService.updateRestaurantStatus(id);
         return ResponseEntity.status(HttpStatus.OK).body(restaurant);
     }
@@ -71,7 +71,7 @@ public class AdminRestaurantController {
             @RequestHeader("Authorization") String token
     ) throws Exception
     {
-        User user = mapper.toENTITY(userService.findUserByJwtToken(token));
+        User user = mapper.toENTITY(userService.findUserByJwtToken(token.substring(7).trim()));
         Restaurant restaurant = restaurantService.findRestaurantByUserId(user.getId());
         return ResponseEntity.status(HttpStatus.OK).body(restaurant);
     }
