@@ -2,24 +2,29 @@ package com.foodify.dto;
 
 import com.foodify.domain.ContactInformation;
 import com.foodify.entity.Address;
-import lombok.*;
+import com.foodify.entity.Order;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.Setter;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Getter
 @Setter
 @Builder
-@AllArgsConstructor
-@NoArgsConstructor
-public class RestaurantRequestDto {
+public class RestaurantResponseDto {
 
     private Long id;
-    private String name;
     private String description;
     private String cuisineType;
+    private String openingHours;
+    private LocalDateTime registrationDate;
+    private boolean open;
     private Address address;
     private ContactInformation contactInformation;
-    private String openingHours;
+    private UserResponseDto owner;
+    private List<Order> orders;
     private List<String> images;
 
 }

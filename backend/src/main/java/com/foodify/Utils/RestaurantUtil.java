@@ -19,7 +19,7 @@ public class RestaurantUtil {
                 .cuisineType(restaurantRequest.getCuisineType())
                 .openingHours(restaurantRequest.getOpeningHours())
                 .registrationDate(LocalDateTime.now())
-                .open(true)
+                .open(false)
                 .address(address)
                 .contactInformation(restaurantRequest.getContactInformation())
                 .owner(userRequest)

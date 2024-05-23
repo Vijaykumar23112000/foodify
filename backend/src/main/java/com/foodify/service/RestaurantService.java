@@ -12,7 +12,7 @@ public interface RestaurantService {
     Restaurant createRestaurant(RestaurantRequestDto restaurantRequest , User userRequest);
     Restaurant updateRestaurant(Long restaurantId , RestaurantRequestDto updatedRestaurantRequest) throws Exception;
     void deleteRestaurant(Long restaurantId) throws Exception;
-    List<Restaurant> getAllRestaurant();   // -> Only Available For Non-Customer
+    List<Restaurant> getAllRestaurant();
     List<Restaurant> searchRestaurant(String keyword);
     Restaurant findRestaurantById(Long id) throws Exception;
     Restaurant findRestaurantByUserId(Long userId) throws Exception;

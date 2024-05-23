@@ -74,8 +74,16 @@ public class RestaurantServiceImpl implements RestaurantService {
     public RestaurantDto addToFavorites(Long restaurantId, User user) throws Exception {
         Restaurant restaurant = findRestaurantById(restaurantId);
         RestaurantDto dto = RestaurantDtoUtil.createRestaurantDto(restaurant);
-        if(user.getFavorites().contains(dto)) user.getFavorites().remove(dto);
-        else user.getFavorites().add(dto);
+        boolean isFavorite = false;
+        List<RestaurantDto> favorites = user.getFavorites();
+        for(RestaurantDto fav: favorites){
+            if(fav.getId().equals(restaurantId)){
+                isFavorite = true;
+                break;
+            }
+        }
+        if(isFavorite) favorites.removeIf(favorite -> favorite.getId().equals(restaurantId));
+        else favorites.add(dto);
         userRepository.save(user);
         return dto;
     }

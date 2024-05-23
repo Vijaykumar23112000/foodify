@@ -22,7 +22,8 @@ public class JwtServiceImpl {
     @Value("${jwt.secret}")
     private String SECRET_KEY;
 
-    private final Supplier<SecretKey> getSignInKey = () -> Keys.hmacShaKeyFor(BASE64URL.decode(SECRET_KEY));
+    private final Supplier<SecretKey> getSignInKey = () ->
+            Keys.hmacShaKeyFor(BASE64URL.decode(SECRET_KEY));
 
     public final Function<User , String> generateToken = user ->
                 Jwts
@@ -42,16 +43,24 @@ public class JwtServiceImpl {
                     .getPayload();
 
 
-    public Function<String , String> extractUsername = token -> extractClaim(token , Claims::getSubject);
+    public Function<String , String> extractUsername = token ->
+            extractClaim(token , Claims::getSubject);
 
     private <T> T extractClaim(String token , Function<Claims , T> resolver){
         Claims claims = extractAllClaims.apply(token);
         return resolver.apply(claims);
     }
-    private final Function<String , Date> extractExpiration = token -> extractClaim(token , Claims::getExpiration);
+    private final Function<String , Date> extractExpiration = token ->
+            extractClaim(token , Claims::getExpiration);
 
-    private final Function<String , Boolean> isTokenExpired = token -> extractExpiration.apply(token).before(new Date());
+    private final Function<String , Boolean> isTokenExpired = token ->
+            extractExpiration
+                    .apply(token)
+                    .before(new Date());
 
-    public final TriFunction<String , UserDetails , Boolean> isValid = (token , user) -> extractUsername.apply(token).equals(user.getUsername()) && !isTokenExpired.apply(token);
+    public final TriFunction<String , UserDetails , Boolean> isValid = (token , user) ->
+            extractUsername
+                    .apply(token)
+                    .equals(user.getUsername()) && !isTokenExpired.apply(token);
 
 }

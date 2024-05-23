@@ -14,8 +14,8 @@ public class UserResponseDtoUtil {
                         .fullName(user.getFullName())
                         .email(user.getEmail())
                         .role(user.getRole())
-                        .favorites(new ArrayList<>())
-                        .addresses(new ArrayList<>())
+                        .favorites(user.getFavorites())
+                        .addresses(user.getAddresses())
                         .build();
     }
 }

@@ -2,10 +2,7 @@ package com.foodify.dto;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Embeddable;
-import lombok.Builder;
-import lombok.Data;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 import java.util.List;
 
@@ -13,6 +10,8 @@ import java.util.List;
 @Setter
 @Builder
 @Embeddable
+@AllArgsConstructor
+@NoArgsConstructor
 public class RestaurantDto {
 
     private Long id;
