@@ -1,6 +1,6 @@
 package com.foodify.service.impl;
 
-import com.foodify.Utils.UserUtils;
+import com.foodify.Utils.user.UserUtils;
 import com.foodify.dto.authentication.LoginRequestDto;
 import com.foodify.dto.user.UserRequestDto;
 import com.foodify.entity.Cart;

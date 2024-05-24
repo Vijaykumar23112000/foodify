@@ -1,4 +1,4 @@
-package com.foodify.Utils;
+package com.foodify.Utils.restaurant;
 
 import com.foodify.dto.restaurant.RestaurantRequestDto;
 import com.foodify.entity.Address;

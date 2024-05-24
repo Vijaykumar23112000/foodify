@@ -1,6 +1,6 @@
 package com.foodify.resource.user;
 
-import com.foodify.Utils.RestaurantConverter;
+import com.foodify.Utils.restaurant.RestaurantConverter;
 import com.foodify.dto.restaurant.RestaurantDto;
 import com.foodify.dto.restaurant.RestaurantResponseDto;
 import com.foodify.dto.user.UserResponseDto;

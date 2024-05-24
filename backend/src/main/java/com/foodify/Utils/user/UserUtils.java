@@ -1,4 +1,4 @@
-package com.foodify.Utils;
+package com.foodify.Utils.user;
 
 import com.foodify.dto.user.UserRequestDto;
 import com.foodify.entity.User;

@@ -1,4 +1,4 @@
-package com.foodify.Utils;
+package com.foodify.Utils.food;
 
 import com.foodify.dto.food.FoodRequestDto;
 import com.foodify.entity.Category;

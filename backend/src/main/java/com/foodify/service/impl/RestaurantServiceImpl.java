@@ -1,7 +1,7 @@
 package com.foodify.service.impl;
 
-import com.foodify.Utils.RestaurantDtoUtil;
-import com.foodify.Utils.RestaurantUtil;
+import com.foodify.Utils.restaurant.RestaurantDtoUtil;
+import com.foodify.Utils.restaurant.RestaurantUtil;
 import com.foodify.dto.restaurant.RestaurantDto;
 import com.foodify.dto.restaurant.RestaurantRequestDto;
 import com.foodify.entity.Address;

@@ -1,4 +1,4 @@
-package com.foodify.Utils;
+package com.foodify.Utils.food;
 
 import com.foodify.entity.Food;
 

@@ -1,4 +1,4 @@
-package com.foodify.Utils;
+package com.foodify.Utils.ingredient;
 
 import com.foodify.entity.IngredientCategory;
 import com.foodify.entity.Restaurant;

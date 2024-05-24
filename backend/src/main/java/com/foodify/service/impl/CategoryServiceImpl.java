@@ -1,6 +1,6 @@
 package com.foodify.service.impl;
 
-import com.foodify.Utils.CategoryUtil;
+import com.foodify.Utils.category.CategoryUtil;
 import com.foodify.entity.Category;
 import com.foodify.entity.Restaurant;
 import com.foodify.repository.CategoryRepository;

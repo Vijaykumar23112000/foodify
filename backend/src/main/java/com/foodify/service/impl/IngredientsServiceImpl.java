@@ -1,7 +1,7 @@
 package com.foodify.service.impl;
 
-import com.foodify.Utils.IngredientCategoryUtil;
-import com.foodify.Utils.IngredientItemUtil;
+import com.foodify.Utils.ingredient.IngredientCategoryUtil;
+import com.foodify.Utils.ingredient.IngredientItemUtil;
 import com.foodify.entity.IngredientCategory;
 import com.foodify.entity.IngredientsItem;
 import com.foodify.entity.Restaurant;

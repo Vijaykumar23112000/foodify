@@ -1,6 +1,6 @@
 package com.foodify.service.impl;
 
-import com.foodify.Utils.FoodUtil;
+import com.foodify.Utils.food.FoodUtil;
 import com.foodify.dto.food.FoodRequestDto;
 import com.foodify.entity.Category;
 import com.foodify.entity.Food;
@@ -13,7 +13,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.Optional;
 
-import static com.foodify.Utils.FoodFilterUtil.*;
+import static com.foodify.Utils.food.FoodFilterUtil.*;
 
 @Service
 @RequiredArgsConstructor

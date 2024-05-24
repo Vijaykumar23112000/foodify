@@ -1,10 +1,9 @@
 package com.foodify.repository;
 
-import com.foodify.entity.Cart;
+import com.foodify.entity.CartItem;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface CartRepository extends JpaRepository<Cart , Long> {
-    Cart findByCustomerId(Long userId);
+public interface CartItemRepository extends JpaRepository<CartItem , Long> {
 }
