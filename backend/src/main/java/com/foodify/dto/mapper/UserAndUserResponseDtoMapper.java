@@ -1,6 +1,6 @@
 package com.foodify.dto.mapper;
 
-import com.foodify.dto.UserResponseDto;
+import com.foodify.dto.user.UserResponseDto;
 import com.foodify.entity.User;
 import org.springframework.stereotype.Component;
 

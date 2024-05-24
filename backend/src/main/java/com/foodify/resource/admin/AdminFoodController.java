@@ -1,7 +1,7 @@
-package com.foodify.resource;
+package com.foodify.resource.admin;
 
 import com.foodify.domain.MessageResponse;
-import com.foodify.dto.FoodRequestDto;
+import com.foodify.dto.food.FoodRequestDto;
 import com.foodify.entity.Food;
 import com.foodify.entity.Restaurant;
 import com.foodify.service.impl.FoodServiceImpl;
@@ -18,7 +18,6 @@ public class AdminFoodController {
 
     private final FoodServiceImpl foodService;
     private final RestaurantServiceImpl restaurantService;
-
 
     @PostMapping
     public ResponseEntity<Food> createFood(
@@ -48,7 +47,6 @@ public class AdminFoodController {
     @PutMapping("/{id}")
     public ResponseEntity<Food> updateFoodAvailability(
             @PathVariable Long id,
-            @RequestBody FoodRequestDto request,
             @RequestHeader("Authorization") String token) throws Exception
     {
 

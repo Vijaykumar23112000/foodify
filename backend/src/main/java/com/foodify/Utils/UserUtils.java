@@ -1,6 +1,6 @@
 package com.foodify.Utils;
 
-import com.foodify.dto.UserRequestDto;
+import com.foodify.dto.user.UserRequestDto;
 import com.foodify.entity.User;
 
 public class UserUtils {

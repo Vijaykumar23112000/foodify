@@ -1,6 +1,6 @@
 package com.foodify.service;
 
-import com.foodify.dto.FoodRequestDto;
+import com.foodify.dto.food.FoodRequestDto;
 import com.foodify.entity.Category;
 import com.foodify.entity.Food;
 import com.foodify.entity.Restaurant;

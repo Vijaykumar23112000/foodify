@@ -1,8 +1,8 @@
 package com.foodify.service;
 
-import com.foodify.dto.LoginRequestDto;
-import com.foodify.dto.UserRequestDto;
-import com.foodify.response.AuthenticationResponse;
+import com.foodify.dto.authentication.LoginRequestDto;
+import com.foodify.dto.user.UserRequestDto;
+import com.foodify.dto.response.AuthenticationResponse;
 
 public interface AuthenticationService {
 

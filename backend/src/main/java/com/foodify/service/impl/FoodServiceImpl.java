@@ -1,7 +1,7 @@
 package com.foodify.service.impl;
 
 import com.foodify.Utils.FoodUtil;
-import com.foodify.dto.FoodRequestDto;
+import com.foodify.dto.food.FoodRequestDto;
 import com.foodify.entity.Category;
 import com.foodify.entity.Food;
 import com.foodify.entity.Restaurant;
@@ -39,9 +39,9 @@ public class FoodServiceImpl implements FoodService {
     @Override
     public List<Food> getRestaurantsFood(Long restaurantId, boolean isVegetarian, boolean isNonVeg, boolean isSeasonable, String foodCategory) {
         List<Food> foods = foodRepository.findByRestaurantId(restaurantId);
-        if(isVegetarian) foods = filterByVegetarian(foods , isVegetarian);
+        if(isVegetarian) foods = filterByVegetarian(foods , isVegetarian);//true
         if(isNonVeg) foods = filterByNonVeg(foods);
-        if(isSeasonable) foods = filterBySeasonal(foods , isSeasonable);
+        if(isSeasonable) foods = filterBySeasonal(foods , isSeasonable);//true
         if(foodCategory != null && !foodCategory.isEmpty()) foods = filterByCategory(foods , foodCategory);
         return foods;
     }

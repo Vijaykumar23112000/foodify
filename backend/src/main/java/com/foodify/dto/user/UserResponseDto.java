@@ -1,5 +1,6 @@
-package com.foodify.dto;
+package com.foodify.dto.user;
 
+import com.foodify.dto.restaurant.RestaurantDto;
 import com.foodify.entity.Address;
 import com.foodify.enumeration.Role;
 import lombok.*;

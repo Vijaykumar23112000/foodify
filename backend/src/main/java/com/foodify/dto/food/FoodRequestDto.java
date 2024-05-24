@@ -1,4 +1,4 @@
-package com.foodify.dto;
+package com.foodify.dto.food;
 
 import com.foodify.entity.Category;
 import com.foodify.entity.IngredientsItem;

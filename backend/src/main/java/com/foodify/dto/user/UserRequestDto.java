@@ -1,4 +1,4 @@
-package com.foodify.dto;
+package com.foodify.dto.user;
 
 
 import com.foodify.enumeration.Role;

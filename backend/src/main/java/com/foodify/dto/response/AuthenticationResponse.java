@@ -1,4 +1,4 @@
-package com.foodify.response;
+package com.foodify.dto.response;
 
 
 import com.foodify.enumeration.Role;

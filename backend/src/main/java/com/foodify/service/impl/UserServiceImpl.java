@@ -1,7 +1,7 @@
 package com.foodify.service.impl;
 
 import com.foodify.Utils.UserResponseDtoUtil;
-import com.foodify.dto.UserResponseDto;
+import com.foodify.dto.user.UserResponseDto;
 import com.foodify.entity.User;
 import com.foodify.repository.UserRepository;
 import com.foodify.service.UserService;

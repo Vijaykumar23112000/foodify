@@ -1,9 +1,9 @@
-package com.foodify.resource;
+package com.foodify.resource.user;
 
 import com.foodify.Utils.RestaurantConverter;
-import com.foodify.dto.RestaurantDto;
-import com.foodify.dto.RestaurantResponseDto;
-import com.foodify.dto.UserResponseDto;
+import com.foodify.dto.restaurant.RestaurantDto;
+import com.foodify.dto.restaurant.RestaurantResponseDto;
+import com.foodify.dto.user.UserResponseDto;
 import com.foodify.dto.mapper.RestaurantAndRestaurantResponseDtoMapper;
 import com.foodify.dto.mapper.UserAndUserResponseDtoMapper;
 import com.foodify.entity.Restaurant;
@@ -40,7 +40,7 @@ public class RestaurantController {
         return ResponseEntity.status(HttpStatus.OK).body(dtos);
     }
 
-    @GetMapping()
+    @GetMapping
     public ResponseEntity<List<RestaurantResponseDto>> getAllRestaurants(
             @RequestHeader("Authorization") String token
     ) throws Exception

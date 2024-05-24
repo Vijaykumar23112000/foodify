@@ -1,9 +1,7 @@
 package com.foodify.Utils;
 
-import com.foodify.dto.UserResponseDto;
+import com.foodify.dto.user.UserResponseDto;
 import com.foodify.entity.User;
-
-import java.util.ArrayList;
 
 public class UserResponseDtoUtil {
 

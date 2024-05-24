@@ -1,4 +1,4 @@
-package com.foodify.dto;
+package com.foodify.dto.authentication;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

@@ -1,4 +1,4 @@
-package com.foodify.dto;
+package com.foodify.dto.restaurant;
 
 import com.foodify.domain.ContactInformation;
 import com.foodify.entity.Address;

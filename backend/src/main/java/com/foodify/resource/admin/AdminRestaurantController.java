@@ -1,9 +1,9 @@
-package com.foodify.resource;
+package com.foodify.resource.admin;
 
 import com.foodify.domain.MessageResponse;
-import com.foodify.dto.RestaurantRequestDto;
-import com.foodify.dto.RestaurantResponseDto;
-import com.foodify.dto.UserResponseDto;
+import com.foodify.dto.restaurant.RestaurantRequestDto;
+import com.foodify.dto.restaurant.RestaurantResponseDto;
+import com.foodify.dto.user.UserResponseDto;
 import com.foodify.dto.mapper.RestaurantAndRestaurantResponseDtoMapper;
 import com.foodify.dto.mapper.UserAndUserResponseDtoMapper;
 import com.foodify.entity.Restaurant;
@@ -24,7 +24,7 @@ public class AdminRestaurantController {
     private final UserAndUserResponseDtoMapper userMapper;
     private final RestaurantAndRestaurantResponseDtoMapper restaurantMapper;
 
-    @PostMapping()
+    @PostMapping
     public ResponseEntity<RestaurantResponseDto> createRestaurant(
             @RequestBody RestaurantRequestDto request,
             @RequestHeader("Authorization") String token

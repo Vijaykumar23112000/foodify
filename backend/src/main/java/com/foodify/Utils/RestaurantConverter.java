@@ -1,7 +1,7 @@
 package com.foodify.Utils;
 
-import com.foodify.dto.RestaurantResponseDto;
-import com.foodify.dto.UserResponseDto;
+import com.foodify.dto.restaurant.RestaurantResponseDto;
+import com.foodify.dto.user.UserResponseDto;
 import com.foodify.dto.mapper.RestaurantAndRestaurantResponseDtoMapper;
 import com.foodify.entity.Restaurant;
 import lombok.RequiredArgsConstructor;

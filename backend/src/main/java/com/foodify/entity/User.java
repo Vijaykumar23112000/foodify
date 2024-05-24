@@ -1,7 +1,7 @@
 package com.foodify.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.foodify.dto.RestaurantDto;
+import com.foodify.dto.restaurant.RestaurantDto;
 import com.foodify.enumeration.Role;
 import jakarta.persistence.*;
 import lombok.*;

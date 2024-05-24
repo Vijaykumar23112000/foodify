@@ -1,4 +1,4 @@
-package com.foodify.dto;
+package com.foodify.dto.restaurant;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Embeddable;

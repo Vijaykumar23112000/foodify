@@ -1,6 +1,6 @@
-package com.foodify.resource;
+package com.foodify.resource.user;
 
-import com.foodify.dto.UserResponseDto;
+import com.foodify.dto.user.UserResponseDto;
 import com.foodify.service.impl.UserServiceImpl;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;

@@ -1,6 +1,7 @@
-package com.foodify.dto;
+package com.foodify.dto.restaurant;
 
 import com.foodify.domain.ContactInformation;
+import com.foodify.dto.user.UserResponseDto;
 import com.foodify.entity.Address;
 import com.foodify.entity.Order;
 import lombok.Builder;

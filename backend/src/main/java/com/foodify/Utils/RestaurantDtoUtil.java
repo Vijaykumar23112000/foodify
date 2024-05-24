@@ -1,6 +1,6 @@
 package com.foodify.Utils;
 
-import com.foodify.dto.RestaurantDto;
+import com.foodify.dto.restaurant.RestaurantDto;
 import com.foodify.entity.Restaurant;
 
 public class RestaurantDtoUtil {

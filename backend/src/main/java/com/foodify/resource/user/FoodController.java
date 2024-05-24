@@ -1,4 +1,4 @@
-package com.foodify.resource;
+package com.foodify.resource.user;
 
 import com.foodify.entity.Food;
 import com.foodify.service.impl.FoodServiceImpl;
@@ -30,11 +30,11 @@ public class FoodController {
 
     @GetMapping("/restaurant/{restaurantId}")
     public ResponseEntity<List<Food>> getRestaurantFood (
+            @PathVariable Long restaurantId,
             @RequestParam boolean isVegetarian,
             @RequestParam boolean isSeasonal,
             @RequestParam boolean isNonVeg,
             @RequestParam(required = false) String foodCategory,
-            @PathVariable Long restaurantId,
             @RequestHeader("Authorization") String token) throws Exception
     {
 

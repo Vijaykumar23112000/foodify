@@ -1,6 +1,6 @@
 package com.foodify.service;
 
-import com.foodify.dto.UserResponseDto;
+import com.foodify.dto.user.UserResponseDto;
 
 public interface UserService {
 

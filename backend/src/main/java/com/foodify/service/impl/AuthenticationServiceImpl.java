@@ -1,13 +1,13 @@
 package com.foodify.service.impl;
 
 import com.foodify.Utils.UserUtils;
-import com.foodify.dto.LoginRequestDto;
-import com.foodify.dto.UserRequestDto;
+import com.foodify.dto.authentication.LoginRequestDto;
+import com.foodify.dto.user.UserRequestDto;
 import com.foodify.entity.Cart;
 import com.foodify.entity.User;
 import com.foodify.repository.CartRepository;
 import com.foodify.repository.UserRepository;
-import com.foodify.response.AuthenticationResponse;
+import com.foodify.dto.response.AuthenticationResponse;
 import com.foodify.service.AuthenticationService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.AuthenticationManager;
