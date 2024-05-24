@@ -3,6 +3,7 @@ package com.foodify.entity;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -16,6 +17,7 @@ import static jakarta.persistence.GenerationType.AUTO;
 @AllArgsConstructor
 @NoArgsConstructor
 @Table(name = "orders")
+@Builder
 public class Order {
 
     @Id
@@ -26,7 +28,7 @@ public class Order {
     private String orderStatus;
     private Date createdAt;
     private int totalItem;
-    private int totalPrice;
+    private Long totalPrice;
 
     @ManyToOne
     private User customer;

@@ -5,7 +5,7 @@ import com.foodify.dto.food.FoodRequestDto;
 import com.foodify.entity.Category;
 import com.foodify.entity.Food;
 import com.foodify.entity.Restaurant;
-import com.foodify.repository.FoodRepository;
+import com.foodify.repository.food.FoodRepository;
 import com.foodify.service.FoodService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;

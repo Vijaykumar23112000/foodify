@@ -1,4 +1,4 @@
-package com.foodify.repository;
+package com.foodify.repository.ingredient;
 
 import com.foodify.entity.IngredientsItem;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -8,7 +8,5 @@ import java.util.List;
 
 @Repository
 public interface IngredientItemRepository extends JpaRepository<IngredientsItem , Long> {
-
     List<IngredientsItem> findByRestaurantId(Long restaurantId);
-
 }

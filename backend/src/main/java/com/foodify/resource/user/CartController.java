@@ -2,9 +2,12 @@ package com.foodify.resource.user;
 
 import com.foodify.dto.cart.CartItemRequestDto;
 import com.foodify.dto.cart.CartItemUpdateRequestDto;
+import com.foodify.dto.mapper.UserAndUserResponseDtoMapper;
 import com.foodify.entity.Cart;
 import com.foodify.entity.CartItem;
+import com.foodify.entity.User;
 import com.foodify.service.impl.CartServiceImpl;
+import com.foodify.service.impl.UserServiceImpl;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -15,7 +18,9 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/api")
 public class CartController {
 
-    private CartServiceImpl cartService;
+    private final CartServiceImpl cartService;
+    private final UserAndUserResponseDtoMapper userMapper;
+    private final UserServiceImpl userService;
 
     @PutMapping("/cart/add")
     public ResponseEntity<CartItem> addItemToCart(
@@ -55,7 +60,8 @@ public class CartController {
             @RequestHeader("Authorization") String token) throws Exception
     {
 
-        Cart cart = cartService.clearCart(token);
+        User user = userMapper.toENTITY.apply(userService.findUserByJwtToken(token.substring(7).trim()));
+        Cart cart = cartService.clearCart(user.getId());
         return ResponseEntity.status(HttpStatus.OK).body(cart);
 
     }
@@ -65,7 +71,8 @@ public class CartController {
             @RequestHeader("Authorization") String token) throws Exception
     {
 
-        Cart cart = cartService.findCartByUserId(token);
+        User user = userMapper.toENTITY.apply(userService.findUserByJwtToken(token.substring(7).trim()));
+        Cart cart = cartService.findCartByUserId(user.getId());
         return ResponseEntity.status(HttpStatus.OK).body(cart);
 
     }

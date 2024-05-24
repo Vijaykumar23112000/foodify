@@ -20,13 +20,19 @@ public class AuthenticationController {
     private final AuthenticationServiceImpl authenticationService;
 
     @PostMapping(value = "/signup", produces = "application/json")
-    public ResponseEntity<AuthenticationResponse> register(@RequestBody UserRequestDto request) throws Exception {
+    public ResponseEntity<AuthenticationResponse> register(@RequestBody UserRequestDto request) throws Exception
+    {
+
         return ResponseEntity.status(HttpStatus.CREATED).body(authenticationService.register(request));
+
     }
 
     @PostMapping("/signin")
-    public ResponseEntity<AuthenticationResponse> login(@RequestBody LoginRequestDto request){
+    public ResponseEntity<AuthenticationResponse> login(@RequestBody LoginRequestDto request)
+    {
+
         return ResponseEntity.status(HttpStatus.OK).body(authenticationService.login(request));
+
     }
 
 }

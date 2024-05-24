@@ -2,7 +2,11 @@ package com.foodify.dto.restaurant;
 
 import com.foodify.domain.ContactInformation;
 import com.foodify.entity.Address;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.util.List;
 

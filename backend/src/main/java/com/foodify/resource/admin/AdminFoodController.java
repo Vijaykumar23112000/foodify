@@ -34,7 +34,6 @@ public class AdminFoodController {
     @DeleteMapping("/{id}")
     public ResponseEntity<MessageResponse> deleteFood(
             @PathVariable Long id,
-            @RequestBody FoodRequestDto request,
             @RequestHeader("Authorization") String token) throws Exception
     {
 

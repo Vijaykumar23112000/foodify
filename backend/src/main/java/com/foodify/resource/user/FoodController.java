@@ -16,7 +16,6 @@ public class FoodController {
 
     private final FoodServiceImpl foodService;
 
-
     @GetMapping("/search")
     public ResponseEntity<List<Food>> searchFood(
             @RequestParam String keyword ,
@@ -24,7 +23,7 @@ public class FoodController {
     {
 
         List<Food> foods = foodService.searchFood(keyword);
-        return ResponseEntity.status(HttpStatus.CREATED).body(foods);
+        return ResponseEntity.status(HttpStatus.OK).body(foods);
 
     }
 

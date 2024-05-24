@@ -21,8 +21,8 @@ public class AdminIngredientController {
 
     @PostMapping("/category")
     public ResponseEntity<IngredientCategory> createIngredientCategory(
-            @RequestBody IngredientCategoryRequestDto request
-            ) throws Exception
+            @RequestBody IngredientCategoryRequestDto request,
+            @RequestHeader("Authorization") String token) throws Exception
     {
 
         IngredientCategory ingredientCategory = ingredientsService.createIngredientCategory(request.getName() , request.getRestaurantId());
@@ -32,19 +32,19 @@ public class AdminIngredientController {
 
     @PostMapping("/category")
     public ResponseEntity<IngredientsItem> createIngredientItem(
-            @RequestBody IngredientItemRequestDto request
-    ) throws Exception
+            @RequestBody IngredientItemRequestDto request,
+            @RequestHeader("Authorization") String token) throws Exception
     {
 
         IngredientsItem ingredientsItem = ingredientsService.createIngredientItem(request.getRestaurantId(), request.getName(), request.getCategoryId());
-        return ResponseEntity.status(HttpStatus.OK).body(ingredientsItem);
+        return ResponseEntity.status(HttpStatus.CREATED).body(ingredientsItem);
 
     }
 
     @PutMapping("/{id}/stock")
     public ResponseEntity<IngredientsItem> updateIngredientsStock(
-            @PathVariable Long id
-    ) throws Exception
+            @PathVariable Long id,
+            @RequestHeader("Authorization") String token) throws Exception
     {
 
         IngredientsItem ingredientsItem = ingredientsService.updateStock(id);
@@ -54,8 +54,8 @@ public class AdminIngredientController {
 
     @GetMapping("/restaurant/{id}")
     public ResponseEntity<List<IngredientsItem>> getRestaurantIngredientsItem(
-            @PathVariable Long id
-    ) throws Exception
+            @PathVariable Long id,
+            @RequestHeader("Authorization") String token) throws Exception
     {
 
         List<IngredientsItem> ingredientsItems = ingredientsService.findRestaurantIngredients(id);
@@ -65,8 +65,8 @@ public class AdminIngredientController {
 
     @GetMapping("/restaurant/{id}/category")
     public ResponseEntity<List<IngredientCategory>> getRestaurantIngredientCategory(
-            @PathVariable Long id
-    ) throws Exception
+            @PathVariable Long id,
+            @RequestHeader("Authorization") String token) throws Exception
     {
 
         List<IngredientCategory> ingredientCategories = ingredientsService.findIngredientCategoryByRestaurantId(id);

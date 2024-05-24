@@ -3,7 +3,7 @@ package com.foodify.service.impl;
 import com.foodify.Utils.user.UserResponseDtoUtil;
 import com.foodify.dto.user.UserResponseDto;
 import com.foodify.entity.User;
-import com.foodify.repository.UserRepository;
+import com.foodify.repository.user.UserRepository;
 import com.foodify.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;

@@ -10,6 +10,6 @@ public interface CartService {
     Cart removieItemFromCart(Long cartItemId , String token) throws Exception;
     Long calculateCartTotals(Cart cart) throws Exception;
     Cart findCartById(Long id) throws Exception;
-    Cart findCartByUserId(String token) throws Exception;
-    Cart clearCart(String token) throws Exception;
+    Cart findCartByUserId(Long userId) throws Exception;
+    Cart clearCart(Long userId) throws Exception;
 }

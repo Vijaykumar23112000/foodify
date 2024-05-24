@@ -4,6 +4,8 @@ import com.foodify.domain.ContactInformation;
 import com.foodify.dto.user.UserResponseDto;
 import com.foodify.entity.Address;
 import com.foodify.entity.Order;
+import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
@@ -13,6 +15,8 @@ import java.util.List;
 
 @Getter
 @Setter
+@AllArgsConstructor
+@NoArgsConstructor
 @Builder
 public class RestaurantResponseDto {
 

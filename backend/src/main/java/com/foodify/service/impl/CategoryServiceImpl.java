@@ -3,7 +3,7 @@ package com.foodify.service.impl;
 import com.foodify.Utils.category.CategoryUtil;
 import com.foodify.entity.Category;
 import com.foodify.entity.Restaurant;
-import com.foodify.repository.CategoryRepository;
+import com.foodify.repository.category.CategoryRepository;
 import com.foodify.service.CategoryService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;

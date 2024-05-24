@@ -1,6 +1,6 @@
 package com.foodify.service.impl;
 
-import com.foodify.repository.UserRepository;
+import com.foodify.repository.user.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;

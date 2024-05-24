@@ -19,7 +19,7 @@ public class RestaurantConverter {
     public List<RestaurantResponseDto> convert(List<Restaurant> restaurants , UserResponseDto user){
         List<RestaurantResponseDto> dtos = new ArrayList<>();
         for(Restaurant r : restaurants){
-            dtos.add(mapper.toDTO(r , user));
+            dtos.add(mapper.toDTO.apply(r , user));
         }
         return dtos;
     }

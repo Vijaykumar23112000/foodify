@@ -1,4 +1,4 @@
-package com.foodify.repository;
+package com.foodify.repository.Cart;
 
 import com.foodify.entity.Cart;
 import org.springframework.data.jpa.repository.JpaRepository;

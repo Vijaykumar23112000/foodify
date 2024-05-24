@@ -1,4 +1,4 @@
-package com.foodify.repository;
+package com.foodify.repository.user;
 
 import com.foodify.entity.User;
 import org.springframework.data.jpa.repository.JpaRepository;

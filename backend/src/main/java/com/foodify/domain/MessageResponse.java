@@ -1,6 +1,5 @@
 package com.foodify.domain;
 
-
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -10,6 +9,4 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class MessageResponse {
-    private String message;
-}
+public class MessageResponse { private String message; }

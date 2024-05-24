@@ -31,47 +31,51 @@ public class RestaurantController {
     @GetMapping("/search")
     public ResponseEntity<List<RestaurantResponseDto>> searchRestaurant(
             @RequestHeader("Authorization") String token,
-            @RequestParam String keyWord
-    ) throws Exception
+            @RequestParam String keyWord) throws Exception
     {
+
         UserResponseDto userResponseDto = userService.findUserByJwtToken(token.substring(7).trim());
         List<Restaurant> restaurants = restaurantService.searchRestaurant(keyWord);
         List<RestaurantResponseDto> dtos = converter.convert(restaurants , userResponseDto);
         return ResponseEntity.status(HttpStatus.OK).body(dtos);
+
     }
 
     @GetMapping
     public ResponseEntity<List<RestaurantResponseDto>> getAllRestaurants(
-            @RequestHeader("Authorization") String token
-    ) throws Exception
+            @RequestHeader("Authorization") String token) throws Exception
     {
+
         UserResponseDto userResponseDto = userService.findUserByJwtToken(token.substring(7).trim());
         List<Restaurant> restaurants = restaurantService.getAllRestaurant();
         List<RestaurantResponseDto> dtos = converter.convert(restaurants , userResponseDto);
         return ResponseEntity.status(HttpStatus.OK).body(dtos);
+
     }
 
     @GetMapping("/{id}")
     public ResponseEntity<RestaurantResponseDto> findRestaurantById(
             @RequestHeader("Authorization") String token,
-            @PathVariable Long id
-    ) throws Exception
+            @PathVariable Long id) throws Exception
     {
+
         UserResponseDto userResponseDto = userService.findUserByJwtToken(token.substring(7).trim());
         Restaurant restaurant = restaurantService.findRestaurantById(id);
-        RestaurantResponseDto restaurantResponseDto = restaurantMapper.toDTO(restaurant , userResponseDto);
+        RestaurantResponseDto restaurantResponseDto = restaurantMapper.toDTO.apply(restaurant , userResponseDto);
         return ResponseEntity.status(HttpStatus.OK).body(restaurantResponseDto);
+
     }
 
     @PutMapping("/{id}/add-favorites")
     public ResponseEntity<RestaurantDto> addToFavorites(
             @RequestHeader("Authorization") String token,
-            @PathVariable Long id
-    ) throws Exception
+            @PathVariable Long id) throws Exception
     {
-        User user = userMapper.toENTITY(userService.findUserByJwtToken(token.substring(7).trim()));
+
+        User user = userMapper.toENTITY.apply(userService.findUserByJwtToken(token.substring(7).trim()));
         RestaurantDto restaurantDto = restaurantService.addToFavorites(id , user);
         return ResponseEntity.status(HttpStatus.OK).body(restaurantDto);
+
     }
 
 }

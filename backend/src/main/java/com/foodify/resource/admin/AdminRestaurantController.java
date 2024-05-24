@@ -27,60 +27,65 @@ public class AdminRestaurantController {
     @PostMapping
     public ResponseEntity<RestaurantResponseDto> createRestaurant(
             @RequestBody RestaurantRequestDto request,
-            @RequestHeader("Authorization") String token
-            )
+            @RequestHeader("Authorization") String token)
     {
+
         UserResponseDto userResponseDto = userService.findUserByJwtToken(token.substring(7).trim());
-        Restaurant restaurant = restaurantService.createRestaurant(request , userMapper.toENTITY(userResponseDto));
-        RestaurantResponseDto restaurantResponseDto = restaurantMapper.toDTO(restaurant , userResponseDto);
+        Restaurant restaurant = restaurantService.createRestaurant(request , userMapper.toENTITY.apply(userResponseDto));
+        RestaurantResponseDto restaurantResponseDto = restaurantMapper.toDTO.apply(restaurant , userResponseDto);
         return ResponseEntity.status(HttpStatus.CREATED).body(restaurantResponseDto);
+
     }
 
     @PutMapping("/{id}")
     public ResponseEntity<RestaurantResponseDto> updateRestaurant(
             @RequestBody RestaurantRequestDto request,
             @RequestHeader("Authorization") String token,
-            @PathVariable Long id
-    ) throws Exception
+            @PathVariable Long id) throws Exception
     {
+
         UserResponseDto userResponseDto = userService.findUserByJwtToken(token.substring(7).trim());
         Restaurant restaurant = restaurantService.updateRestaurant(id , request);
-        RestaurantResponseDto restaurantResponseDto = restaurantMapper.toDTO(restaurant , userResponseDto);
+        RestaurantResponseDto restaurantResponseDto = restaurantMapper.toDTO.apply(restaurant , userResponseDto);
         return ResponseEntity.status(HttpStatus.OK).body(restaurantResponseDto);
+
     }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<MessageResponse> deleteRestaurant(
             @RequestHeader("Authorization") String token,
-            @PathVariable Long id
-    ) throws Exception
+            @PathVariable Long id) throws Exception
     {
+
         restaurantService.deleteRestaurant(id);
         MessageResponse msg = new MessageResponse("Restaurant Deleted Successfully");
         return ResponseEntity.status(HttpStatus.OK).body(msg);
+
     }
 
     @PutMapping("/{id}/status")
     public ResponseEntity<RestaurantResponseDto> updateRestaurantStatus(
             @RequestHeader("Authorization") String token,
-            @PathVariable Long id
-    ) throws Exception
+            @PathVariable Long id) throws Exception
     {
+
         UserResponseDto userResponseDto = userService.findUserByJwtToken(token.substring(7).trim());
         Restaurant restaurant = restaurantService.updateRestaurantStatus(id);
-        RestaurantResponseDto restaurantResponseDto = restaurantMapper.toDTO(restaurant , userResponseDto);
+        RestaurantResponseDto restaurantResponseDto = restaurantMapper.toDTO.apply(restaurant , userResponseDto);
         return ResponseEntity.status(HttpStatus.OK).body(restaurantResponseDto);
+
     }
 
     @GetMapping("/user")
     public ResponseEntity<RestaurantResponseDto> findRestaurantByUserId(
-            @RequestHeader("Authorization") String token
-    ) throws Exception
+            @RequestHeader("Authorization") String token) throws Exception
     {
+
         UserResponseDto userResponseDto = userService.findUserByJwtToken(token.substring(7).trim());
         Restaurant restaurant = restaurantService.findRestaurantByUserId(userResponseDto.getId());
-        RestaurantResponseDto restaurantResponseDto = restaurantMapper.toDTO(restaurant , userResponseDto);
+        RestaurantResponseDto restaurantResponseDto = restaurantMapper.toDTO.apply(restaurant , userResponseDto);
         return ResponseEntity.status(HttpStatus.OK).body(restaurantResponseDto);
+
     }
 
 }

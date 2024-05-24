@@ -25,14 +25,10 @@ public class AdminCategoryController {
             @RequestHeader("Authorization") String token) throws Exception
     {
 
-        User user = userMapper.toENTITY(userService.findUserByJwtToken(token.substring(7).trim()));
+        User user = userMapper.toENTITY.apply(userService.findUserByJwtToken(token.substring(7).trim()));
         Category createdCategory = categoryService.createCategory(category.getName(), user.getId());
         return ResponseEntity.status(HttpStatus.CREATED).body(createdCategory);
 
     }
-
-
-
-
 
 }

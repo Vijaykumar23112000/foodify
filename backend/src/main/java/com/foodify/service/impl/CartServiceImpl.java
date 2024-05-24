@@ -7,8 +7,8 @@ import com.foodify.entity.Cart;
 import com.foodify.entity.CartItem;
 import com.foodify.entity.Food;
 import com.foodify.entity.User;
-import com.foodify.repository.CartItemRepository;
-import com.foodify.repository.CartRepository;
+import com.foodify.repository.Cart.CartItemRepository;
+import com.foodify.repository.Cart.CartRepository;
 import com.foodify.service.CartService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -28,7 +28,7 @@ public class CartServiceImpl implements CartService {
 
     @Override
     public CartItem addItemToCart(CartItemRequestDto request, String token) throws Exception {
-        User user = userMapper.toENTITY(userService.findUserByJwtToken(token.substring(7).trim()));
+        User user = userMapper.toENTITY.apply(userService.findUserByJwtToken(token.substring(7).trim()));
         Food food = foodService.findFoodById(request.getFoodId());
         Cart cart = cartRepository.findByCustomerId(user.getId());
         for(CartItem cartItem : cart.getItem()){
@@ -55,7 +55,7 @@ public class CartServiceImpl implements CartService {
 
     @Override
     public Cart removieItemFromCart(Long cartItemId, String token) throws Exception {
-        User user = userMapper.toENTITY(userService.findUserByJwtToken(token.substring(7).trim()));
+        User user = userMapper.toENTITY.apply(userService.findUserByJwtToken(token.substring(7).trim()));
         Cart cart = cartRepository.findByCustomerId(user.getId());
         Optional<CartItem> optionalCartItem = cartItemRepository.findById(cartItemId);
         if(optionalCartItem.isEmpty()) throw new Exception("CartItem Not Found");
@@ -66,7 +66,7 @@ public class CartServiceImpl implements CartService {
 
     @Override
     public Long calculateCartTotals(Cart cart) throws Exception {
-        long total = 0L;
+        Long total = 0L;
         for(CartItem cartItem : cart.getItem()){
             total+=cartItem.getItem().getPrice()*cartItem.getQuantity();
         }
@@ -81,14 +81,15 @@ public class CartServiceImpl implements CartService {
     }
 
     @Override
-    public Cart findCartByUserId(String token) throws Exception {
-        User user = userMapper.toENTITY(userService.findUserByJwtToken(token.substring(7).trim()));
-        return cartRepository.findByCustomerId(user.getId());
+    public Cart findCartByUserId(Long userId) throws Exception {
+        Cart cart = cartRepository.findByCustomerId(userId);
+        cart.setTotal(calculateCartTotals(cart));
+        return cart;
     }
 
     @Override
-    public Cart clearCart(String token) throws Exception {
-        Cart cart = findCartByUserId(token);
+    public Cart clearCart(Long userId) throws Exception {
+        Cart cart = findCartByUserId(userId);
         cart.getItem().clear();
         return cartRepository.save(cart);
     }
