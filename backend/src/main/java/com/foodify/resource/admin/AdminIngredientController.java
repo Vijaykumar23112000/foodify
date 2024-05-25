@@ -25,18 +25,18 @@ public class AdminIngredientController {
             @RequestHeader("Authorization") String token) throws Exception
     {
 
-        IngredientCategory ingredientCategory = ingredientsService.createIngredientCategory(request.getName() , request.getRestaurantId());
+        var ingredientCategory = ingredientsService.createIngredientCategory(request.getName() , request.getRestaurantId());
         return ResponseEntity.status(HttpStatus.CREATED).body(ingredientCategory);
 
     }
 
-    @PostMapping("/category")
+    @PostMapping
     public ResponseEntity<IngredientsItem> createIngredientItem(
             @RequestBody IngredientItemRequestDto request,
             @RequestHeader("Authorization") String token) throws Exception
     {
 
-        IngredientsItem ingredientsItem = ingredientsService.createIngredientItem(request.getRestaurantId(), request.getName(), request.getCategoryId());
+        var ingredientsItem = ingredientsService.createIngredientItem(request.getRestaurantId(), request.getName(), request.getCategoryId());
         return ResponseEntity.status(HttpStatus.CREATED).body(ingredientsItem);
 
     }
@@ -47,7 +47,7 @@ public class AdminIngredientController {
             @RequestHeader("Authorization") String token) throws Exception
     {
 
-        IngredientsItem ingredientsItem = ingredientsService.updateStock(id);
+        var ingredientsItem = ingredientsService.updateStock(id);
         return ResponseEntity.status(HttpStatus.OK).body(ingredientsItem);
 
     }
@@ -58,7 +58,7 @@ public class AdminIngredientController {
             @RequestHeader("Authorization") String token) throws Exception
     {
 
-        List<IngredientsItem> ingredientsItems = ingredientsService.findRestaurantIngredients(id);
+        var ingredientsItems = ingredientsService.findRestaurantIngredients(id);
         return ResponseEntity.status(HttpStatus.OK).body(ingredientsItems);
 
     }
@@ -69,7 +69,7 @@ public class AdminIngredientController {
             @RequestHeader("Authorization") String token) throws Exception
     {
 
-        List<IngredientCategory> ingredientCategories = ingredientsService.findIngredientCategoryByRestaurantId(id);
+        var ingredientCategories = ingredientsService.findIngredientCategoryByRestaurantId(id);
         return ResponseEntity.status(HttpStatus.OK).body(ingredientCategories);
 
     }

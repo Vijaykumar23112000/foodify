@@ -1,10 +1,9 @@
 package com.foodify.service.impl;
 
+import com.foodify.Utils.cart.CartUtil;
 import com.foodify.Utils.user.UserUtils;
 import com.foodify.dto.authentication.LoginRequestDto;
 import com.foodify.dto.user.UserRequestDto;
-import com.foodify.entity.Cart;
-import com.foodify.entity.User;
 import com.foodify.repository.Cart.CartRepository;
 import com.foodify.repository.user.UserRepository;
 import com.foodify.dto.response.AuthenticationResponse;
@@ -27,28 +26,21 @@ public class AuthenticationServiceImpl implements AuthenticationService {
 
     @Override
     public AuthenticationResponse register(UserRequestDto request) throws Exception {
-
         if(userRepository.findByEmail(request.getEmail())!=null) throw new Exception("Email Already Exists");
-        User user = UserUtils.createUser(request);
-        user.setPassword(encoder.encode(request.getPassword()));
-        User savedUser = userRepository.save(user);
-        Cart cart = new Cart();
-        cart.setCustomer(savedUser);
+        var createdUser = UserUtils.createUser.apply(request);
+        createdUser.setPassword(encoder.encode(request.getPassword()));
+        var savedUser = userRepository.save(createdUser);
+        var cart = CartUtil.createCart.apply(savedUser);
         cartRepository.save(cart);
-        String token = jwtService.generateToken.apply(user);
-        return new AuthenticationResponse(token , "Registration Success" , savedUser.getRole());
-
+        return new AuthenticationResponse(jwtService.generateToken.apply(createdUser) , "Registration Success" , savedUser.getRole());
     }
 
     @Override
     public AuthenticationResponse login(LoginRequestDto request){
-
         var unauthenticated = new UsernamePasswordAuthenticationToken(request.getEmail() , request.getPassword());
         authenticationManager.authenticate(unauthenticated);
-        User user = userRepository.findByEmail(request.getEmail());
-        String token = jwtService.generateToken.apply(user);
-        return new AuthenticationResponse(token , "Login Success" , user.getRole());
-
+        var user = userRepository.findByEmail(request.getEmail());
+        return new AuthenticationResponse(jwtService.generateToken.apply(user) , "Login Success" , user.getRole());
     }
 
 }

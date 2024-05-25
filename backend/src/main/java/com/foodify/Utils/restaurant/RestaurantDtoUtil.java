@@ -3,16 +3,17 @@ package com.foodify.Utils.restaurant;
 import com.foodify.dto.restaurant.RestaurantDto;
 import com.foodify.entity.Restaurant;
 
+import java.util.function.Function;
+
 public class RestaurantDtoUtil {
 
-    public static RestaurantDto createRestaurantDto(Restaurant restaurant){
-        return RestaurantDto
-                .builder()
-                .description(restaurant.getDescription())
-                .images(restaurant.getImages())
-                .title(restaurant.getName())
-                .id(restaurant.getId())
-                .build();
-    }
+    public static Function<Restaurant , RestaurantDto> createRestaurantDto = restaurant ->
+            RestaurantDto
+                    .builder()
+                    .description(restaurant.getDescription())
+                    .images(restaurant.getImages())
+                    .title(restaurant.getName())
+                    .id(restaurant.getId())
+                    .build();
 
 }

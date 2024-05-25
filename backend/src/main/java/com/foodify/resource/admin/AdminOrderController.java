@@ -27,19 +27,19 @@ public class AdminOrderController {
             @RequestHeader("Authorization") String token ) throws Exception
     {
 
-        List<Order> orders = orderService.getRestaurantsOrder(id , orderStatus);
+        var orders = orderService.getRestaurantsOrder(id , orderStatus);
         return ResponseEntity.status(HttpStatus.OK).body(orders);
 
     }
 
-    @PutMapping("/order/{orderId/{orderStatus}}")
+    @PutMapping("/order/{orderId}/{orderStatus}")
     public ResponseEntity<Order> updateOrderStatus(
             @PathVariable Long orderId,
             @PathVariable String orderStatus,
             @RequestHeader("Authorization") String token ) throws Exception
     {
 
-        Order order = orderService.updateOrder(orderId,orderStatus);
+        var order = orderService.updateOrder(orderId,orderStatus);
         return ResponseEntity.status(HttpStatus.OK).body(order);
 
     }

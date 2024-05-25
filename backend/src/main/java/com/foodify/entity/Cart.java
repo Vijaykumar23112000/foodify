@@ -1,9 +1,7 @@
 package com.foodify.entity;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -12,9 +10,11 @@ import static jakarta.persistence.CascadeType.*;
 import static jakarta.persistence.GenerationType.AUTO;
 
 @Entity
-@Data
+@Getter
+@Setter
 @AllArgsConstructor
 @NoArgsConstructor
+@Builder
 public class Cart {
 
     @Id

@@ -1,7 +1,5 @@
 package com.foodify.service.impl;
 
-import com.foodify.Utils.order.OrderItemUtil;
-import com.foodify.Utils.order.OrderUtil;
 import com.foodify.dto.order.OrderRequestDto;
 import com.foodify.entity.*;
 import com.foodify.repository.Address.AddressRepository;
@@ -14,8 +12,10 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
+
+import static com.foodify.Utils.order.OrderItemUtil.createOrderItem;
+import static com.foodify.Utils.order.OrderUtil.createOrder;
 
 @Service
 @RequiredArgsConstructor
@@ -30,31 +30,31 @@ public class OrderServiceImpl implements OrderService {
 
     @Override
     public Order createOrder(OrderRequestDto order, User user) throws Exception {
-        Address shippingAddress = order.getDeliveryAddress();
-        Address savedAddress = addressRepository.save(shippingAddress);
+        var shippingAddress = order.getDeliveryAddress();
+        var savedAddress = addressRepository.save(shippingAddress);
         if(!user.getAddresses().contains(savedAddress)) {
             user.getAddresses().add(savedAddress);
             userRepository.save(user);
         }
-        Restaurant restaurant = restaurantService.findRestaurantById(order.getRestaurantId());
-        Order createdOrder = OrderUtil.createOrder(user , savedAddress , restaurant);
-        Cart cart = cartService.findCartByUserId(user.getId());
-        List<OrderItem> orderItems = new ArrayList<>();
+        var restaurant = restaurantService.findRestaurantById(order.getRestaurantId());
+        var createdOrder = createOrder.apply(user , savedAddress , restaurant);
+        var cart = cartService.findCartByUserId(user.getId());
+        var orderItems = new ArrayList<OrderItem>();
         for(CartItem cartItem : cart.getItem()){
-            OrderItem orderItem = OrderItemUtil.createOrderItem(cartItem);
-            OrderItem savedOrderItem = orderItemRepository.save(orderItem);
+            var orderItem = createOrderItem.apply(cartItem);
+            var savedOrderItem = orderItemRepository.save(orderItem);
             orderItems.add(savedOrderItem);
         }
         createdOrder.setItems(orderItems);
         createdOrder.setTotalPrice(cartService.calculateCartTotals(cart));
-        Order savedOrder = orderRepository.save(createdOrder);
+        var savedOrder = orderRepository.save(createdOrder);
         restaurant.getOrders().add(savedOrder);
         return createdOrder;
     }
 
     @Override
     public Order updateOrder(Long orderId, String orderStatus) throws Exception {
-        Order order = findOrderById(orderId);
+        var order = findOrderById(orderId);
         if(orderStatus.equals("OUT_FOR_DELIVERY")
                 || orderStatus.equals("DELIVERED")
                 || orderStatus.equals("COMPLETED")
@@ -68,18 +68,18 @@ public class OrderServiceImpl implements OrderService {
 
     @Override
     public void cancelOrder(Long orderId) throws Exception {
-//        Order order = findOrderById(orderId);
+        findOrderById(orderId);
         orderRepository.deleteById(orderId);
     }
 
     @Override
-    public List<Order> getUsersOrder(Long userId) throws Exception {
+    public List<Order> getUsersOrder(Long userId) {
         return orderRepository.findByCustomerId(userId);
     }
 
     @Override
-    public List<Order> getRestaurantsOrder(Long restaurantId, String orderStatus) throws Exception {
-        List<Order> orders = orderRepository.findByRestaurantId(restaurantId);
+    public List<Order> getRestaurantsOrder(Long restaurantId, String orderStatus) {
+        var orders = orderRepository.findByRestaurantId(restaurantId);
         if(orderStatus!=null) orders = orders.stream()
                                             .filter(order -> order.getOrderStatus().equals(orderStatus))
                                             .collect(Collectors.toList());
@@ -88,7 +88,7 @@ public class OrderServiceImpl implements OrderService {
 
     @Override
     public Order findOrderById(Long orderId) throws Exception {
-        Optional<Order> optionalOrder = orderRepository.findById(orderId);
+        var optionalOrder = orderRepository.findById(orderId);
         if(optionalOrder.isEmpty()) throw new Exception("Order Not Found");
         return optionalOrder.get();
     }

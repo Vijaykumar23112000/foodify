@@ -3,11 +3,8 @@ package com.foodify.resource.user;
 import com.foodify.Utils.restaurant.RestaurantConverter;
 import com.foodify.dto.restaurant.RestaurantDto;
 import com.foodify.dto.restaurant.RestaurantResponseDto;
-import com.foodify.dto.user.UserResponseDto;
 import com.foodify.dto.mapper.RestaurantAndRestaurantResponseDtoMapper;
 import com.foodify.dto.mapper.UserAndUserResponseDtoMapper;
-import com.foodify.entity.Restaurant;
-import com.foodify.entity.User;
 import com.foodify.service.impl.RestaurantServiceImpl;
 import com.foodify.service.impl.UserServiceImpl;
 import lombok.RequiredArgsConstructor;
@@ -34,9 +31,9 @@ public class RestaurantController {
             @RequestParam String keyWord) throws Exception
     {
 
-        UserResponseDto userResponseDto = userService.findUserByJwtToken(token.substring(7).trim());
-        List<Restaurant> restaurants = restaurantService.searchRestaurant(keyWord);
-        List<RestaurantResponseDto> dtos = converter.convert(restaurants , userResponseDto);
+        var userResponseDto = userService.findUserByJwtToken(token.substring(7).trim());
+        var restaurants = restaurantService.searchRestaurant(keyWord);
+        var dtos = converter.convert(restaurants , userResponseDto);
         return ResponseEntity.status(HttpStatus.OK).body(dtos);
 
     }
@@ -46,9 +43,9 @@ public class RestaurantController {
             @RequestHeader("Authorization") String token) throws Exception
     {
 
-        UserResponseDto userResponseDto = userService.findUserByJwtToken(token.substring(7).trim());
-        List<Restaurant> restaurants = restaurantService.getAllRestaurant();
-        List<RestaurantResponseDto> dtos = converter.convert(restaurants , userResponseDto);
+        var userResponseDto = userService.findUserByJwtToken(token.substring(7).trim());
+        var restaurants = restaurantService.getAllRestaurant();
+        var dtos = converter.convert(restaurants , userResponseDto);
         return ResponseEntity.status(HttpStatus.OK).body(dtos);
 
     }
@@ -59,9 +56,9 @@ public class RestaurantController {
             @PathVariable Long id) throws Exception
     {
 
-        UserResponseDto userResponseDto = userService.findUserByJwtToken(token.substring(7).trim());
-        Restaurant restaurant = restaurantService.findRestaurantById(id);
-        RestaurantResponseDto restaurantResponseDto = restaurantMapper.toDTO.apply(restaurant , userResponseDto);
+        var userResponseDto = userService.findUserByJwtToken(token.substring(7).trim());
+        var restaurant = restaurantService.findRestaurantById(id);
+        var restaurantResponseDto = restaurantMapper.toDTO.apply(restaurant , userResponseDto);
         return ResponseEntity.status(HttpStatus.OK).body(restaurantResponseDto);
 
     }
@@ -72,8 +69,8 @@ public class RestaurantController {
             @PathVariable Long id) throws Exception
     {
 
-        User user = userMapper.toENTITY.apply(userService.findUserByJwtToken(token.substring(7).trim()));
-        RestaurantDto restaurantDto = restaurantService.addToFavorites(id , user);
+        var user = userMapper.toENTITY.apply(userService.findUserByJwtToken(token.substring(7).trim()));
+        var restaurantDto = restaurantService.addToFavorites(id , user);
         return ResponseEntity.status(HttpStatus.OK).body(restaurantDto);
 
     }

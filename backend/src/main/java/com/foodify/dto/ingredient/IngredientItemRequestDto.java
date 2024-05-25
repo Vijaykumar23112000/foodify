@@ -11,6 +11,7 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor
 public class IngredientItemRequestDto {
+
     private String name;
     private Long categoryId;
     private Long restaurantId;

@@ -2,7 +2,6 @@ package com.foodify.resource.admin;
 
 import com.foodify.dto.mapper.UserAndUserResponseDtoMapper;
 import com.foodify.entity.Category;
-import com.foodify.entity.User;
 import com.foodify.service.impl.CategoryServiceImpl;
 import com.foodify.service.impl.UserServiceImpl;
 import lombok.RequiredArgsConstructor;
@@ -25,8 +24,8 @@ public class AdminCategoryController {
             @RequestHeader("Authorization") String token) throws Exception
     {
 
-        User user = userMapper.toENTITY.apply(userService.findUserByJwtToken(token.substring(7).trim()));
-        Category createdCategory = categoryService.createCategory(category.getName(), user.getId());
+        var user = userMapper.toENTITY.apply(userService.findUserByJwtToken(token.substring(7).trim()));
+        var createdCategory = categoryService.createCategory(category.getName(), user.getId());
         return ResponseEntity.status(HttpStatus.CREATED).body(createdCategory);
 
     }

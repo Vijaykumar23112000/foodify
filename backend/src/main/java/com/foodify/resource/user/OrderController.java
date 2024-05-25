@@ -3,7 +3,6 @@ package com.foodify.resource.user;
 import com.foodify.dto.mapper.UserAndUserResponseDtoMapper;
 import com.foodify.dto.order.OrderRequestDto;
 import com.foodify.entity.Order;
-import com.foodify.entity.User;
 import com.foodify.service.impl.OrderServiceImpl;
 import com.foodify.service.impl.UserServiceImpl;
 import lombok.RequiredArgsConstructor;
@@ -29,20 +28,19 @@ public class OrderController {
             @RequestHeader("Authorization") String token ) throws Exception
     {
 
-        User user = userMapper.toENTITY.apply(userService.findUserByJwtToken(token.substring(7).trim()));
-        Order order = orderService.createOrder(request , user);
+        var user = userMapper.toENTITY.apply(userService.findUserByJwtToken(token.substring(7).trim()));
+        var order = orderService.createOrder(request , user);
         return ResponseEntity.status(HttpStatus.CREATED).body(order);
 
     }
 
     @GetMapping("/order/user")
     public ResponseEntity<List<Order>> getOrderHistory(
-            @RequestBody OrderRequestDto request ,
             @RequestHeader("Authorization") String token ) throws Exception
     {
 
-        User user = userMapper.toENTITY.apply(userService.findUserByJwtToken(token.substring(7).trim()));
-        List<Order> orders = orderService.getUsersOrder(user.getId());
+        var user = userMapper.toENTITY.apply(userService.findUserByJwtToken(token.substring(7).trim()));
+        var orders = orderService.getUsersOrder(user.getId());
         return ResponseEntity.status(HttpStatus.OK).body(orders);
 
     }

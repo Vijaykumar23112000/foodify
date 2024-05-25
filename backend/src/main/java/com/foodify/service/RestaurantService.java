@@ -8,7 +8,6 @@ import com.foodify.entity.User;
 import java.util.List;
 
 public interface RestaurantService {
-
     Restaurant createRestaurant(RestaurantRequestDto restaurantRequest , User userRequest);
     Restaurant updateRestaurant(Long restaurantId , RestaurantRequestDto updatedRestaurantRequest) throws Exception;
     void deleteRestaurant(Long restaurantId) throws Exception;
@@ -18,5 +17,4 @@ public interface RestaurantService {
     Restaurant findRestaurantByUserId(Long userId) throws Exception;
     RestaurantDto addToFavorites(Long restaurantId , User user) throws Exception;
     Restaurant updateRestaurantStatus(Long restaurantId) throws Exception;
-
 }

@@ -3,36 +3,33 @@ package com.foodify.Utils.food;
 import com.foodify.entity.Food;
 
 import java.util.List;
+import java.util.function.BiFunction;
+import java.util.function.Function;
 import java.util.stream.Collectors;
 
 public class FoodFilterUtil {
 
-    public static List<Food> filterByVegetarian(List<Food> foods , boolean isVegetarian){
-        return foods.stream()
-                .filter(food -> food.isVegetarian() == isVegetarian)
-                .collect(Collectors.toList());
-    }
+    public static BiFunction<List<Food> , Boolean, List<Food>> filterByVegetarian = (foods , isVegetarian) ->
+            foods.stream()
+                    .filter(food -> food.getIsVegetarian() == isVegetarian)
+                    .collect(Collectors.toList());
 
-    public static List<Food> filterByNonVeg(List<Food> foods){
-        return foods.stream()
-                .filter(food -> !food.isVegetarian())
-                .collect(Collectors.toList());
-    }
+    public static Function<List<Food> , List<Food>> filterByNonVeg = foods ->
+            foods.stream()
+                    .filter(food -> !food.getIsVegetarian())
+                    .collect(Collectors.toList());
 
-    public static List<Food> filterBySeasonal(List<Food> foods , boolean isSeasonable){
-        return foods.stream()
-                .filter(food -> food.isSeasonable() == isSeasonable)
-                .collect(Collectors.toList());
-    }
+    public static BiFunction<List<Food> , Boolean , List<Food>> filterBySeasonal = (foods , isSeasonable) ->
+            foods.stream()
+                    .filter(food -> food.getIsSeasonable() == isSeasonable)
+                    .collect(Collectors.toList());
 
-    public static List<Food> filterByCategory(List<Food> foods , String foodCategory){
-        return foods.stream()
-                .filter(food -> {
-                    if(food.getFoodCategory()!=null) return food.getFoodCategory().getName().equals(foodCategory);
-                    return false;
-//                    return food.getFoodCategory() != null && food.getFoodCategory().getName().equals(foodCategory);
-                })
-                .collect(Collectors.toList());
-    }
+    public static BiFunction<List<Food> , String , List<Food>> filterByCategory = (foods , foodCategory) ->
+            foods.stream()
+                    .filter(food -> {
+                        if(food.getFoodCategory() != null) return food.getFoodCategory().getName().equals(foodCategory);
+                        return false;
+                    })
+                    .collect(Collectors.toList());
 
 }

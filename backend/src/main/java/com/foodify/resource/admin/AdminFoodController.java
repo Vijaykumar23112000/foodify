@@ -3,7 +3,6 @@ package com.foodify.resource.admin;
 import com.foodify.domain.MessageResponse;
 import com.foodify.dto.food.FoodRequestDto;
 import com.foodify.entity.Food;
-import com.foodify.entity.Restaurant;
 import com.foodify.service.impl.FoodServiceImpl;
 import com.foodify.service.impl.RestaurantServiceImpl;
 import lombok.RequiredArgsConstructor;
@@ -25,8 +24,8 @@ public class AdminFoodController {
             @RequestHeader("Authorization") String token) throws Exception
     {
 
-        Restaurant restaurant = restaurantService.findRestaurantById(request.getRestaurantId());
-        Food food = foodService.createFood(request , request.getCategory() , restaurant);
+        var restaurant = restaurantService.findRestaurantById(request.getRestaurantId());
+        var food = foodService.createFood(request , request.getCategory() , restaurant);
         return ResponseEntity.status(HttpStatus.CREATED).body(food);
 
     }
@@ -38,8 +37,7 @@ public class AdminFoodController {
     {
 
         foodService.deleteFood(id);
-        MessageResponse msg = new MessageResponse("Food Deleted Successfully");
-        return ResponseEntity.status(HttpStatus.OK).body(msg);
+        return ResponseEntity.status(HttpStatus.OK).body(new MessageResponse("Food Deleted Successfully"));
 
     }
 
@@ -49,7 +47,7 @@ public class AdminFoodController {
             @RequestHeader("Authorization") String token) throws Exception
     {
 
-        Food food = foodService.updateAvailabilityStatus(id);
+        var food = foodService.updateAvailabilityStatus(id);
         return ResponseEntity.status(HttpStatus.OK).body(food);
 
     }

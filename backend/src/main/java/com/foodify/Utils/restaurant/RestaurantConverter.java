@@ -10,8 +10,8 @@ import org.springframework.stereotype.Component;
 import java.util.ArrayList;
 import java.util.List;
 
-@RequiredArgsConstructor
 @Component
+@RequiredArgsConstructor
 public class RestaurantConverter {
 
     private final RestaurantAndRestaurantResponseDtoMapper mapper;

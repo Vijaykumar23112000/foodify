@@ -1,10 +1,8 @@
 package com.foodify.service.impl;
 
-import com.foodify.Utils.restaurant.RestaurantDtoUtil;
 import com.foodify.Utils.restaurant.RestaurantUtil;
 import com.foodify.dto.restaurant.RestaurantDto;
 import com.foodify.dto.restaurant.RestaurantRequestDto;
-import com.foodify.entity.Address;
 import com.foodify.entity.Restaurant;
 import com.foodify.entity.User;
 import com.foodify.repository.Address.AddressRepository;
@@ -15,7 +13,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
+
+import static com.foodify.Utils.restaurant.RestaurantDtoUtil.createRestaurantDto;
 
 @Service
 @RequiredArgsConstructor
@@ -27,14 +26,14 @@ public class RestaurantServiceImpl implements RestaurantService {
 
     @Override
     public Restaurant createRestaurant(RestaurantRequestDto restaurantRequest, User userRequest) {
-        Address address = addressRepository.save(restaurantRequest.getAddress());
-        Restaurant restaurant = RestaurantUtil.createRestaurant(restaurantRequest , userRequest , address);
+        var address = addressRepository.save(restaurantRequest.getAddress());
+        var restaurant = RestaurantUtil.createRestaurant.apply(restaurantRequest , userRequest , address);
         return restaurantRepository.save(restaurant);
     }
 
     @Override
     public Restaurant updateRestaurant(Long restaurantId, RestaurantRequestDto updatedRestaurantRequest) throws Exception {
-        Restaurant restaurant = findRestaurantById(restaurantId);
+        var restaurant = findRestaurantById(restaurantId);
         if(restaurant.getCuisineType() != null) restaurant.setCuisineType(updatedRestaurantRequest.getCuisineType());
         if(restaurant.getDescription() != null) restaurant.setDescription(updatedRestaurantRequest.getDescription());
         if(restaurant.getName() != null) restaurant.setName(updatedRestaurantRequest.getName());
@@ -58,24 +57,24 @@ public class RestaurantServiceImpl implements RestaurantService {
 
     @Override
     public Restaurant findRestaurantById(Long id) throws Exception {
-        Optional<Restaurant> optionalRestaurant = restaurantRepository.findById(id);
+        var optionalRestaurant = restaurantRepository.findById(id);
         if(optionalRestaurant.isEmpty()) throw new Exception("Restaurant Not Found With Id : "+id);
         return optionalRestaurant.get();
     }
 
     @Override
     public Restaurant findRestaurantByUserId(Long userId) throws Exception {
-        Restaurant restaurant = restaurantRepository.findByOwnerId(userId);
+        var restaurant = restaurantRepository.findByOwnerId(userId);
         if(restaurant == null) throw new Exception("Restaurant Not Found For The OwnerId : "+userId);
         return restaurant;
     }
 
     @Override
     public RestaurantDto addToFavorites(Long restaurantId, User user) throws Exception {
-        Restaurant restaurant = findRestaurantById(restaurantId);
-        RestaurantDto dto = RestaurantDtoUtil.createRestaurantDto(restaurant);
-        boolean isFavorite = false;
-        List<RestaurantDto> favorites = user.getFavorites();
+        var restaurant = findRestaurantById(restaurantId);
+        var restaurantDto = createRestaurantDto.apply(restaurant);
+        var isFavorite = false;
+        var favorites = user.getFavorites();
         for(RestaurantDto fav: favorites){
             if(fav.getId().equals(restaurantId)){
                 isFavorite = true;
@@ -83,15 +82,15 @@ public class RestaurantServiceImpl implements RestaurantService {
             }
         }
         if(isFavorite) favorites.removeIf(favorite -> favorite.getId().equals(restaurantId));
-        else favorites.add(dto);
+        else favorites.add(restaurantDto);
         userRepository.save(user);
-        return dto;
+        return restaurantDto;
     }
 
     @Override
     public Restaurant updateRestaurantStatus(Long restaurantId) throws Exception {
-        Restaurant restaurant = findRestaurantById(restaurantId);
-        restaurant.setOpen(!restaurant.isOpen());
+        var restaurant = findRestaurantById(restaurantId);
+        restaurant.setOpen(!restaurant.getOpen());
         return restaurantRepository.save(restaurant);
     }
 

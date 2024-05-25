@@ -175,28 +175,54 @@ Entities :
 
 EndPoints :
 
-    /auth/signup                                    -> POST          -> Everyone can access
-    /auth/signin                                    -> POST          -> Everyone can access
+    Authentication
+        /auth/signup                                    -> POST          -> Everyone can access
+        /auth/signin                                    -> POST          -> Everyone can access
 
-    /api/admin/**                                   securityFilterChain    -> Only ADMIN & RESTAURANT_OWNER can access
-    /api/**                                         securityFilterChain    -> authenticated
+    SecurityFilterChain
+        /api/admin/**                                   -> Only ADMIN & RESTAURANT_OWNER can access
+        /api/**                                         -> Authenticated
 
-    /api/users/profile                              -> GET           -> Authenticated
+    User
+        /api/users/profile                              -> GET           -> Authenticated
 
-    /api/restaurants                                -> GET           -> authenticated
-    /api/restaurants/search                         -> GET           -> authenticated
-    /api/restaurants/{id}                           -> GET           -> authenticated
-    /api/restaurants/{id}/add-favorites             -> PUT           -> authenticated
+        /api/restaurants                                -> GET           -> Authenticated
+        /api/restaurants/search                         -> GET           -> Authenticated
+        /api/restaurants/{id}                           -> GET           -> Authenticated
+        /api/restaurants/{id}/add-favorites             -> PUT           -> Authenticated
 
-    /api/food/search                                -> GET           -> authenticated
-    /api/food/restaurant/{restaurantId}             -> GET           -> authenticated
+        /api/food/search                                -> GET           -> Authenticated
+        /api/food/restaurant/{restaurantId}             -> GET           -> Authenticated
 
-    /api/admin/restaurants                          -> POST          -> authenticated and ADMIN & RESTAURANT_OWNER only
-    /api/admin/restaurants/{id}                     -> PUT           -> authenticated and ADMIN & RESTAURANT_OWNER only
-    /api/admin/restaurants/{id}                     -> DELETE        -> authenticated and ADMIN & RESTAURANT_OWNER only
-    /api/admin/restaurants/{id}/status              -> PUT           -> authenticated and ADMIN & RESTAURANT_OWNER only
-    /api/admin/restaurants/{id}/user                -> GET           -> authenticated and ADMIN & RESTAURANT_OWNER only
+        /api/cart/add                                   -> PUT           -> Authenticated
+        /api/cart-item/update                           -> PUT           -> Authenticated
+        /api/cart-item/{id}/remove                      -> DELETE        -> Authenticated
+        /api/cart/clear                                 -> PUT           -> Authenticated
+        /api/cart/                                      -> GET           -> Authenticated
 
-    /api/admin/food                                 -> POST          -> authenticated and ADMIN & RESTAURANT_OWNER only
-    /api/admin/food/{id}                            -> DELETE        -> authenticated and ADMIN & RESTAURANT_OWNER only
-    /api/admin/food/{id}                            -> PUT           -> authenticated and ADMIN & RESTAURANT_OWNER only
+        /api/category/restaurant                        -> GET           -> Authenticated
+
+        /api/order                                      -> POST          -> Authenticated
+        /api/order/user                                 -> GET           -> Authenticated
+
+    Admin
+        /api/admin/category                             -> POST          -> Authenticated and ADMIN & RESTAURANT_OWNER only
+
+        /api/admin/ingredients/category                 -> POST          -> Authenticated and ADMIN & RESTAURANT_OWNER only
+        /api/admin/ingredients/category                 -> POST          -> Authenticated and ADMIN & RESTAURANT_OWNER only
+        /api/admin/ingredients/{id}/stock               -> POST          -> Authenticated and ADMIN & RESTAURANT_OWNER only
+        /api/admin/ingredients/restaurant/{id}          -> POST          -> Authenticated and ADMIN & RESTAURANT_OWNER only
+        /api/admin/ingredients/restaurant/{id}/category -> POST          -> Authenticated and ADMIN & RESTAURANT_OWNER only
+
+        /api/admin/restaurants                          -> POST          -> Authenticated and ADMIN & RESTAURANT_OWNER only
+        /api/admin/restaurants/{id}                     -> PUT           -> Authenticated and ADMIN & RESTAURANT_OWNER only
+        /api/admin/restaurants/{id}                     -> DELETE        -> Authenticated and ADMIN & RESTAURANT_OWNER only
+        /api/admin/restaurants/{id}/status              -> PUT           -> Authenticated and ADMIN & RESTAURANT_OWNER only
+        /api/admin/restaurants//user                    -> GET           -> Authenticated and ADMIN & RESTAURANT_OWNER only
+
+        /api/admin/order/restaurant/{id}                -> GET           -> Authenticated and ADMIN & RESTAURANT_OWNER only
+        /api/admin/order/{orderId}/{orderStatus}        -> PUT           -> Authenticated and ADMIN & RESTAURANT_OWNER only
+
+        /api/admin/food                                 -> POST          -> Authenticated and ADMIN & RESTAURANT_OWNER only
+        /api/admin/food/{id}                            -> DELETE        -> Authenticated and ADMIN & RESTAURANT_OWNER only
+        /api/admin/food/{id}                            -> PUT           -> Authenticated and ADMIN & RESTAURANT_OWNER only

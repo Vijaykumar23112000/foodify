@@ -29,7 +29,7 @@ public class Restaurant {
     private String cuisineType;
     private String openingHours;
     private LocalDateTime registrationDate;
-    private boolean open;
+    private Boolean open;
 
     @OneToOne
     private Address address;

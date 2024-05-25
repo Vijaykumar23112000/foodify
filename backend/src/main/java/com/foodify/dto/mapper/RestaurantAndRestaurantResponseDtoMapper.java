@@ -17,7 +17,7 @@ public class RestaurantAndRestaurantResponseDtoMapper {
                     .cuisineType(restaurant.getCuisineType())
                     .openingHours(restaurant.getOpeningHours())
                     .registrationDate(restaurant.getRegistrationDate())
-                    .open(restaurant.isOpen())
+                    .open(restaurant.getOpen())
                     .address(restaurant.getAddress())
                     .contactInformation(restaurant.getContactInformation())
                     .owner(user)

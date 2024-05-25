@@ -3,10 +3,8 @@ package com.foodify.resource.admin;
 import com.foodify.domain.MessageResponse;
 import com.foodify.dto.restaurant.RestaurantRequestDto;
 import com.foodify.dto.restaurant.RestaurantResponseDto;
-import com.foodify.dto.user.UserResponseDto;
 import com.foodify.dto.mapper.RestaurantAndRestaurantResponseDtoMapper;
 import com.foodify.dto.mapper.UserAndUserResponseDtoMapper;
-import com.foodify.entity.Restaurant;
 import com.foodify.service.impl.RestaurantServiceImpl;
 import com.foodify.service.impl.UserServiceImpl;
 import lombok.RequiredArgsConstructor;
@@ -30,9 +28,9 @@ public class AdminRestaurantController {
             @RequestHeader("Authorization") String token)
     {
 
-        UserResponseDto userResponseDto = userService.findUserByJwtToken(token.substring(7).trim());
-        Restaurant restaurant = restaurantService.createRestaurant(request , userMapper.toENTITY.apply(userResponseDto));
-        RestaurantResponseDto restaurantResponseDto = restaurantMapper.toDTO.apply(restaurant , userResponseDto);
+        var userResponseDto = userService.findUserByJwtToken(token.substring(7).trim());
+        var restaurant = restaurantService.createRestaurant(request , userMapper.toENTITY.apply(userResponseDto));
+        var restaurantResponseDto = restaurantMapper.toDTO.apply(restaurant , userResponseDto);
         return ResponseEntity.status(HttpStatus.CREATED).body(restaurantResponseDto);
 
     }
@@ -44,9 +42,9 @@ public class AdminRestaurantController {
             @PathVariable Long id) throws Exception
     {
 
-        UserResponseDto userResponseDto = userService.findUserByJwtToken(token.substring(7).trim());
-        Restaurant restaurant = restaurantService.updateRestaurant(id , request);
-        RestaurantResponseDto restaurantResponseDto = restaurantMapper.toDTO.apply(restaurant , userResponseDto);
+        var userResponseDto = userService.findUserByJwtToken(token.substring(7).trim());
+        var restaurant = restaurantService.updateRestaurant(id , request);
+        var restaurantResponseDto = restaurantMapper.toDTO.apply(restaurant , userResponseDto);
         return ResponseEntity.status(HttpStatus.OK).body(restaurantResponseDto);
 
     }
@@ -58,8 +56,7 @@ public class AdminRestaurantController {
     {
 
         restaurantService.deleteRestaurant(id);
-        MessageResponse msg = new MessageResponse("Restaurant Deleted Successfully");
-        return ResponseEntity.status(HttpStatus.OK).body(msg);
+        return ResponseEntity.status(HttpStatus.OK).body(new MessageResponse("Restaurant Deleted Successfully"));
 
     }
 
@@ -69,9 +66,9 @@ public class AdminRestaurantController {
             @PathVariable Long id) throws Exception
     {
 
-        UserResponseDto userResponseDto = userService.findUserByJwtToken(token.substring(7).trim());
-        Restaurant restaurant = restaurantService.updateRestaurantStatus(id);
-        RestaurantResponseDto restaurantResponseDto = restaurantMapper.toDTO.apply(restaurant , userResponseDto);
+        var userResponseDto = userService.findUserByJwtToken(token.substring(7).trim());
+        var restaurant = restaurantService.updateRestaurantStatus(id);
+        var restaurantResponseDto = restaurantMapper.toDTO.apply(restaurant , userResponseDto);
         return ResponseEntity.status(HttpStatus.OK).body(restaurantResponseDto);
 
     }
@@ -81,9 +78,9 @@ public class AdminRestaurantController {
             @RequestHeader("Authorization") String token) throws Exception
     {
 
-        UserResponseDto userResponseDto = userService.findUserByJwtToken(token.substring(7).trim());
-        Restaurant restaurant = restaurantService.findRestaurantByUserId(userResponseDto.getId());
-        RestaurantResponseDto restaurantResponseDto = restaurantMapper.toDTO.apply(restaurant , userResponseDto);
+        var userResponseDto = userService.findUserByJwtToken(token.substring(7).trim());
+        var restaurant = restaurantService.findRestaurantByUserId(userResponseDto.getId());
+        var restaurantResponseDto = restaurantMapper.toDTO.apply(restaurant , userResponseDto);
         return ResponseEntity.status(HttpStatus.OK).body(restaurantResponseDto);
 
     }

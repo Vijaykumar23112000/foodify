@@ -1,10 +1,7 @@
 package com.foodify.entity;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -13,7 +10,8 @@ import java.util.List;
 import static jakarta.persistence.GenerationType.AUTO;
 
 @Entity
-@Data
+@Getter
+@Setter
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
@@ -26,9 +24,9 @@ public class Food {
     private String name;
     private String description;
     private Long price;
-    private boolean isVegetarian;
-    private boolean isSeasonable;
-    private boolean available;
+    private Boolean isVegetarian;
+    private Boolean isSeasonable;
+    private Boolean available;
     private Date creationDate;
 
     @ManyToOne

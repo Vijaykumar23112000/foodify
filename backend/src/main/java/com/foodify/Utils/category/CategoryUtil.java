@@ -3,14 +3,15 @@ package com.foodify.Utils.category;
 import com.foodify.entity.Category;
 import com.foodify.entity.Restaurant;
 
+import java.util.function.BiFunction;
+
 public class CategoryUtil {
 
-    public static Category createCategory(String name , Restaurant restaurant){
-        return Category
-                .builder()
-                .name(name)
-                .restaurant(restaurant)
-                .build();
-    }
+    public static BiFunction<String , Restaurant , Category> createCategory = (name , restaurant) ->
+            Category
+                    .builder()
+                    .name(name)
+                    .restaurant(restaurant)
+                    .build();
 
 }

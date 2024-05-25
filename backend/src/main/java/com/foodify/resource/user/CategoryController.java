@@ -3,7 +3,6 @@ package com.foodify.resource.user;
 
 import com.foodify.dto.mapper.UserAndUserResponseDtoMapper;
 import com.foodify.entity.Category;
-import com.foodify.entity.User;
 import com.foodify.service.impl.CategoryServiceImpl;
 import com.foodify.service.impl.UserServiceImpl;
 import lombok.RequiredArgsConstructor;
@@ -23,13 +22,13 @@ public class CategoryController {
     private final UserAndUserResponseDtoMapper userMapper;
 
     @GetMapping("/restaurant")
-    public ResponseEntity<List<Category>> createCategory(
+    public ResponseEntity<List<Category>> getRestaurantsCategory(
             @RequestHeader("Authorization") String token) throws Exception
     {
 
-        User user = userMapper.toENTITY.apply(userService.findUserByJwtToken(token.substring(7).trim()));
-        List<Category> categories = categoryService.findCategoryByRestaurantId(user.getId());
-        return ResponseEntity.status(HttpStatus.CREATED).body(categories);
+        var user = userMapper.toENTITY.apply(userService.findUserByJwtToken(token.substring(7).trim()));
+        var categories = categoryService.findCategoryByRestaurantId(user.getId());
+        return ResponseEntity.status(HttpStatus.OK).body(categories);
 
     }
 

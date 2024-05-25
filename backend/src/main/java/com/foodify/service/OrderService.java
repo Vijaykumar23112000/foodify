@@ -10,7 +10,7 @@ public interface OrderService {
     Order createOrder(OrderRequestDto order , User user) throws Exception;
     Order updateOrder(Long orderId , String orderStatus) throws Exception;
     void cancelOrder(Long orderId) throws Exception;
-    List<Order> getUsersOrder(Long userId) throws Exception;
-    List<Order> getRestaurantsOrder(Long restaurantId , String orderStatus) throws Exception;
+    List<Order> getUsersOrder(Long userId);
+    List<Order> getRestaurantsOrder(Long restaurantId , String orderStatus);
     Order findOrderById(Long orderId) throws Exception;
 }

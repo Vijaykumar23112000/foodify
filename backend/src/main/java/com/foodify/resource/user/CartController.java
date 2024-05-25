@@ -5,7 +5,6 @@ import com.foodify.dto.cart.CartItemUpdateRequestDto;
 import com.foodify.dto.mapper.UserAndUserResponseDtoMapper;
 import com.foodify.entity.Cart;
 import com.foodify.entity.CartItem;
-import com.foodify.entity.User;
 import com.foodify.service.impl.CartServiceImpl;
 import com.foodify.service.impl.UserServiceImpl;
 import lombok.RequiredArgsConstructor;
@@ -28,7 +27,7 @@ public class CartController {
             @RequestHeader("Authorization") String token) throws Exception
     {
 
-        CartItem cartItem = cartService.addItemToCart(request , token);
+        var cartItem = cartService.addItemToCart(request , token);
         return ResponseEntity.status(HttpStatus.OK).body(cartItem);
 
     }
@@ -39,7 +38,7 @@ public class CartController {
             @RequestHeader("Authorization") String token) throws Exception
     {
 
-        CartItem cartItem = cartService.updateCartItemQuantity(request.getCartItemId(), request.getQuantity());
+        var cartItem = cartService.updateCartItemQuantity(request.getCartItemId(), request.getQuantity());
         return ResponseEntity.status(HttpStatus.OK).body(cartItem);
 
     }
@@ -50,7 +49,7 @@ public class CartController {
             @RequestHeader("Authorization") String token) throws Exception
     {
 
-        Cart cart = cartService.removieItemFromCart(id , token);
+        var cart = cartService.removieItemFromCart(id , token);
         return ResponseEntity.status(HttpStatus.OK).body(cart);
 
     }
@@ -60,8 +59,8 @@ public class CartController {
             @RequestHeader("Authorization") String token) throws Exception
     {
 
-        User user = userMapper.toENTITY.apply(userService.findUserByJwtToken(token.substring(7).trim()));
-        Cart cart = cartService.clearCart(user.getId());
+        var user = userMapper.toENTITY.apply(userService.findUserByJwtToken(token.substring(7).trim()));
+        var cart = cartService.clearCart(user.getId());
         return ResponseEntity.status(HttpStatus.OK).body(cart);
 
     }
@@ -71,8 +70,8 @@ public class CartController {
             @RequestHeader("Authorization") String token) throws Exception
     {
 
-        User user = userMapper.toENTITY.apply(userService.findUserByJwtToken(token.substring(7).trim()));
-        Cart cart = cartService.findCartByUserId(user.getId());
+        var user = userMapper.toENTITY.apply(userService.findUserByJwtToken(token.substring(7).trim()));
+        var cart = cartService.findCartByUserId(user.getId());
         return ResponseEntity.status(HttpStatus.OK).body(cart);
 
     }

@@ -1,10 +1,7 @@
 package com.foodify.service.impl;
 
-import com.foodify.Utils.ingredient.IngredientCategoryUtil;
-import com.foodify.Utils.ingredient.IngredientItemUtil;
 import com.foodify.entity.IngredientCategory;
 import com.foodify.entity.IngredientsItem;
-import com.foodify.entity.Restaurant;
 import com.foodify.repository.ingredient.IngredientCategoryRepository;
 import com.foodify.repository.ingredient.IngredientItemRepository;
 import com.foodify.service.IngredientsService;
@@ -12,7 +9,9 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
+
+import static com.foodify.Utils.ingredient.IngredientCategoryUtil.createIngredientCategory;
+import static com.foodify.Utils.ingredient.IngredientItemUtil.createIngredientsItem;
 
 @Service
 @RequiredArgsConstructor
@@ -24,14 +23,14 @@ public class IngredientsServiceImpl implements IngredientsService {
 
     @Override
     public IngredientCategory createIngredientCategory(String name, Long restaurantId) throws Exception {
-        Restaurant restaurant = restaurantService.findRestaurantById(restaurantId);
-        IngredientCategory category = IngredientCategoryUtil.createIngredientCategory(restaurant , name);
-        return ingredientCategoryRepository.save(category);
+        var restaurant = restaurantService.findRestaurantById(restaurantId);
+        var ingredientCategory = createIngredientCategory.apply(restaurant , name);
+        return ingredientCategoryRepository.save(ingredientCategory);
     }
 
     @Override
     public IngredientCategory findIngredientCategoryById(Long id) throws Exception {
-        Optional<IngredientCategory> optionalIngredientCategory = ingredientCategoryRepository.findById(id);
+        var optionalIngredientCategory = ingredientCategoryRepository.findById(id);
         if(optionalIngredientCategory.isEmpty()) throw new Exception("IngredientCategory Not Found");
         return optionalIngredientCategory.get();
     }
@@ -44,10 +43,10 @@ public class IngredientsServiceImpl implements IngredientsService {
 
     @Override
     public IngredientsItem createIngredientItem(Long restaurantId, String ingredientName, Long categoryId) throws Exception {
-        Restaurant restaurant = restaurantService.findRestaurantById(restaurantId);
-        IngredientCategory ingredientCategory = findIngredientCategoryById(categoryId);
-        IngredientsItem ingredientsItem = IngredientItemUtil.createIngredientsItem(ingredientName , restaurant , ingredientCategory);
-        IngredientsItem savedIngredientItem = ingredientItemRepository.save(ingredientsItem);
+        var restaurant = restaurantService.findRestaurantById(restaurantId);
+        var ingredientCategory = findIngredientCategoryById(categoryId);
+        var ingredientsItem = createIngredientsItem.apply(ingredientName , restaurant , ingredientCategory);
+        var savedIngredientItem = ingredientItemRepository.save(ingredientsItem);
         ingredientCategory.getIngredients().add(savedIngredientItem);
         return savedIngredientItem;
     }
@@ -59,10 +58,10 @@ public class IngredientsServiceImpl implements IngredientsService {
 
     @Override
     public IngredientsItem updateStock(Long id) throws Exception {
-        Optional<IngredientsItem> optionalIngredientsItem = ingredientItemRepository.findById(id);
+        var optionalIngredientsItem = ingredientItemRepository.findById(id);
         if(optionalIngredientsItem.isEmpty()) throw new Exception("IngredientItem Not Found");
-        IngredientsItem ingredientItem = optionalIngredientsItem.get();
-        ingredientItem.setStock(!ingredientItem.isStock());
+        var ingredientItem = optionalIngredientsItem.get();
+        ingredientItem.setIsStock(!ingredientItem.getIsStock());
         return ingredientItemRepository.save(ingredientItem);
     }
 }

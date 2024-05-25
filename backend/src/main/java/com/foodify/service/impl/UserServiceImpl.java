@@ -2,7 +2,6 @@ package com.foodify.service.impl;
 
 import com.foodify.Utils.user.UserResponseDtoUtil;
 import com.foodify.dto.user.UserResponseDto;
-import com.foodify.entity.User;
 import com.foodify.repository.user.UserRepository;
 import com.foodify.service.UserService;
 import lombok.RequiredArgsConstructor;
@@ -18,24 +17,20 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public UserResponseDto findUserByJwtToken(String token) {
-
-        String email = jwtService.extractUsername.apply(token);
+        var email = jwtService.extractUsername.apply(token);
         if(email!=null){
-            User user = userRepository.findByEmail(email);
-            if(user!=null) return UserResponseDtoUtil.createUserResponseDto(user);
+            var user = userRepository.findByEmail(email);
+            if(user!=null) return UserResponseDtoUtil.createUserResponseDto.apply(user);
             else throw new UsernameNotFoundException("User not found with email : "+email);
         }
         else throw new IllegalArgumentException("Invalid Token");
-
     }
 
     @Override
-    public UserResponseDto findUserByEmail(String email) throws Exception {
-
-        User user = userRepository.findByEmail(email);
-        if(user!=null) return UserResponseDtoUtil.createUserResponseDto(user);
+    public UserResponseDto findUserByEmail(String email) {
+        var user = userRepository.findByEmail(email);
+        if(user!=null) return UserResponseDtoUtil.createUserResponseDto.apply(user);
         else throw new UsernameNotFoundException("User not found with email : "+email);
-
     }
 
 }

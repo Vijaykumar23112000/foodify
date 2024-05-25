@@ -22,7 +22,7 @@ public class FoodController {
             @RequestHeader("Authorization") String token) throws Exception
     {
 
-        List<Food> foods = foodService.searchFood(keyword);
+        var foods = foodService.searchFood(keyword);
         return ResponseEntity.status(HttpStatus.OK).body(foods);
 
     }
@@ -30,14 +30,14 @@ public class FoodController {
     @GetMapping("/restaurant/{restaurantId}")
     public ResponseEntity<List<Food>> getRestaurantFood (
             @PathVariable Long restaurantId,
-            @RequestParam boolean isVegetarian,
-            @RequestParam boolean isSeasonal,
-            @RequestParam boolean isNonVeg,
+            @RequestParam Boolean isVegetarian,
+            @RequestParam Boolean isSeasonal,
+            @RequestParam Boolean isNonVeg,
             @RequestParam(required = false) String foodCategory,
             @RequestHeader("Authorization") String token) throws Exception
     {
 
-        List<Food> foods = foodService.getRestaurantsFood(restaurantId , isVegetarian , isNonVeg , isSeasonal , foodCategory);
+        var foods = foodService.getRestaurantsFood(restaurantId , isVegetarian , isNonVeg , isSeasonal , foodCategory);
         return ResponseEntity.status(HttpStatus.OK).body(foods);
 
     }

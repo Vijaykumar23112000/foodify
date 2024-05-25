@@ -30,7 +30,7 @@ public class CartItem {
     private Cart cart;
 
     @ManyToOne
-    private Food item;
+    private Food food;
 
     private List<String> ingredients;
 
