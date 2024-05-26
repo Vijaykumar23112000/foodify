@@ -1,0 +1,30 @@
+export const topSeller = [
+    {
+        image:"https://images.pexels.com/photos/803290/pexels-photo-803290.jpeg?auto=compress&cs=tinysrgb&w=600",
+        title:"Pizza"
+    },
+    {
+        image:"https://images.pexels.com/photos/461189/pexels-photo-461189.jpeg?auto=compress&cs=tinysrgb&w=600",
+        title:"Ice Cream"
+    },
+    {
+        image:"https://images.pexels.com/photos/789327/pexels-photo-789327.jpeg?auto=compress&cs=tinysrgb&w=600",
+        title:"Waffle"
+    },
+    {
+        image:"https://images.pexels.com/photos/15476841/pexels-photo-15476841/free-photo-of-chocolates-in-paper-in-box.jpeg?auto=compress&cs=tinysrgb&w=600",
+        title:"Truffle"
+    },
+    {
+        image:"https://images.pexels.com/photos/2955820/pexels-photo-2955820.jpeg?auto=compress&cs=tinysrgb&w=600",
+        title:"Donut"
+    },
+    {
+        image:"https://images.pexels.com/photos/1209029/pexels-photo-1209029.jpeg?auto=compress&cs=tinysrgb&w=600",
+        title:"Sandwitch"
+    },
+    {
+        image:"https://images.pexels.com/photos/1199958/pexels-photo-1199958.jpeg?auto=compress&cs=tinysrgb&w=600",
+        title:"Burger"
+    }
+]
