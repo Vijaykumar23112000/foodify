@@ -1,4 +1,4 @@
-import { Divider, FormControl, FormControlLabel, Grid, Radio, RadioGroup, Typography } from '@mui/material'
+import { Divider, FormControl, FormControlLabel, FormLabel, Grid, Radio, RadioGroup, Typography } from '@mui/material'
 import React, { useState } from 'react'
 import LocationOnIcon from '@mui/icons-material/LocationOn';
 import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
@@ -10,7 +10,8 @@ const RestaurantDetails = () => {
 
     const foodCategories = ["Pizza", "Biriyani", "Burger", "Chicken", "Donut"]
 
-    const handleFilter = (e) => {
+    const handleFilter = e => {
+        setFoodType("")
         console.log(e.target.value , e.target.name);
     }
 
@@ -39,7 +40,7 @@ const RestaurantDetails = () => {
                         <Grid item xs={12} lg={6}>
                             <img
                                 className='w-full h-[40vh] object-cover'
-                                src="https://api.deepai.org/job-view-file/78c7fe89-dafe-4d77-b633-3ce8e4393c9c/outputs/output.jpg"
+                                src="https://images.pexels.com/photos/941861/pexels-photo-941861.jpeg?auto=compress&cs=tinysrgb&w=600"
                                 alt="restaurant"
                             />
                         </Grid>
@@ -53,7 +54,7 @@ const RestaurantDetails = () => {
                     </Grid>
                 </div>
                 <div className='pt-3 pb-5'>
-                    <h1 className='text-4xl font-semibold'>Indian Fast Food</h1>
+                    <Typography variant='h3' className='font-semibold' color="primary">Indian Fast Food</Typography>
                     <p className='text-gray-400 mt-1'>
                         Lorem ipsum dolor sit amet consectetur adipisicing elit.
                         Et autem rerum nostrum distinctio iusto assumenda culpa
@@ -81,10 +82,10 @@ const RestaurantDetails = () => {
                 <div className="space-y-10 lg:w-[20%] filter">
                     <div className='box space-y-5 lg:sticky top-28'>
                         <div>
-                            <Typography variant='h5' sx={{ paddingBottom: "1rem" }}>
-                                Food Type
-                            </Typography>
                             <FormControl className='py-10 space-y-5' component={"fieldset"}>
+                                <FormLabel>
+                                    <Typography variant='h5' sx={{ paddingBottom: "1rem" }}>Food Type</Typography>
+                                </FormLabel>
                                 <RadioGroup onChange={handleFilter} name='food_type' value={foodType}>
                                     {
                                         foodTypes.map(item => <FormControlLabel key={item.value} value={item.value} control={<Radio />} label={item.label} />)
@@ -94,10 +95,10 @@ const RestaurantDetails = () => {
                         </div>
                         <Divider />
                         <div>
-                            <Typography variant='h5' sx={{ paddingBottom: "1rem" }}>
-                                Food Category
-                            </Typography>
                             <FormControl className='py-10 space-y-5' component={"fieldset"}>
+                                <FormLabel>
+                                    <Typography variant='h5' sx={{ paddingBottom: "1rem" }}>Food Category</Typography>
+                                </FormLabel>
                                 <RadioGroup onChange={handleFilter} name='food_Type' value={foodType}>
                                     {
                                         foodCategories.map(item => <FormControlLabel key={item} value={item} control={<Radio />} label={item} />)

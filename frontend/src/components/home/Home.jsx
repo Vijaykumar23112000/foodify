@@ -1,7 +1,7 @@
 import React from 'react'
-import "./home.css"
 import Carousel from './carousel/Carousel'
 import RestaurantCard from './restaurant/RestaurantCard'
+import "./home.css"
 
 
 const home = () => {

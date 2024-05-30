@@ -2,7 +2,8 @@ import { CssBaseline, ThemeProvider } from '@mui/material';
 import './App.css';
 import Navbar from './components/navbar/Navbar';
 import { darkTheme } from './theme/DarkTheme';
-import RestaurantDetails from './components/restaurant/RestaurantDetails';
+import Cart from './components/cart/Cart';
+// import RestaurantDetails from './components/restaurant/RestaurantDetails';
 // import Home from './components/home/Home'
 
 function App() {
@@ -11,7 +12,8 @@ function App() {
       <CssBaseline />
       <Navbar />
       {/* <Home /> */}
-      <RestaurantDetails />
+      {/* <RestaurantDetails /> */}
+      <Cart />
     </ThemeProvider>
   )
 }

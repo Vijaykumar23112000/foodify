@@ -13,9 +13,11 @@ const MenuCard = () => {
 
     ]
 
-    const handleCheckBocChange = (value) => {
+    const handleCheckBoxChange = (value) => {
         console.log(value);
     }
+
+    const handleSubmit = e => e.preventDefault()
 
     return (
         <Accordion>
@@ -40,7 +42,7 @@ const MenuCard = () => {
                 </div>
             </AccordionSummary>
             <AccordionDetails>
-                <form>
+                <form onSubmit={handleSubmit}>
                     <div className='flex gap-5 flex-wrap'>
                         {
                             ingredients.map(item => 
@@ -48,7 +50,17 @@ const MenuCard = () => {
                                                     <p>{item.category}</p>
                                                     <FormGroup>
                                                         {
-                                                           item.ingredients.map(ingredient => <FormControlLabel control={<Checkbox onChange={() => handleCheckBocChange(ingredient)} />} label={ingredient} />) 
+                                                           item.ingredients.map(ingredient => 
+                                                                                    <FormControlLabel 
+                                                                                        control={
+                                                                                                    <Checkbox 
+                                                                                                        onChange={() => handleCheckBoxChange(ingredient)} 
+                                                                                                        color='secondary'
+                                                                                                    />
+                                                                                                } 
+                                                                                        label={ingredient} 
+                                                                                    />
+                                                                                ) 
                                                         }
                                                     </FormGroup>
                                                 </div>
