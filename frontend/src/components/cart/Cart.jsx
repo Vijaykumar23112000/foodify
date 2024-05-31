@@ -34,7 +34,7 @@ const Cart = () => {
 
     const handleOpenAddressModel = () => setOpen(true)
 
-    const handleSubmit = (values) => console.log("form value : ",values)
+    const handleSubmit = (values) => console.log(values)
 
     return (
         <>
@@ -98,57 +98,53 @@ const Cart = () => {
                         onSubmit={handleSubmit}
                         validationSchema={validation}
                     >
-                        {/* {
-                            ({ errors }) => { */}
-                                <Form>
-                                    <Grid container spacing={2}>
-                                        <Grid item xs={12}>
-                                            <Field
-                                                as={TextField}
-                                                name="streetAddress"
-                                                label="Street Address"
-                                                fullWidth
-                                                variant="outlined"
-                                            />
-                                            {/* {errors.streetAddress && <span>{errors.streetAddress}</span>} */}
-                                        </Grid>
-                                        <Grid item xs={6}>
-                                            <Field
-                                                as={TextField}
-                                                name="state"
-                                                label="State"
-                                                fullWidth
-                                                variant="outlined"
-                                            />
-                                            {/* {errors.state && <span>{errors.state}</span>} */}
-                                        </Grid>
-                                        <Grid item xs={6}>
-                                            <Field
-                                                as={TextField}
-                                                name="pincode"
-                                                label="Pincode"
-                                                fullWidth
-                                                variant="outlined"
-                                            />
-                                            {/* {errors.pincode && <span>{errors.pincode}</span>} */}
-                                        </Grid>
-                                        <Grid item xs={12}>
-                                            <Field
-                                                as={TextField}
-                                                name="city"
-                                                label="City"
-                                                fullWidth
-                                                variant="outlined"
-                                            />
-                                            {/* {errors.city && <span>{errors.city}</span>} */}
-                                        </Grid>
-                                        <Grid item xs={12}>
-                                            <Button fullWidth variant='contained' type='submit' color='primary'>Deliver Here</Button>
-                                        </Grid>
-                                    </Grid>
-                                </Form>
-                            {/* }
-                        } */}
+                        <Form>
+                            <Grid container spacing={2}>
+                                <Grid item xs={12}>
+                                    <Field
+                                        as={TextField}
+                                        name="streetAddress"
+                                        label="Street Address"
+                                        fullWidth
+                                        variant="outlined"
+                                    />
+                                    {/* {errors.streetAddress && <span>{errors.streetAddress}</span>} */}
+                                </Grid>
+                                <Grid item xs={6}>
+                                    <Field
+                                        as={TextField}
+                                        name="state"
+                                        label="State"
+                                        fullWidth
+                                        variant="outlined"
+                                    />
+                                    {/* {errors.state && <span>{errors.state}</span>} */}
+                                </Grid>
+                                <Grid item xs={6}>
+                                    <Field
+                                        as={TextField}
+                                        name="pincode"
+                                        label="Pincode"
+                                        fullWidth
+                                        variant="outlined"
+                                    />
+                                    {/* {errors.pincode && <span>{errors.pincode}</span>} */}
+                                </Grid>
+                                <Grid item xs={12}>
+                                    <Field
+                                        as={TextField}
+                                        name="city"
+                                        label="City"
+                                        fullWidth
+                                        variant="outlined"
+                                    />
+                                    {/* {errors.city && <span>{errors.city}</span>} */}
+                                </Grid>
+                                <Grid item xs={12}>
+                                    <Button fullWidth variant='contained' type='submit' color='primary'>Deliver Here</Button>
+                                </Grid>
+                            </Grid>
+                        </Form>
                     </Formik>
                 </Box>
             </Modal>

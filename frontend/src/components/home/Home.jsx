@@ -3,7 +3,6 @@ import Carousel from './carousel/Carousel'
 import RestaurantCard from './restaurant/RestaurantCard'
 import "./home.css"
 
-
 const home = () => {
 
     const restaurant = [1,1,1,1,1,1,1,1]
