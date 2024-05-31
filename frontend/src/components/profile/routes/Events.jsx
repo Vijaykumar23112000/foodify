@@ -1,9 +1,12 @@
 import React from 'react'
+import EventCard from './Card/EventCard'
 
 const Events = () => {
     return (
-        <div>
-            <h1>Events</h1>
+        <div className='mt-5 px-5 flex flex-wrap gap-5'>
+            {
+                [1,1,1].map((item) => <EventCard />)
+            }
         </div>
     )
 }
