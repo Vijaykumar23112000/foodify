@@ -5,6 +5,7 @@ import Home from '../home/Home'
 import RestaurantDetails from '../restaurant/RestaurantDetails'
 import Cart from '../cart/Cart'
 import Profile from '../profile/Profile'
+import Authentication from '../authentication/Authentication'
 
 const Router = () => {
     return (
@@ -17,6 +18,7 @@ const Router = () => {
                 <Route path='/cart' element={<Cart />} />
                 <Route path='/my-profile/*' element={<Profile />} />
             </Routes>
+            <Authentication />
         </div>
     )
 }
