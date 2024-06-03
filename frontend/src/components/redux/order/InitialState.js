@@ -1,6 +1,5 @@
 export const initialState = {
-    cart: null,
-    cartItems: [],
     loading: false,
+    orders: [],
     error: null,
 }
