@@ -9,7 +9,7 @@ import LogoutIcon from '@mui/icons-material/Logout';
 import { Divider, Drawer, useMediaQuery } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
-import { logout } from '../redux/authentication/Action';
+import { logoutAction } from '../redux/authentication/Action';
 
 const ProfileNavigation = ({open , handleClose}) => {
 
@@ -29,7 +29,7 @@ const ProfileNavigation = ({open , handleClose}) => {
 
     const handleNavigate = (item) => {
         if(item.title === "Logout") {
-            dispatch(logout())
+            dispatch(logoutAction())
             navigate("/")
         }
         else navigate(`/my-profile/${item.title.toLowerCase()}`)

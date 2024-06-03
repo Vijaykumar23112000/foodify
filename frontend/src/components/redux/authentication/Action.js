@@ -15,7 +15,7 @@ import {
     REGISTER_SUCCESS
 } from './ActionType'
 
-export const registerUser = (requestData) => async (dispatch) => {
+export const registerUserAction = (requestData) => async (dispatch) => {
     dispatch({ type: REGISTER_REQUEST })
     try {
         const { data } = await api.post(`/auth/signup`, requestData.userData)
@@ -29,7 +29,7 @@ export const registerUser = (requestData) => async (dispatch) => {
     }
 }
 
-export const loginUser = (requestData) => async (dispatch) => {
+export const loginUserAction = (requestData) => async (dispatch) => {
     dispatch({ type: LOGIN_REQUEST })
     try {
         const { data } = await api.post(`/auth/signin`, requestData.userData)
@@ -43,7 +43,7 @@ export const loginUser = (requestData) => async (dispatch) => {
     }
 }
 
-export const getUser = (token) => async (dispatch) => {
+export const getUserAction = (token) => async (dispatch) => {
     dispatch({ type: GET_USER_REQUEST })
     try {
         const { data } = await api.get(`/api/users/profile`, { headers: { Authorization: `Bearer ${token}` } })
@@ -55,7 +55,7 @@ export const getUser = (token) => async (dispatch) => {
     }
 }
 
-export const addToFavorite = (token, restaurantId) => async (dispatch) => {
+export const addToFavoriteAction = (token, restaurantId) => async (dispatch) => {
     dispatch({ type: ADD_TO_FAVORITES_REQUEST })
     try {
         const { data } = await api.put(`api/restaurants/${restaurantId}/add-favorite`, {}, { headers: { Authorization: `Bearer ${token}` } })
@@ -67,7 +67,7 @@ export const addToFavorite = (token, restaurantId) => async (dispatch) => {
     }
 }
 
-export const logout = () => async (dispatch) => {
+export const logoutAction = () => async (dispatch) => {
     try {
         localStorage.clear()
         dispatch({ type: LOGOUT })

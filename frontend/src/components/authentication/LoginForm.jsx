@@ -3,7 +3,7 @@ import { Field, Form, Formik } from 'formik'
 import React from 'react'
 import { useDispatch } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
-import { loginUser } from '../redux/authentication/Action'
+import { loginUserAction } from '../redux/authentication/Action'
 
 const LoginForm = () => {
 
@@ -16,7 +16,7 @@ const LoginForm = () => {
     const navigate = useNavigate()
 
     const handleSubmit = (values) => {
-        dispatch(loginUser({userData: values,navigate}))
+        dispatch(loginUserAction({userData: values,navigate}))
     }
 
     return (

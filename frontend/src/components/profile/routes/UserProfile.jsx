@@ -3,7 +3,7 @@ import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import { Button } from '@mui/material';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import { logout } from '../../redux/authentication/Action';
+import { logoutAction } from '../../redux/authentication/Action';
 
 const UserProfile = () => {
 
@@ -11,7 +11,7 @@ const UserProfile = () => {
     const dispatch = useDispatch()
 
     const handleLogout = () => { 
-        dispatch(logout())
+        dispatch(logoutAction())
             navigate("/")
      }
 

@@ -1,5 +1,5 @@
-import { handleAddToFavorites, handleFailiure, handleGetUser, handleRequest, handleSuccess } from "./HelperFunctions/HelperFunctions"
 import { initialState } from "./InitialState"
+import { handleAddToFavorites, handleFailiure, handleGetUser, handleRequest, handleSuccess } from "./helper/HelperFunction"
 import {
     ADD_TO_FAVORITES_FAILED,
     ADD_TO_FAVORITES_REQUEST,
