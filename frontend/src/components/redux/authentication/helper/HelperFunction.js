@@ -28,7 +28,7 @@ export const handleAddToFavorites = (state, payload) => (
     }
 )
 
-export const handleFailiure = (state, payload) => (
+export const handleFailed = (state, payload) => (
     {
         ...state,
         isLoading: false,

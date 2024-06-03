@@ -1,5 +1,11 @@
 import { initialState } from "./InitialState"
-import { handleAddToFavorites, handleFailiure, handleGetUser, handleRequest, handleSuccess } from "./helper/HelperFunction"
+import { 
+    handleAddToFavorites, 
+    handleFailed, 
+    handleGetUser, 
+    handleRequest, 
+    handleSuccess 
+} from "./helper/HelperFunction"
 import {
     ADD_TO_FAVORITES_FAILED,
     ADD_TO_FAVORITES_REQUEST,
@@ -39,7 +45,7 @@ export const authenticationReducer = (state = initialState, action) => {
         case LOGIN_FAILED:
         case GET_USER_FAILED:
         case ADD_TO_FAVORITES_FAILED:
-            return handleFailiure(state, action.payload)
+            return handleFailed(state, action.payload)
 
         case LOGOUT:
             return initialState
