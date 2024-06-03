@@ -20,8 +20,7 @@ export const registerUser = (requestData) => async (dispatch) => {
     try {
         const { data } = await api.post(`/auth/signup`, requestData.userData)
         if (data.token) localStorage.setItem("token", data.token)
-        if (data.role === "ROLE_RESTAURANT_OWNER") requestData.navigate("/admin/restaurant")
-        else requestData.navigate("/")
+        data.role === "ROLE_RESTAURANT_OWNER" ? requestData.navigate("/admin/restaurant") : requestData.navigate("/")
         dispatch({ type: REGISTER_SUCCESS, payload: data.token })
         console.log("Register Success : ", data)
     } catch (error) {
@@ -35,8 +34,7 @@ export const loginUser = (requestData) => async (dispatch) => {
     try {
         const { data } = await api.post(`/auth/signin`, requestData.userData)
         if (data.token) localStorage.setItem("token", data.token)
-        if (data.role === "ROLE_RESTAURANT_OWNER") requestData.navigate("/admin/restaurant")
-        else requestData.navigate("/")
+        data.role === "ROLE_RESTAURANT_OWNER" ? requestData.navigate("/admin/restaurant") : requestData.navigate("/")
         dispatch({ type: LOGIN_SUCCESS, payload: data.token })
         console.log("Login Success : ", data)
     } catch (error) {
@@ -48,7 +46,7 @@ export const loginUser = (requestData) => async (dispatch) => {
 export const getUser = (token) => async (dispatch) => {
     dispatch({ type: GET_USER_REQUEST })
     try {
-        const { data } = await api.get(`/auth/signup`, { headers: { Authorization: `Bearer ${token}` } })
+        const { data } = await api.get(`/api/users/profile`, { headers: { Authorization: `Bearer ${token}` } })
         dispatch({ type: GET_USER_SUCCESS, payload: data })
         console.log("User Profile : ", data)
     } catch (error) {
@@ -70,9 +68,9 @@ export const addToFavorite = (token, restaurantId) => async (dispatch) => {
 }
 
 export const logout = () => async (dispatch) => {
-    dispatch({ type: LOGOUT })
     try {
         localStorage.clear()
+        dispatch({ type: LOGOUT })
         console.log("Logout Success")
     } catch (error) {
         console.log(error)

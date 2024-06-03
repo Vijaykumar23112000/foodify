@@ -6,9 +6,6 @@ import LoginForm from './LoginForm'
 
 const Authentication = () => {
     
-    const location = useLocation()
-    const navigate = useNavigate()
-
     const style = {
         position: 'absolute',
         top: '50%',
@@ -20,6 +17,9 @@ const Authentication = () => {
         p: 4,
         outline: "none",
     };
+    
+    const location = useLocation()
+    const navigate = useNavigate()
 
     const handleOnClose = () => {
         navigate("/")

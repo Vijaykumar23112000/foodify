@@ -4,9 +4,7 @@ import RestaurantCard from './restaurant/RestaurantCard'
 import "./home.css"
 
 const home = () => {
-
-    const restaurant = [1,1,1,1,1,1,1,1]
-
+    
     return (
         <div className='pb-10'>
             <section className='banner -z-50 relative flex flex-col justify-center items-center'>
@@ -35,7 +33,7 @@ const home = () => {
                 <h1 className='text-2xl font-semibold text-gray-300 pb-8'>Discover culinary bliss with our specially chosen favorites!</h1>
                 <div className='flex flex-wrap items-center justify-around  gap-4'>
                     {
-                        restaurant.map(item => <RestaurantCard />)
+                        [1,1,1,1,1,1,1,1].map(item => <RestaurantCard />)
                     }
                 </div>
             </section>

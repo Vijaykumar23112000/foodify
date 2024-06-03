@@ -1,13 +1,11 @@
 import { Button, FormControl, InputLabel, MenuItem, Select, TextField, Typography } from '@mui/material'
 import { Field, Form, Formik } from 'formik'
 import React from 'react'
+import { useDispatch } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
+import { registerUser } from '../redux/authentication/Action'
 
 const RegistrationForm = () => {
-
-    const handleSubmit = (values) => {
-        console.log(values)
-    }
 
     const intialValues = {
         fullName: "",
@@ -16,7 +14,12 @@ const RegistrationForm = () => {
         role: "ROLE_CUSTOMER"
     }
 
+    const dispatch = useDispatch()
     const navigate = useNavigate()
+
+    const handleSubmit = (values) => {
+        dispatch(registerUser({userData: values,navigate}))        
+    }
 
     return (
         <div>
@@ -63,7 +66,7 @@ const RegistrationForm = () => {
                             name="role"
                         >
                             <MenuItem value={"ROLE_CUSTOMER"}>Customer</MenuItem>
-                            <MenuItem value={"ROLE_RESTAURANT-OWNER"}>Restaurant Owner</MenuItem>
+                            <MenuItem value={"ROLE_RESTAURANT_OWNER"}>Restaurant Owner</MenuItem>
                         </Field>
                     </FormControl>
                     <Button

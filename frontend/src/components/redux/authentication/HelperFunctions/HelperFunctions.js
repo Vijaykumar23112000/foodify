@@ -37,6 +37,14 @@ export const handleFailiure = (state, payload) => (
     }
 )
 
+export const handleGetUser = (state , payload) => (
+    {
+        ...state,
+        isLoading: false,
+        user: payload
+    }
+)
+
 const isPresentInFavorites = (favorites, restaurant) => {
     for (let item of favorites) {
         if (restaurant.id === item.id) return true

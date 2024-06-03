@@ -13,9 +13,7 @@ const MenuCard = () => {
 
     ]
 
-    const handleCheckBoxChange = (value) => {
-        console.log(value);
-    }
+    const handleCheckBoxChange = (value) => console.log(value)
 
     const handleSubmit = e => e.preventDefault()
 

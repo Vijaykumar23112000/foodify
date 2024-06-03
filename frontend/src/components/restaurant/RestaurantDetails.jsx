@@ -5,24 +5,21 @@ import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
 import MenuCard from './MenuCard';
 
 const RestaurantDetails = () => {
-
-    const [foodType , setFoodType] = useState("all")
-
-    const foodCategories = ["Pizza", "Biriyani", "Burger", "Chicken", "Donut"]
-
-    const handleFilter = e => {
-        setFoodType("")
-        console.log(e.target.value , e.target.name);
-    }
-
-    const menu = [1,1,1,1,1,1,1]
-
+    
     const foodTypes = [
         { label: "All", value: "all" },
         { label: "Vegetarian", value: "vegetarian" },
         { label: "Non-Vegetarian", value: "non_vegetarian" },
         { label: "Seasonal Only", value: "seasonal" }
     ]
+
+    const [foodType , setFoodType] = useState("all")
+    const foodCategories = ["Pizza", "Biriyani", "Burger", "Chicken", "Donut"]
+
+    const handleFilter = e => {
+        setFoodType("")
+        console.log(e.target.value , e.target.name);
+    }
 
     return (
         <div className='px-5 lg:px-20'>
@@ -110,7 +107,7 @@ const RestaurantDetails = () => {
                 </div>
                 <div className="space-y-5 lg:w-[80%] lg:pl-10 menu">
                     {
-                        menu.map(item => <MenuCard />)
+                        [1,1,1,1,1,1,1].map(item => <MenuCard />)
                     }
                 </div>
             </section>

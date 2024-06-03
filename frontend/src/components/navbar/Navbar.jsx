@@ -4,15 +4,21 @@ import SearchIcon from '@mui/icons-material/Search';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import PersonIcon from '@mui/icons-material/Person';
 import { useNavigate } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 
 const Navbar = () => {
 
     const navigate = useNavigate()
+    const authentication = useSelector(store => store.authentication)
+
+    const handleAvatarClick = () => authentication.user?.role === "ROLE_CUSTOMER" ? navigate("/my-profile") : navigate("/admin/restaurant")
 
     return (
         <Box bgcolor="secondary.main" className='px-5 sticky top-0 z-50 py-[.8rem] lg:px-20 flex justify-between'>
             <div className="lg:mr-10 cursor-pointer flex items-center space-x-4">
-                <li className='logo font-semibold 
+                <li
+                    onClick={ () => navigate("/") }
+                    className='logo font-semibold 
                             text-gray-300 text-2xl
                             first-letter:text-red-600 
                             first-letter:text-[30px]
@@ -29,9 +35,18 @@ const Navbar = () => {
                 </div>
                 <div className="">
                     {
-                        false ? 
-                            <Avatar sx={{ backgroundColor: "white", color: "black" }}>A</Avatar> : 
-                            <IconButton onClick={()=>navigate("/account/login")}><PersonIcon /></IconButton>
+                        authentication.user ?
+                            (
+                                <Avatar
+                                    onClick={handleAvatarClick}
+                                    sx={{ backgroundColor: "white", color: "black" }}
+                                >
+                                    {authentication.user?.fullName[0].toUpperCase()}
+                                </Avatar>
+                            ) :
+                            (
+                                <IconButton onClick={() => navigate("/account/login")}><PersonIcon /></IconButton>
+                            )
                     }
                 </div>
                 <div className="">

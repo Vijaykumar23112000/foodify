@@ -8,9 +8,6 @@ import { validation } from './address/Validation';
 
 const Cart = () => {
 
-    const [open, setOpen] = useState(false);
-    const handleCloseAddressModal = () => setOpen(false);
-
     const style = {
         position: 'absolute',
         top: '50%',
@@ -30,10 +27,14 @@ const Cart = () => {
         city: ""
     }
 
+    const [open, setOpen] = useState(false);
+
+    const handleCloseAddressModal = () => setOpen(false);
+
     const createOrderUsingSelectedAddress = () => { }
 
     const handleOpenAddressModel = () => setOpen(true)
-
+    
     const handleSubmit = (values) => console.log(values)
 
     return (
