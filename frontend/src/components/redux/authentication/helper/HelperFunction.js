@@ -41,7 +41,8 @@ export const handleGetUser = (state , payload) => (
     {
         ...state,
         isLoading: false,
-        user: payload
+        user: payload,
+        favorites: payload.favorites
     }
 )
 

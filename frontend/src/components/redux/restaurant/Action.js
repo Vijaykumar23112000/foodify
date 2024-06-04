@@ -185,7 +185,7 @@ export const createCategoryAction = ({ requestData ,  token }) => async (dispatc
 export const getRestaurantCategoryAction = ({ restaurantId ,  token }) => async (dispatch) => {
     dispatch({ type: GET_RESTAURANT_CATEGORY_REQUEST })
     try {
-        const { data } = await api.get(`/api/category/restaurant/${restaurantId}`, requestData, { headers: { Authorization: `Bearer ${token}` } })
+        const { data } = await api.get(`/api/category/restaurant/${restaurantId}`, { headers: { Authorization: `Bearer ${token}` } })
         dispatch({ type: GET_RESTAURANT_CATEGORY_SUCCESS, payload: data })
         console.log("create category event : ", data);
     } catch (error) {

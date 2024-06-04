@@ -13,6 +13,7 @@ public class RestaurantAndRestaurantResponseDtoMapper {
             RestaurantResponseDto
                     .builder()
                     .id(restaurant.getId())
+                    .name(restaurant.getName())
                     .description(restaurant.getDescription())
                     .cuisineType(restaurant.getCuisineType())
                     .openingHours(restaurant.getOpeningHours())

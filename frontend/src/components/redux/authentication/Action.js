@@ -55,10 +55,10 @@ export const getUserAction = (token) => async (dispatch) => {
     }
 }
 
-export const addToFavoriteAction = (token, restaurantId) => async (dispatch) => {
+export const addToFavoriteAction = ({restaurantId , token}) => async (dispatch) => {
     dispatch({ type: ADD_TO_FAVORITES_REQUEST })
     try {
-        const { data } = await api.put(`api/restaurants/${restaurantId}/add-favorite`, {}, { headers: { Authorization: `Bearer ${token}` } })
+        const { data } = await api.put(`api/restaurants/${restaurantId}/add-favorites`, {}, { headers: { Authorization: `Bearer ${token}` } })
         dispatch({ type: ADD_TO_FAVORITES_SUCCESS, payload: data })
         console.log("added to favorites : ", data)
     } catch (error) {

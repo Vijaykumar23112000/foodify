@@ -1,10 +1,21 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import Carousel from './carousel/Carousel'
 import RestaurantCard from './restaurant/RestaurantCard'
 import "./home.css"
+import { useDispatch, useSelector } from 'react-redux'
+import { getAllRestaurantsAction } from '../redux/restaurant/Action'
 
-const home = () => {
-    
+const Home = () => {
+
+    useEffect(() => {
+        dispatch(getAllRestaurantsAction(token))
+    }, [])
+
+    const dispatch = useDispatch()
+    const token = localStorage.getItem("token")
+    const { restaurant } = useSelector(store => store)
+    console.log("Restaurants from store : => " , restaurant);
+
     return (
         <div className='pb-10'>
             <section className='banner -z-50 relative flex flex-col justify-center items-center'>
@@ -33,7 +44,7 @@ const home = () => {
                 <h1 className='text-2xl font-semibold text-gray-300 pb-8'>Discover culinary bliss with our specially chosen favorites!</h1>
                 <div className='flex flex-wrap items-center justify-around  gap-4'>
                     {
-                        [1,1,1,1,1,1,1,1].map(item => <RestaurantCard />)
+                        restaurant.restaurants.map(item => <RestaurantCard item = {item}/>)
                     }
                 </div>
             </section>
@@ -41,4 +52,4 @@ const home = () => {
     )
 }
 
-export default home
+export default Home

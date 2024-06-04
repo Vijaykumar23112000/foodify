@@ -4,7 +4,7 @@ import { darkTheme } from './theme/DarkTheme';
 import Router from './components/router/Router';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { getUserAction } from './components/redux/authentication/Action';
+import { getUserAction, /*logoutAction*/ } from './components/redux/authentication/Action';
 
 function App() {
 
@@ -15,6 +15,7 @@ function App() {
 
   useEffect(() => {
     dispatch(getUserAction(authentication.token || token))
+    // dispatch(logoutAction())
   }, [authentication.token])
 
   return (

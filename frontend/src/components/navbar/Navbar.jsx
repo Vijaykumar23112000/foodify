@@ -4,12 +4,15 @@ import SearchIcon from '@mui/icons-material/Search';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import PersonIcon from '@mui/icons-material/Person';
 import { useNavigate } from 'react-router-dom';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { logoutAction } from '../redux/authentication/Action';
 
 const Navbar = () => {
 
     const navigate = useNavigate()
     const authentication = useSelector(store => store.authentication)
+
+    const dispatch = useDispatch()
 
     const handleAvatarClick = () => authentication.user?.role === "ROLE_CUSTOMER" ? navigate("/my-profile") : navigate("/admin/restaurant")
 
@@ -29,7 +32,7 @@ const Navbar = () => {
             </div>
             <div className='flex items-center space-x-2 lg:space-x-10'>
                 <div className="">
-                    <IconButton onClick={() => console.log("Search Icon Clicked")}>
+                    <IconButton onClick={() => console.log("search icon clicked")}>
                         <SearchIcon sx={{ fontSize: "1.5rem" }} />
                     </IconButton>
                 </div>

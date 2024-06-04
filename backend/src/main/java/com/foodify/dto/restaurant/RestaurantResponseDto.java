@@ -21,6 +21,7 @@ import java.util.List;
 public class RestaurantResponseDto {
 
     private Long id;
+    private String name;
     private String description;
     private String cuisineType;
     private String openingHours;
