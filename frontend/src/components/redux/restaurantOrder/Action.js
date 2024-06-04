@@ -11,7 +11,7 @@ import {
 export const updateRestaurantOrderStatus = ({ orderId, orderStatus, token }) => async (dispatch) => {
     dispatch({ type: UPDATE_ORDER_STATUS_REQUEST })
     try {
-        const { data } = api.put(`/api/admin/orders/${orderId}/${orderStatus}`, {}, { headers: { Authorization: `Bearer ${token}` } })
+        const { data } = await api.put(`/api/admin/orders/${orderId}/${orderStatus}`, {}, { headers: { Authorization: `Bearer ${token}` } })
         console.log("Update restaurant order status : ", data);
         dispatch({ type: UPDATE_ORDER_STATUS_SUCCESS, payload: data })
     } catch (error) {
@@ -23,7 +23,7 @@ export const updateRestaurantOrderStatus = ({ orderId, orderStatus, token }) => 
 export const fetchRestaurantsOrder = ({ restaurantId, orderStatus, token }) => async (dispatch) => {
     dispatch({ type: GET_RESTAURANTS_ORDER_REQUEST })
     try {
-        const { data } = api.put(`/api/admin/order/${restaurantId}`, { params: {order_status: orderS}, headers: { Authorization: `Bearer ${token}` } })
+        const { data } = await api.put(`/api/admin/order/${restaurantId}`, { params: {order_status: orderS}, headers: { Authorization: `Bearer ${token}` } })
         console.log("fetch restaurant order : ", data);
         dispatch({ type: GET_RESTAURANTS_ORDER_SUCCESS, payload: data })
     } catch (error) {
