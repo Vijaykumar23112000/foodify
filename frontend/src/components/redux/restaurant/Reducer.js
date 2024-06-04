@@ -64,7 +64,7 @@ export const restaurantReducer = (state = initialState, action) => {
             return handleGetAllRestaurantSuccess(state, action.payload)
 
         case GET_RESTAURANT_BY_ID_SUCCESS:
-            return handleGetRestaurantByIdSuccess(state, payload)
+            return handleGetRestaurantByIdSuccess(state, action.payload)
 
         case GET_RESTAURANT_BY_USER_ID_SUCCESS:
         case UPDATE_RESTAURANT_STATUS_SUCCESS:
@@ -90,7 +90,7 @@ export const restaurantReducer = (state = initialState, action) => {
             return handleCreateCategorySuccess(state , action.payload)
 
         case GET_RESTAURANT_CATEGORY_SUCCESS:
-            return handleGetRestaurantsCategorySuccess(state , payload)
+            return handleGetRestaurantsCategorySuccess(state , action.payload)
 
         case CREATE_RESTAURANT_FAILED:
         case GET_ALL_RESTAURANTS_FAILED:
@@ -100,7 +100,7 @@ export const restaurantReducer = (state = initialState, action) => {
         case CREATE_EVENT_FAILED:
         case CREATE_CATEGORY_FAILED:
         case GET_RESTAURANT_CATEGORY_FAILED:
-            return handleFailed(state , payload)
+            return handleFailed(state , action.payload)
 
         default:
             return state

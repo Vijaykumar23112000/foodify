@@ -59,6 +59,6 @@ export const menuItemReducer = (state = initialState , action) => {
             return handleFailed(state , action.payload)
         
         default:
-            state
+            return state
     }
 }
