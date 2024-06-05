@@ -10,6 +10,7 @@ public class IngredientItemUtil {
     public static QuadFunction<String , Restaurant , IngredientCategory , IngredientsItem> createIngredientsItem = (ingredientName, restaurant, ingredientCategory) ->
             IngredientsItem
                     .builder()
+                    .isStock(true)
                     .name(ingredientName)
                     .restaurant(restaurant)
                     .category(ingredientCategory)

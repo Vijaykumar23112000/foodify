@@ -21,13 +21,14 @@ public class CategoryController {
     private final UserServiceImpl userService;
     private final UserAndUserResponseDtoMapper userMapper;
 
-    @GetMapping("/restaurant")
+    @GetMapping("/restaurant/{id}")
     public ResponseEntity<List<Category>> getRestaurantsCategory(
+            @PathVariable Long id,
             @RequestHeader("Authorization") String token) throws Exception
     {
 
-        var user = userMapper.toENTITY.apply(userService.findUserByJwtToken(token.substring(7).trim()));
-        var categories = categoryService.findCategoryByRestaurantId(user.getId());
+//        var user = userMapper.toENTITY.apply(userService.findUserByJwtToken(token.substring(7).trim()));
+        var categories = categoryService.findCategoryByRestaurantId(id);
         return ResponseEntity.status(HttpStatus.OK).body(categories);
 
     }

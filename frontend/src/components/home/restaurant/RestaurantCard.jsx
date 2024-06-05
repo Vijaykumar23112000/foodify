@@ -13,8 +13,12 @@ const RestaurantCard = ({ item }) => {
     const token = localStorage.getItem("token")
     const { authentication } = useSelector(store => store)
 
-    const handleAddToFavorite = () => {
-        dispatch(addToFavoriteAction({ restaurantId: item.id, token }))
+    const handleAddToFavorite = () => dispatch(addToFavoriteAction({ restaurantId: item.id, token }))
+
+    const handleNavigateToRestaurant = () => {
+        if(item.open){
+            navigate(`/restaurant/${item.address.city}/${item.name}/${item.id}`)
+        }
     }
 
     const isPresentInFavorites = (favorites, restaurant) => {
@@ -41,7 +45,7 @@ const RestaurantCard = ({ item }) => {
             </div>
             <div className='p-4 textPart lg:flex w-full justify-between'>
                 <div className='space-y-1'>
-                    <p className='font-semibold text-lg'>{item.name}</p>
+                    <p onClick={handleNavigateToRestaurant} className='font-semibold text-lg cursor-pointer'>{item.name}</p>
                     <p className='text-gray-300 text-sm'>{item.description}</p>
                 </div>
                 <div>

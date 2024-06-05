@@ -1,5 +1,9 @@
 package com.foodify.service.impl;
 
+import com.foodify.dto.ingredient.IngredientCategoryResponseDto;
+import com.foodify.dto.ingredient.IngredientsItemResponseDto;
+import com.foodify.dto.mapper.IngredientCategoryAndIngredientCategoryResponseDtoMapper;
+import com.foodify.dto.mapper.IngredientsItemAndIngredientsItemResponseDtoMapper;
 import com.foodify.entity.IngredientCategory;
 import com.foodify.entity.IngredientsItem;
 import com.foodify.repository.ingredient.IngredientCategoryRepository;
@@ -20,12 +24,14 @@ public class IngredientsServiceImpl implements IngredientsService {
     private final IngredientItemRepository ingredientItemRepository;
     private final IngredientCategoryRepository ingredientCategoryRepository;
     private final RestaurantServiceImpl restaurantService;
+    private final IngredientCategoryAndIngredientCategoryResponseDtoMapper categoryMapper;
+    private final IngredientsItemAndIngredientsItemResponseDtoMapper itemMapper;
 
     @Override
-    public IngredientCategory createIngredientCategory(String name, Long restaurantId) throws Exception {
+    public IngredientCategoryResponseDto createIngredientCategory(String name, Long restaurantId) throws Exception {
         var restaurant = restaurantService.findRestaurantById(restaurantId);
         var ingredientCategory = createIngredientCategory.apply(restaurant , name);
-        return ingredientCategoryRepository.save(ingredientCategory);
+        return categoryMapper.toDTO.apply(ingredientCategoryRepository.save(ingredientCategory));
     }
 
     @Override
@@ -42,13 +48,13 @@ public class IngredientsServiceImpl implements IngredientsService {
     }
 
     @Override
-    public IngredientsItem createIngredientItem(Long restaurantId, String ingredientName, Long categoryId) throws Exception {
+    public IngredientsItemResponseDto createIngredientItem(Long restaurantId, String ingredientName, Long categoryId) throws Exception {
         var restaurant = restaurantService.findRestaurantById(restaurantId);
         var ingredientCategory = findIngredientCategoryById(categoryId);
         var ingredientsItem = createIngredientsItem.apply(ingredientName , restaurant , ingredientCategory);
         var savedIngredientItem = ingredientItemRepository.save(ingredientsItem);
         ingredientCategory.getIngredients().add(savedIngredientItem);
-        return savedIngredientItem;
+        return itemMapper.toDTO.apply(savedIngredientItem);
     }
 
     @Override

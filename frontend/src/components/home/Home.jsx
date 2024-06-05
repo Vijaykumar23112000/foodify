@@ -4,6 +4,7 @@ import RestaurantCard from './restaurant/RestaurantCard'
 import "./home.css"
 import { useDispatch, useSelector } from 'react-redux'
 import { getAllRestaurantsAction } from '../redux/restaurant/Action'
+import { useNavigate } from 'react-router-dom'
 
 const Home = () => {
 

@@ -28,6 +28,7 @@ public class IngredientCategory {
     @JsonIgnore
     private Restaurant restaurant;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "category" , cascade = ALL)
     private List<IngredientsItem> ingredients = new ArrayList<>();
 

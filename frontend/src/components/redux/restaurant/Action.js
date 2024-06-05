@@ -50,14 +50,14 @@ export const getAllRestaurantsAction = (token) => async (dispatch) => {
     }
 }
 
-export const getRestaurantByIdAction = (requestData) => async (dispatch) => {
+export const getRestaurantByIdAction = ({ token, restaurantId }) => async (dispatch) => {
     dispatch({ type: GET_RESTAURANT_BY_ID_REQUEST })
     try {
-        const { data } = await api.get(`/api/restaurants/${requestData.restaurantId}`, { headers: { Authorization: `Bearer ${requestData.token}` } })
+        const { data } = await api.get(`/api/restaurants/${restaurantId}`, { headers: { Authorization: `Bearer ${token}` } })
         dispatch({ type: GET_RESTAURANT_BY_ID_SUCCESS, payload: data })
-        console.log("Get restaurant by id : ", data);
+        console.log("Get restaurant by restaurantId : ", data);
     } catch (error) {
-        console.log("Get restaurant by id : ", error)
+        console.log("Get restaurant by restaurantId : ", error)
         dispatch({ type: GET_RESTAURANT_BY_ID_FAILED, payload: error })
     }
 }
@@ -146,7 +146,7 @@ export const getAllEventsAction = ({ token }) => async (dispatch) => {
     }
 }
 
-export const deleteEventAction = ({ eventId ,  token }) => async (dispatch) => {
+export const deleteEventAction = ({ eventId, token }) => async (dispatch) => {
     dispatch({ type: DELETE_EVENT_REQUEST })
     try {
         const { data } = await api.delete(`/api/admin/events/${eventId}`, { headers: { Authorization: `Bearer ${token}` } })
@@ -158,7 +158,7 @@ export const deleteEventAction = ({ eventId ,  token }) => async (dispatch) => {
     }
 }
 
-export const getRestaurantEventsAction = ({ restaurantId ,  token }) => async (dispatch) => {
+export const getRestaurantEventsAction = ({ restaurantId, token }) => async (dispatch) => {
     dispatch({ type: GET_RESTAURANT_EVENTS_REQUEST })
     try {
         const { data } = await api.get(`/api/admin/events/restaurant/${restaurantId}`, { headers: { Authorization: `Bearer ${token}` } })
@@ -170,26 +170,26 @@ export const getRestaurantEventsAction = ({ restaurantId ,  token }) => async (d
     }
 }
 
-export const createCategoryAction = ({ requestData ,  token }) => async (dispatch) => {
+export const createCategoryAction = ({ requestData, token }) => async (dispatch) => {
     dispatch({ type: CREATE_CATEGORY_REQUEST })
     try {
         const { data } = await api.post(`/api/admin/category`, requestData, { headers: { Authorization: `Bearer ${token}` } })
         dispatch({ type: CREATE_CATEGORY_SUCCESS, payload: data })
-        console.log("create category event : ", data);
+        console.log("create category : ", data);
     } catch (error) {
-        console.log("create category event : ", error)
+        console.log("create category : ", error)
         dispatch({ type: CREATE_CATEGORY_FAILED, payload: error })
     }
 }
 
-export const getRestaurantCategoryAction = ({ restaurantId ,  token }) => async (dispatch) => {
+export const getRestaurantCategoryAction = ({ restaurantId, token }) => async (dispatch) => {
     dispatch({ type: GET_RESTAURANT_CATEGORY_REQUEST })
     try {
         const { data } = await api.get(`/api/category/restaurant/${restaurantId}`, { headers: { Authorization: `Bearer ${token}` } })
         dispatch({ type: GET_RESTAURANT_CATEGORY_SUCCESS, payload: data })
-        console.log("create category event : ", data);
+        console.log("get restaurants category : ", data);
     } catch (error) {
-        console.log("create category event : ", error)
+        console.log("get restaurants category : ", error)
         dispatch({ type: GET_RESTAURANT_CATEGORY_FAILED, payload: error })
     }
 }

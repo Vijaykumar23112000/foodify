@@ -1,7 +1,9 @@
 package com.foodify.resource.admin;
 
 import com.foodify.dto.ingredient.IngredientCategoryRequestDto;
+import com.foodify.dto.ingredient.IngredientCategoryResponseDto;
 import com.foodify.dto.ingredient.IngredientItemRequestDto;
+import com.foodify.dto.ingredient.IngredientsItemResponseDto;
 import com.foodify.entity.IngredientCategory;
 import com.foodify.entity.IngredientsItem;
 import com.foodify.service.impl.IngredientsServiceImpl;
@@ -20,18 +22,18 @@ public class AdminIngredientController {
     private final IngredientsServiceImpl ingredientsService;
 
     @PostMapping("/category")
-    public ResponseEntity<IngredientCategory> createIngredientCategory(
+    public ResponseEntity<IngredientCategoryResponseDto> createIngredientCategory(
             @RequestBody IngredientCategoryRequestDto request,
             @RequestHeader("Authorization") String token) throws Exception
     {
 
-        var ingredientCategory = ingredientsService.createIngredientCategory(request.getName() , request.getRestaurantId());
-        return ResponseEntity.status(HttpStatus.CREATED).body(ingredientCategory);
+        var ingredientCategoryResponseDto = ingredientsService.createIngredientCategory(request.getName() , request.getRestaurantId());
+        return ResponseEntity.status(HttpStatus.CREATED).body(ingredientCategoryResponseDto);
 
     }
 
     @PostMapping
-    public ResponseEntity<IngredientsItem> createIngredientItem(
+    public ResponseEntity<IngredientsItemResponseDto> createIngredientItem(
             @RequestBody IngredientItemRequestDto request,
             @RequestHeader("Authorization") String token) throws Exception
     {

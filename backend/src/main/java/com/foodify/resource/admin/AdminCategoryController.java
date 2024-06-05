@@ -1,5 +1,6 @@
 package com.foodify.resource.admin;
 
+import com.foodify.dto.category.CategoryRequestDto;
 import com.foodify.dto.mapper.UserAndUserResponseDtoMapper;
 import com.foodify.entity.Category;
 import com.foodify.service.impl.CategoryServiceImpl;
@@ -20,7 +21,7 @@ public class AdminCategoryController {
 
     @PostMapping
     public ResponseEntity<Category> createCategory(
-            @RequestBody Category category ,
+            @RequestBody CategoryRequestDto category ,
             @RequestHeader("Authorization") String token) throws Exception
     {
 
