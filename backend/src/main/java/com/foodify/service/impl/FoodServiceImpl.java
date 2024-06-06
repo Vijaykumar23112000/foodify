@@ -1,8 +1,14 @@
 package com.foodify.service.impl;
 
+import com.foodify.Utils.food.FoodResponseDtoUtil;
 import com.foodify.dto.food.FoodRequestDto;
+import com.foodify.dto.food.FoodResponseDto;
+import com.foodify.dto.ingredient.IngredientsItemResponseDto;
+import com.foodify.dto.mapper.IngredientsItemAndIngredientsItemResponseDtoMapper;
+import com.foodify.dto.mapper.RestaurantAndRestaurantResponseDtoMapper;
 import com.foodify.entity.Category;
 import com.foodify.entity.Food;
+import com.foodify.entity.IngredientsItem;
 import com.foodify.entity.Restaurant;
 import com.foodify.repository.food.FoodRepository;
 import com.foodify.service.FoodService;
@@ -19,13 +25,21 @@ import static com.foodify.Utils.food.FoodUtil.createFood;
 public class FoodServiceImpl implements FoodService {
 
     private final FoodRepository foodRepository;
+    private final RestaurantAndRestaurantResponseDtoMapper restaurantMapper;
+    private final UserServiceImpl userService;
+    private final IngredientsItemAndIngredientsItemResponseDtoMapper ingredientsMapper;
 
     @Override
-    public Food createFood(FoodRequestDto foodRequestDto, Category category, Restaurant restaurant) {
+    public FoodResponseDto createFood(FoodRequestDto foodRequestDto, Category category, Restaurant restaurant) throws Exception {
         var food = createFood.apply(foodRequestDto , category , restaurant);
         var savedFood = foodRepository.save(food);
         restaurant.getFoods().add(savedFood);
-        return savedFood;
+        var restaurantResponseDto = restaurantMapper.toDTO.apply(restaurant , userService.findUserByEmail(restaurant.getOwner().getEmail()));
+        List<IngredientsItem> ingredients = savedFood.getIngredients();
+        List<IngredientsItemResponseDto> dtos = ingredients.stream()
+                .map(ingredientsMapper.toDTO)
+                .toList();
+        return FoodResponseDtoUtil.createFoodResponseDtoUtil.apply(savedFood , restaurantResponseDto , dtos);
     }
 
     @Override

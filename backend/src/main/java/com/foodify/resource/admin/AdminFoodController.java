@@ -2,6 +2,7 @@ package com.foodify.resource.admin;
 
 import com.foodify.domain.MessageResponse;
 import com.foodify.dto.food.FoodRequestDto;
+import com.foodify.dto.food.FoodResponseDto;
 import com.foodify.entity.Food;
 import com.foodify.service.impl.FoodServiceImpl;
 import com.foodify.service.impl.RestaurantServiceImpl;
@@ -19,7 +20,7 @@ public class AdminFoodController {
     private final RestaurantServiceImpl restaurantService;
 
     @PostMapping
-    public ResponseEntity<Food> createFood(
+    public ResponseEntity<FoodResponseDto> createFood(
             @RequestBody FoodRequestDto request,
             @RequestHeader("Authorization") String token) throws Exception
     {

@@ -3,7 +3,6 @@ package com.foodify.dto.ingredient;
 import com.foodify.entity.IngredientCategory;
 import lombok.*;
 
-import java.util.List;
 
 @Getter
 @Setter

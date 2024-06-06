@@ -6,6 +6,8 @@ import com.foodify.entity.Food;
 import com.foodify.entity.Restaurant;
 import com.foodify.myimpl.QuadFunction;
 
+import java.util.Date;
+
 public class FoodUtil {
 
     public static QuadFunction<FoodRequestDto , Category , Restaurant , Food> createFood = (request , category , restaurant) ->
@@ -20,6 +22,8 @@ public class FoodUtil {
                     .ingredients(request.getIngredients())
                     .isSeasonable(request.getIsSeasonable())
                     .isVegetarian(request.getIsVegetarian())
+                    .creationDate(new Date())
+                    .available(true)
                     .build();
 
 }
