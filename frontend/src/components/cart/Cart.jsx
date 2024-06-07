@@ -5,7 +5,8 @@ import AddressCard from './address/AddressCard'
 import AddLocationAltIcon from '@mui/icons-material/AddLocationAlt';
 import { Field, Form, Formik } from 'formik';
 import { validation } from './address/Validation';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { createOrderAction } from '../redux/order/Action';
 
 const Cart = () => {
 
@@ -36,12 +37,31 @@ const Cart = () => {
 
     const handleOpenAddressModel = () => setOpen(true)
 
-    const handleSubmit = (values) => console.log(values)
+    const { cart , authentication } = useSelector(store => store)
+
+    const dispatch = useDispatch()
+
+    const handleSubmit = (values) => {
+        const requestData = {
+            token: localStorage.getItem("token"),
+            order:{
+                restaurantId: cart.cartItems[0].food?.restaurant.id,
+                deliveryAddress: {
+                    fullName: authentication.user?.fullName,
+                    streetAddress: values.streetAddress,
+                    city: values.city,
+                    state: values.state,
+                    postalCode: values.pincode,
+                    country: "India"
+                }
+            }
+        }
+        dispatch(createOrderAction(requestData))
+        setOpen(false)
+    }
 
     var x = 1;
     var y = 1
-
-    const { cart } = useSelector(store => store)
 
     return (
         <>
@@ -56,7 +76,7 @@ const Cart = () => {
                         <div className="space-y-3">
                             <div className="flex justify-between text-gray-400">
                                 <p>Item Total</p>
-                                <p>₹{cart.cart.total}</p>
+                                <p>₹{cart.cart?.total}</p>
                             </div>
                             <div className="flex justify-between text-gray-400">
                                 <p>Delivery Charge</p>
@@ -70,7 +90,7 @@ const Cart = () => {
                         </div>
                         <div className="flex justify-between text-gray-400 pt-2">
                             <p>Total Pay</p>
-                            <p>₹{cart.cart.total+33+21}</p>
+                            <p>₹{cart.cart?.total+33+21}</p>
                         </div>
                     </div>
                 </section>

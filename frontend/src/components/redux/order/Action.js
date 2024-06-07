@@ -11,10 +11,10 @@ export const createOrderAction = (requestData) => async (dispatch) => {
     dispatch({ type: CREATE_ORDER_REQUEST })
     try {
         const { data } = await api.post(`/api/order`, requestData.order, { headers: { Authorization: `Bearer ${requestData.token}` } })
-        console.log("create order : ", data);
+        console.log("create order success : ", data);
         dispatch({ type: CREATE_ORDER_SUCCESS, payload: data })
     } catch (error) {
-        console.log("create order : ", error);
+        console.log("create order error : ", error);
         dispatch({ type: CREATE_ORDER_SUCCESS, payload: error })
     }
 }

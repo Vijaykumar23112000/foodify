@@ -40,6 +40,7 @@ public class Restaurant {
     @OneToOne
     private User owner;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "restaurant" , cascade = ALL , orphanRemoval = true)
     private List<Order> orders = new ArrayList<>();
 

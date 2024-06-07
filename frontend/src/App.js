@@ -14,10 +14,18 @@ function App() {
   
   const { authentication } = useSelector(store => store)
 
+  // useEffect(() => {
+  //   dispatch(getUserAction(authentication.token || token))
+  //   dispatch(findCartAction(token))
+  // }, [authentication.token])
+
   useEffect(() => {
-    dispatch(getUserAction(authentication.token || token))
-    dispatch(findCartAction(token))
-  }, [authentication.token])
+    const effectiveToken = authentication.token || token;
+    if (effectiveToken) {
+      dispatch(getUserAction(effectiveToken));
+      dispatch(findCartAction(effectiveToken));
+    }
+  }, [dispatch, authentication.token, token]);
 
   return (
     <ThemeProvider theme={darkTheme}>
