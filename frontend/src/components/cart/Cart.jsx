@@ -30,21 +30,15 @@ const Cart = () => {
     }
 
     const [open, setOpen] = useState(false);
-
-    const handleCloseAddressModal = () => setOpen(false);
+    const { cart, authentication } = useSelector(store => store)
+    const dispatch = useDispatch()
 
     const createOrderUsingSelectedAddress = () => { }
-
-    const handleOpenAddressModel = () => setOpen(true)
-
-    const { cart , authentication } = useSelector(store => store)
-
-    const dispatch = useDispatch()
 
     const handleSubmit = (values) => {
         const requestData = {
             token: localStorage.getItem("token"),
-            order:{
+            order: {
                 restaurantId: cart.cartItems[0].food?.restaurant.id,
                 deliveryAddress: {
                     fullName: authentication.user?.fullName,
@@ -60,7 +54,7 @@ const Cart = () => {
         setOpen(false)
     }
 
-    var x = 1;
+    var x = 1
     var y = 1
 
     return (
@@ -90,7 +84,7 @@ const Cart = () => {
                         </div>
                         <div className="flex justify-between text-gray-400 pt-2">
                             <p>Total Pay</p>
-                            <p>₹{cart.cart?.total+33+21}</p>
+                            <p>₹{cart.cart?.total + 33 + 21}</p>
                         </div>
                     </div>
                 </section>
@@ -106,7 +100,7 @@ const Cart = () => {
                                 <AddLocationAltIcon />
                                 <div className="space-y-3 text-gray-500">
                                     <h1 className='font-semibold text-lg text-white'>Add New Address</h1>
-                                    <Button variant='outlined' fullWidth onClick={handleOpenAddressModel}>Add</Button>
+                                    <Button variant='outlined' fullWidth onClick={() => setOpen(true)}>Add</Button>
                                 </div>
                             </Card>
                         </div>
@@ -115,7 +109,7 @@ const Cart = () => {
             </main>
             <Modal
                 open={open}
-                onClose={handleCloseAddressModal}
+                onClose={() => setOpen(false)}
                 aria-labelledby="modal-modal-title"
                 aria-describedby="modal-modal-description"
             >

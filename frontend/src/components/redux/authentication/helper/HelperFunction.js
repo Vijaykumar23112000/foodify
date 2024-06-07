@@ -7,7 +7,7 @@ export const handleRequest = state => (
     }
 )
 
-export const handleSuccess = (state, payload) => (
+export const handleRegisterAndLoginSuccess = (state, payload) => (
     {
         ...state,
         isLoading: false,
@@ -17,7 +17,7 @@ export const handleSuccess = (state, payload) => (
     }
 )
 
-export const handleAddToFavorites = (state, payload) => (
+export const handleAddToFavoritesSuccess = (state, payload) => (
     {
         ...state,
         isLoading: false,
@@ -37,7 +37,7 @@ export const handleFailed = (state, payload) => (
     }
 )
 
-export const handleGetUser = (state , payload) => (
+export const handleGetUserSuccess = (state, payload) => (
     {
         ...state,
         isLoading: false,
@@ -46,9 +46,4 @@ export const handleGetUser = (state , payload) => (
     }
 )
 
-const isPresentInFavorites = (favorites, restaurant) => {
-    for (let item of favorites) {
-        if (restaurant.id === item.id) return true
-    }
-    return false
-}
+const isPresentInFavorites = (favorites, restaurant) => favorites.find(item => item.id === restaurant.id) !== undefined

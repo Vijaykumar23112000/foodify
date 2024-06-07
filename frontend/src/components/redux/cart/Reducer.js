@@ -1,60 +1,38 @@
 import { LOGOUT } from "../authentication/ActionType";
-import {
-    ADD_ITEM_TO_CART_SUCCESS,
-    CLEAR_CART_SUCCESS,
-    FIND_CART_FAILED,
-    FIND_CART_REQUEST,
-    FIND_CART_SUCCESS,
-    GET_ALL_CART_ITEMS_FAILED,
-    GET_ALL_CART_ITEMS_REQUEST,
-    REMOVE_CART_ITEM_FAILED,
-    REMOVE_CART_ITEM_REQUEST,
-    REMOVE_CART_ITEM_SUCCESS,
-    UPDATE_CART_ITEM_FAILED,
-    UPDATE_CART_ITEM_REQUEST,
-    UPDATE_CART_ITEM_SUCCESS
-} from "./ActionType";
 import { initialState } from "./InitialState";
-import {
-    handleAddItemToCartSuccess,
-    handleFailed,
-    handleFindCartAndClearCartSuccess,
-    handleLogout,
-    handleRemoveCartItemSuccess,
-    handleRequest,
-    handleUpdateCartItemSuccess
-} from "./helper/HelperFunction";
+import * as actionTypes from './ActionType'
+import * as helper from './helper/HelperFunction'
 
 export const cartReducer = (state = initialState, action) => {
     switch (action.type) {
 
-        case FIND_CART_REQUEST:
-        case GET_ALL_CART_ITEMS_REQUEST:
-        case UPDATE_CART_ITEM_REQUEST:
-        case REMOVE_CART_ITEM_REQUEST:
-            return handleRequest(state)
+        case actionTypes.FIND_CART_REQUEST:
+        case actionTypes.GET_ALL_CART_ITEMS_REQUEST:
+        case actionTypes.UPDATE_CART_ITEM_REQUEST:
+        case actionTypes.REMOVE_CART_ITEM_REQUEST:
+            return helper.handleRequest(state)
 
-        case FIND_CART_SUCCESS:
-        case CLEAR_CART_SUCCESS:
-            return handleFindCartAndClearCartSuccess(state, action.payload)
+        case actionTypes.FIND_CART_SUCCESS:
+        case actionTypes.CLEAR_CART_SUCCESS:
+            return helper.handleFindCartAndClearCartSuccess(state, action.payload)
 
-        case ADD_ITEM_TO_CART_SUCCESS:
-            return handleAddItemToCartSuccess(state, action.payload)
+        case actionTypes.ADD_ITEM_TO_CART_SUCCESS:
+            return helper.handleAddItemToCartSuccess(state, action.payload)
 
-        case UPDATE_CART_ITEM_SUCCESS:
-            return handleUpdateCartItemSuccess(state, action.payload)
+        case actionTypes.UPDATE_CART_ITEM_SUCCESS:
+            return helper.handleUpdateCartItemSuccess(state, action.payload)
 
-        case REMOVE_CART_ITEM_SUCCESS:
-            return handleRemoveCartItemSuccess(state, action.payload)
+        case actionTypes.REMOVE_CART_ITEM_SUCCESS:
+            return helper.handleRemoveCartItemSuccess(state, action.payload)
 
-        case FIND_CART_FAILED:
-        case UPDATE_CART_ITEM_FAILED:
-        case REMOVE_CART_ITEM_FAILED:
-        case GET_ALL_CART_ITEMS_FAILED:
-            return handleFailed(state, action.payload)
+        case actionTypes.FIND_CART_FAILED:
+        case actionTypes.UPDATE_CART_ITEM_FAILED:
+        case actionTypes.REMOVE_CART_ITEM_FAILED:
+        case actionTypes.GET_ALL_CART_ITEMS_FAILED:
+            return helper.handleFailed(state, action.payload)
 
         case LOGOUT:
-            return handleLogout(state)
+            return helper.handleLogout(state)
 
         default:
             return state

@@ -1,5 +1,4 @@
 import { CssBaseline, ThemeProvider } from '@mui/material';
-import './App.css';
 import { darkTheme } from './theme/DarkTheme';
 import Router from './components/router/Router';
 import { useEffect } from 'react';
@@ -11,20 +10,13 @@ function App() {
 
   const dispatch = useDispatch()
   const token = localStorage.getItem("token")
-  
   const { authentication } = useSelector(store => store)
-
-  // useEffect(() => {
-  //   dispatch(getUserAction(authentication.token || token))
-  //   dispatch(findCartAction(token))
-  // }, [authentication.token])
 
   useEffect(() => {
     const effectiveToken = authentication.token || token;
-    if (effectiveToken) {
-      dispatch(getUserAction(effectiveToken));
-      dispatch(findCartAction(effectiveToken));
-    }
+    dispatch(getUserAction(effectiveToken));
+    dispatch(findCartAction(effectiveToken));
+
   }, [dispatch, authentication.token, token]);
 
   return (

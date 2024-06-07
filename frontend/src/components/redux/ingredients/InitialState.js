@@ -1,5 +1,7 @@
 export const initialState = {
     ingredients: [],
     update: null,
-    category: []
+    category: [],
+    error: null,
+    loading: false
 }

@@ -15,18 +15,9 @@ const RestaurantCard = ({ item }) => {
 
     const handleAddToFavorite = () => dispatch(addToFavoriteAction({ restaurantId: item.id, token }))
 
-    const handleNavigateToRestaurant = () => {
-        if(item.open){
-            navigate(`/restaurant/${item.address.city}/${item.name}/${item.id}`)
-        }
-    }
+    const handleNavigateToRestaurant = () => { if (item.open) navigate(`/restaurant/${item.address.city}/${item.name}/${item.id}`) }
 
-    const isPresentInFavorites = (favorites, restaurant) => {
-        for (let item of favorites) {
-            if (restaurant.id === item.id) return true
-        }
-        return false
-    }
+    const isPresentInFavorites = (favorites, restaurant) => favorites.find(item => item.id === restaurant.id) !== undefined
 
     return (
         <Card className='m-5 w-[18rem]'>
@@ -50,7 +41,9 @@ const RestaurantCard = ({ item }) => {
                 </div>
                 <div>
                     <IconButton onClick={handleAddToFavorite}>
-                        {isPresentInFavorites(authentication.favorites , item) ? <FavoriteIcon color='primary' /> : <FavoriteBorderIcon />}
+                        {
+                            isPresentInFavorites(authentication.favorites, item) ? <FavoriteIcon color='primary' /> : <FavoriteBorderIcon />
+                        }
                     </IconButton>
                 </div>
             </div>

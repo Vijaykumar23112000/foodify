@@ -1,62 +1,38 @@
-import { 
-    CREATE_MENU_ITEM_FAILED,
-    CREATE_MENU_ITEM_REQUEST, 
-    CREATE_MENU_ITEM_SUCCESS, 
-    DELETE_MENU_ITEM_FAILED, 
-    DELETE_MENU_ITEM_REQUEST, 
-    DELETE_MENU_ITEM_SUCCESS, 
-    GET_MENU_ITEMS_BY_RESTAURANT_ID_FAILED, 
-    GET_MENU_ITEMS_BY_RESTAURANT_ID_REQUEST, 
-    GET_MENU_ITEMS_BY_RESTAURANT_ID_SUCCESS, 
-    SEARCH_MENU_ITEM_FAILED, 
-    SEARCH_MENU_ITEM_REQUEST, 
-    SEARCH_MENU_ITEM_SUCCESS, 
-    UPDATE_MENU_ITEMS_AVAILABILITY_FAILED, 
-    UPDATE_MENU_ITEMS_AVAILABILITY_REQUEST, 
-    UPDATE_MENU_ITEMS_AVAILABILITY_SUCCESS
-} from "./ActionType";
 import { initialState } from "./InitialState";
-import { 
-    handleCreateMenuItemSuccess, 
-    handleDeleteMenuItemSuccess, 
-    handleFailed, 
-    handleGetMenuItemsByRestaurantIdSuccess, 
-    handleRequest, 
-    handleSearchMenuItemSuccess, 
-    handleUpdateMenuItemsAvailability 
-} from "./helper/HelperFunction";
+import * as helper from './helper/HelperFunction'
+import * as actionTypes from './ActionType'
 
 export const menuItemReducer = (state = initialState , action) => {
     switch (action.type) {
         
-        case CREATE_MENU_ITEM_REQUEST:
-        case GET_MENU_ITEMS_BY_RESTAURANT_ID_REQUEST:
-        case DELETE_MENU_ITEM_REQUEST:
-        case SEARCH_MENU_ITEM_REQUEST:
-        case UPDATE_MENU_ITEMS_AVAILABILITY_REQUEST:
-            return handleRequest(state)
+        case actionTypes.CREATE_MENU_ITEM_REQUEST:
+        case actionTypes.GET_MENU_ITEMS_BY_RESTAURANT_ID_REQUEST:
+        case actionTypes.DELETE_MENU_ITEM_REQUEST:
+        case actionTypes.SEARCH_MENU_ITEM_REQUEST:
+        case actionTypes.UPDATE_MENU_ITEMS_AVAILABILITY_REQUEST:
+            return helper.handleRequest(state)
         
-        case CREATE_MENU_ITEM_SUCCESS:
-            return handleCreateMenuItemSuccess(state , action.payload)
+        case actionTypes.CREATE_MENU_ITEM_SUCCESS:
+            return helper.handleCreateMenuItemSuccess(state , action.payload)
         
-        case GET_MENU_ITEMS_BY_RESTAURANT_ID_SUCCESS:
-            return handleGetMenuItemsByRestaurantIdSuccess(state , action.payload)
+        case actionTypes.GET_MENU_ITEMS_BY_RESTAURANT_ID_SUCCESS:
+            return helper.handleGetMenuItemsByRestaurantIdSuccess(state , action.payload)
 
-        case DELETE_MENU_ITEM_SUCCESS:
-            return handleDeleteMenuItemSuccess(state , action.payload)
+        case actionTypes.DELETE_MENU_ITEM_SUCCESS:
+            return helper.handleDeleteMenuItemSuccess(state , action.payload)
 
-        case UPDATE_MENU_ITEMS_AVAILABILITY_SUCCESS:
-            return handleUpdateMenuItemsAvailability(state,action.payload)
+        case actionTypes.UPDATE_MENU_ITEMS_AVAILABILITY_SUCCESS:
+            return helper.handleUpdateMenuItemsAvailability(state,action.payload)
 
-        case SEARCH_MENU_ITEM_SUCCESS:
-            return handleSearchMenuItemSuccess(state,action.payload)
+        case actionTypes.SEARCH_MENU_ITEM_SUCCESS:
+            return helper.handleSearchMenuItemSuccess(state,action.payload)
 
-        case CREATE_MENU_ITEM_FAILED:
-        case GET_MENU_ITEMS_BY_RESTAURANT_ID_FAILED:
-        case DELETE_MENU_ITEM_FAILED:
-        case SEARCH_MENU_ITEM_FAILED:
-        case UPDATE_MENU_ITEMS_AVAILABILITY_FAILED:
-            return handleFailed(state , action.payload)
+        case actionTypes.CREATE_MENU_ITEM_FAILED:
+        case actionTypes.GET_MENU_ITEMS_BY_RESTAURANT_ID_FAILED:
+        case actionTypes.DELETE_MENU_ITEM_FAILED:
+        case actionTypes.SEARCH_MENU_ITEM_FAILED:
+        case actionTypes.UPDATE_MENU_ITEMS_AVAILABILITY_FAILED:
+            return helper.handleFailed(state , action.payload)
         
         default:
             return state

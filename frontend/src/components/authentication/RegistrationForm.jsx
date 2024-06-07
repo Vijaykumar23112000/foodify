@@ -17,15 +17,11 @@ const RegistrationForm = () => {
     const dispatch = useDispatch()
     const navigate = useNavigate()
 
-    const handleSubmit = (values) => {
-        dispatch(registerUserAction({userData: values,navigate}))        
-    }
+    const handleSubmit = values => dispatch(registerUserAction({ userData: values, navigate }))
 
     return (
         <div>
-            <Typography variant='h5' className='text-center'>
-                Register
-            </Typography>
+            <Typography variant='h5' className='text-center'>Register</Typography>
             <Formik
                 initialValues={intialValues}
                 onSubmit={handleSubmit}
@@ -81,7 +77,9 @@ const RegistrationForm = () => {
             </Formik>
             <Typography variant='body2' align='center' sx={{ marginTop: 3 }}>
                 If Have An Account Already ?
-                <Button size='small' onClick={() => navigate("/account/login")}>Login</Button>
+                <Button size='small' onClick={() => navigate("/account/login")}>
+                    Login
+                </Button>
             </Typography>
         </div>
     )

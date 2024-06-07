@@ -4,18 +4,18 @@ export const darkTheme = createTheme({
     palette: {
         mode: "dark",
         primary: {
-            main: "#e91e63" // red
+            main: "#e91e63"
         },
         secondary: {
-            main: "#5A20CB" // purple
+            main: "#5A20CB" 
         },
         black: {
-            main: "#242B2E" // gray-black
+            main: "#242B2E" 
         },
         background: {
-            main: "#000000", // core black
-            default: "#0D0D0D",  // black-light-faded
-            paper: "#0D0D0D" // black faded
+            main: "#000000", 
+            default: "#0D0D0D",  
+            paper: "#0D0D0D"  
         },
         textColor: {
             main: "#111111"

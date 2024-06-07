@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react'
 import LocationOnIcon from '@mui/icons-material/LocationOn';
 import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
 import MenuCard from './MenuCard';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { getRestaurantByIdAction, getRestaurantCategoryAction } from '../redux/restaurant/Action';
 import { getMenuItemsByRestaurantIdAction } from '../redux/menu/Action';
@@ -17,40 +17,29 @@ const RestaurantDetails = () => {
         { id: 4, label: "Seasonal Only", value: "isSeasonal" }
     ]
 
-    const handleFilterFoodType = e => {
-        setFoodType(e.target.value)
-        console.log(e.target.value, e.target.name);
-    }
-
-    const handleFilterCategory = (e, value) => {
-        setSelectedCategory(value)
-        console.log(e.target.value, e.target.name, value);
-    }
-
-    const navigate = useNavigate()
     const dispatch = useDispatch()
     const token = localStorage.getItem("token")
-    const { authentication, restaurant, menu } = useSelector(store => store)
+    const { restaurant, menu } = useSelector(store => store)
     const [selectedCategory, setSelectedCategory] = useState("")
     const [foodType, setFoodType] = useState("all")
-
     const { id } = useParams()
+    var x = 1
+
+    const handleFilterCategory = value => setSelectedCategory(value)
 
     useEffect(() => {
         dispatch(getRestaurantByIdAction({ token, restaurantId: id }))
         dispatch(getRestaurantCategoryAction({ restaurantId: id, token }))
-    }, [])
+    }, [token , id])
 
     useEffect(() => {
         dispatch(getMenuItemsByRestaurantIdAction({ restaurantId: id, token, isVegetarian: foodType === "isVegetarian", isNonVeg: foodType === "isNonVeg", isSeasonal: foodType === "isSeasonal", foodCategory: selectedCategory }))
-    }, [selectedCategory, foodType])
-
-    console.log("restaurant : => ", restaurant)
+    }, [token , id , selectedCategory, foodType])
 
     return (
         <div className='px-5 lg:px-20'>
             <section>
-                <h3 className='text-gray-300 py-2 mt-10'>Home/india/indian fast food/3</h3>
+                <h3 className='text-gray-300 py-2 mt-10'>Home/india/{restaurant.restaurant?.name}/{id}</h3>
                 <div>
                     <Grid container spacing={2}>
                         <Grid item xs={12}>
@@ -104,9 +93,9 @@ const RestaurantDetails = () => {
                                 <FormLabel>
                                     <Typography variant='h5' sx={{ paddingBottom: "1rem" }}>Food Type</Typography>
                                 </FormLabel>
-                                <RadioGroup onChange={handleFilterFoodType} name='food_type' value={foodType}>
+                                <RadioGroup onChange={e => setFoodType(e.target.value)} name='food_type' value={foodType}>
                                     {
-                                        foodTypes.map(item => <FormControlLabel key={item.value} value={item.value} control={<Radio />} label={item.label} />)
+                                        foodTypes.map(item => <FormControlLabel key={item.id} value={item.value} control={<Radio />} label={item.label} />)
                                     }
                                 </RadioGroup>
                             </FormControl>
@@ -117,7 +106,7 @@ const RestaurantDetails = () => {
                                 <FormLabel>
                                     <Typography variant='h5' sx={{ paddingBottom: "1rem" }}>Food Category</Typography>
                                 </FormLabel>
-                                <RadioGroup onChange={handleFilterCategory} name='food_category' value={selectedCategory}>
+                                <RadioGroup onChange={e => handleFilterCategory(e.target.value)} name='food_category' value={selectedCategory}>
                                     {
                                         restaurant.categories.map(item => <FormControlLabel key={item.id} value={item.name} control={<Radio />} label={item.name} />)
                                     }
@@ -128,7 +117,7 @@ const RestaurantDetails = () => {
                 </div>
                 <div className="space-y-5 lg:w-[80%] lg:pl-10 menu">
                     {
-                        menu.menuItems.map(item => <MenuCard item={item} />)
+                        menu.menuItems.map(item => <MenuCard key={++x} item={item} />)
                     }
                 </div>
             </section>

@@ -8,10 +8,11 @@ import { removeCartItemAction, updateCartItemAction } from '../redux/cart/Action
 
 const CartItem = ({ item }) => {
 
-    const { authentication, cart } = useSelector(store => store)
+    const { authentication } = useSelector(store => store)
     const navigate = useNavigate()
     const dispatch = useDispatch()
     const token = localStorage.getItem("token")
+    var x = 1;
 
     const handleUpdateCartItem = value => {
         if (value === -1 && item.quantity === 1) handleRemoveCartItem()
@@ -22,8 +23,6 @@ const CartItem = ({ item }) => {
     }
 
     const handleRemoveCartItem = () => dispatch(removeCartItemAction({ cartItemId: item.id, token: authentication.token || token }))
-
-    var x = 1;
 
     return (
         <div className='px-5'>

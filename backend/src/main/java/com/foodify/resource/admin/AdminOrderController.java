@@ -18,7 +18,6 @@ public class AdminOrderController {
 
 
     private final OrderServiceImpl orderService;
-    private final UserAndUserResponseDtoMapper userMapper;
 
     @GetMapping("/order/restaurant/{id}")
     public ResponseEntity<List<Order>> getOrderHistoryForRestaurant(

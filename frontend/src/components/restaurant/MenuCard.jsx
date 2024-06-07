@@ -9,6 +9,7 @@ const MenuCard = ({ item }) => {
 
     const [selectedIngredients, setSelectedIngredients] = useState([])
     const dispatch = useDispatch()
+    var x = 1
 
     const handleAddItemToCard = e => {
         e.preventDefault()
@@ -20,13 +21,18 @@ const MenuCard = ({ item }) => {
                 ingredients: selectedIngredients
             }
         }
-        console.log(requestData);
         dispatch(addItemToCartAction(requestData))
     }
 
-    const handleCheckBoxChange = (itemName) => selectedIngredients.includes(itemName) ? 
-                                                    setSelectedIngredients(selectedIngredients.filter(item => item !== itemName)) : 
-                                                    setSelectedIngredients([...selectedIngredients, itemName])
+    const categorizedIngredients = categorizeIngredients(item.ingredients)
+
+    const handleCheckBoxChange = (ingredientName) => {
+        setSelectedIngredients(prevState => 
+            prevState.includes(ingredientName) ?
+                prevState.filter(ingredient => ingredient !== ingredientName) :
+                [...prevState, ingredientName]
+        );
+    };
 
     return (
         <Accordion>
@@ -54,17 +60,18 @@ const MenuCard = ({ item }) => {
                 <form onSubmit={handleAddItemToCard}>
                     <div className='flex gap-5 flex-wrap'>
                         {
-                            Object.keys(categorizeIngredients(item.ingredients)).map(category =>
-                                <div>
+                            Object.keys(categorizedIngredients).map(category =>
+                                <div key={++x}>
                                     <p className='py-5'>{category}</p>
                                     <FormGroup>
                                         {
-                                            categorizeIngredients(item.ingredients)[category].map(ingredient =>
+                                            categorizedIngredients[category].map(ingredient =>
                                                 <FormControlLabel
-                                                    key={ingredient.id}
+                                                    key={ingredient.name}
                                                     control={
                                                         <Checkbox
                                                             onChange={() => handleCheckBoxChange(ingredient.name)}
+                                                            checked={selectedIngredients.includes(ingredient.name)}
                                                             color='secondary'
                                                         />
                                                     }

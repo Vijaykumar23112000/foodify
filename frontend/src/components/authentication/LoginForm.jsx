@@ -15,15 +15,11 @@ const LoginForm = () => {
     const dispatch = useDispatch()
     const navigate = useNavigate()
 
-    const handleSubmit = (values) => {
-        dispatch(loginUserAction({userData: values,navigate}))
-    }
+    const handleSubmit = values => dispatch(loginUserAction({userData: values,navigate}))
 
     return (
         <div>
-            <Typography variant='h5' className='text-center'>
-                Login
-            </Typography>
+            <Typography variant='h5' className='text-center'>Login</Typography>
             <Formik
                 initialValues={initialValues}
                 onSubmit={handleSubmit}

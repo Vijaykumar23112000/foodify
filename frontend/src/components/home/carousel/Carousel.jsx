@@ -15,15 +15,17 @@ const Carousel = () => {
     slidesToScroll: 1,
     autoplay: true,
     autoplaySpeed: 1000,
-    arrows:false
+    arrows: false
   }
 
   var x = 1
 
   return (
-    <div>
+    <div> 
       <Slider  {...settings}>
-        {topSeller.map(item => <CarouselItem key={++x} image={item.image} title={item.title} />)}
+        {
+          topSeller.map(item => <CarouselItem key={++x} image={item.image} title={item.title} />)
+        }
       </Slider>
     </div>
   )

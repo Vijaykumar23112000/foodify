@@ -21,17 +21,13 @@ const Authentication = () => {
     const location = useLocation()
     const navigate = useNavigate()
 
-    const handleOnClose = () => {
-        navigate("/")
-    }
-
     return (
         <>
             <Modal
                 open={
                     location.pathname === "/account/register" || location.pathname === "/account/login"
                 }
-                onClose={handleOnClose}
+                onClose={() => navigate("/")}
             >   
                 <Box sx={style}>
                     {
