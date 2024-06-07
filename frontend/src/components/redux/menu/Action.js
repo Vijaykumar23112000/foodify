@@ -32,7 +32,7 @@ export const createMenuItemAction = ({ menu, token }) => async (dispatch) => {
 export const getMenuItemsByRestaurantIdAction = (requestData) => async (dispatch) => {
     dispatch({ type: GET_MENU_ITEMS_BY_RESTAURANT_ID_REQUEST })
     try {
-        const { data } = await api.get(`api/food/restaurant/${requestData.restaurantId}?vegetarian=${requestData.vegetarian}&nonveg=${requestData.nonveg}&seasonal=${requestData.seasonal}&food_category=${requestData.foodCategory}`,
+        const { data } = await api.get(`api/foods/restaurant/${requestData.restaurantId}?isVegetarian=${requestData.isVegetarian}&isNonVeg=${requestData.isNonVeg}&isSeasonal=${requestData.isSeasonal}&foodCategory=${requestData.foodCategory}`,
             { headers: { Authorization: `Bearer ${requestData.token}` } })
         dispatch({ type: GET_MENU_ITEMS_BY_RESTAURANT_ID_SUCCESS, payload: data })
         console.log("get menu items by restaurant id : ", data);

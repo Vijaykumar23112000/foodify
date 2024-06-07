@@ -4,7 +4,8 @@ import { darkTheme } from './theme/DarkTheme';
 import Router from './components/router/Router';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { getUserAction, /*logoutAction*/ } from './components/redux/authentication/Action';
+import { getUserAction } from './components/redux/authentication/Action';
+import { findCartAction } from './components/redux/cart/Action';
 
 function App() {
 
@@ -15,7 +16,7 @@ function App() {
 
   useEffect(() => {
     dispatch(getUserAction(authentication.token || token))
-    // dispatch(logoutAction())
+    dispatch(findCartAction(token))
   }, [authentication.token])
 
   return (

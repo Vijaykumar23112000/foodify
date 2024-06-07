@@ -6,35 +6,44 @@ import MenuCard from './MenuCard';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { getRestaurantByIdAction, getRestaurantCategoryAction } from '../redux/restaurant/Action';
+import { getMenuItemsByRestaurantIdAction } from '../redux/menu/Action';
 
 const RestaurantDetails = () => {
 
     const foodTypes = [
-        { label: "All", value: "all" },
-        { label: "Vegetarian", value: "vegetarian" },
-        { label: "Non-Vegetarian", value: "non_vegetarian" },
-        { label: "Seasonal Only", value: "seasonal" }
+        { id: 1, label: "All", value: "all" },
+        { id: 3, label: "Vegetarian", value: "isVegetarian" },
+        { id: 3, label: "Non-Vegetarian", value: "isNonVeg" },
+        { id: 4, label: "Seasonal Only", value: "isSeasonal" }
     ]
 
-    const [foodType, setFoodType] = useState("all")
-    // const foodCategories = ["Pizza", "Biriyani", "Burger", "Chicken", "Donut"]
-
-    const handleFilter = e => {
-        setFoodType("")
+    const handleFilterFoodType = e => {
+        setFoodType(e.target.value)
         console.log(e.target.value, e.target.name);
+    }
+
+    const handleFilterCategory = (e, value) => {
+        setSelectedCategory(value)
+        console.log(e.target.value, e.target.name, value);
     }
 
     const navigate = useNavigate()
     const dispatch = useDispatch()
     const token = localStorage.getItem("token")
-    const { authentication, restaurant } = useSelector(store => store)
+    const { authentication, restaurant, menu } = useSelector(store => store)
+    const [selectedCategory, setSelectedCategory] = useState("")
+    const [foodType, setFoodType] = useState("all")
 
-    const { id, city } = useParams()
+    const { id } = useParams()
 
     useEffect(() => {
-        dispatch(getRestaurantByIdAction({ token, restaurantId:id }))
-        dispatch(getRestaurantCategoryAction({ restaurantId:id , token}))
+        dispatch(getRestaurantByIdAction({ token, restaurantId: id }))
+        dispatch(getRestaurantCategoryAction({ restaurantId: id, token }))
     }, [])
+
+    useEffect(() => {
+        dispatch(getMenuItemsByRestaurantIdAction({ restaurantId: id, token, isVegetarian: foodType === "isVegetarian", isNonVeg: foodType === "isNonVeg", isSeasonal: foodType === "isSeasonal", foodCategory: selectedCategory }))
+    }, [selectedCategory, foodType])
 
     console.log("restaurant : => ", restaurant)
 
@@ -95,7 +104,7 @@ const RestaurantDetails = () => {
                                 <FormLabel>
                                     <Typography variant='h5' sx={{ paddingBottom: "1rem" }}>Food Type</Typography>
                                 </FormLabel>
-                                <RadioGroup onChange={handleFilter} name='food_type' value={foodType}>
+                                <RadioGroup onChange={handleFilterFoodType} name='food_type' value={foodType}>
                                     {
                                         foodTypes.map(item => <FormControlLabel key={item.value} value={item.value} control={<Radio />} label={item.label} />)
                                     }
@@ -108,9 +117,9 @@ const RestaurantDetails = () => {
                                 <FormLabel>
                                     <Typography variant='h5' sx={{ paddingBottom: "1rem" }}>Food Category</Typography>
                                 </FormLabel>
-                                <RadioGroup onChange={handleFilter} name='food_Type' value={foodType}>
+                                <RadioGroup onChange={handleFilterCategory} name='food_category' value={selectedCategory}>
                                     {
-                                        restaurant.categories.map(item => <FormControlLabel key={item} value={item} control={<Radio />} label={item.name} />)
+                                        restaurant.categories.map(item => <FormControlLabel key={item.id} value={item.name} control={<Radio />} label={item.name} />)
                                     }
                                 </RadioGroup>
                             </FormControl>
@@ -119,7 +128,7 @@ const RestaurantDetails = () => {
                 </div>
                 <div className="space-y-5 lg:w-[80%] lg:pl-10 menu">
                     {
-                        [1, 1, 1, 1, 1, 1, 1].map(item => <MenuCard />)
+                        menu.menuItems.map(item => <MenuCard item={item} />)
                     }
                 </div>
             </section>

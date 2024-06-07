@@ -12,6 +12,8 @@ const Home = () => {
         dispatch(getAllRestaurantsAction(token))
     }, [])
 
+    var x = 1
+
     const dispatch = useDispatch()
     const token = localStorage.getItem("token")
     const { restaurant } = useSelector(store => store)
@@ -45,7 +47,7 @@ const Home = () => {
                 <h1 className='text-2xl font-semibold text-gray-300 pb-8'>Discover culinary bliss with our specially chosen favorites!</h1>
                 <div className='flex flex-wrap items-center justify-around  gap-4'>
                     {
-                        restaurant.restaurants.map(item => <RestaurantCard item = {item}/>)
+                        restaurant.restaurants.map(item => <RestaurantCard key={++x} item = {item}/>)
                     }
                 </div>
             </section>

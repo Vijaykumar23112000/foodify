@@ -5,14 +5,11 @@ import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import PersonIcon from '@mui/icons-material/Person';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { logoutAction } from '../redux/authentication/Action';
 
 const Navbar = () => {
 
     const navigate = useNavigate()
-    const authentication = useSelector(store => store.authentication)
-
-    const dispatch = useDispatch()
+    const { authentication, cart } = useSelector(store => store)
 
     const handleAvatarClick = () => authentication.user?.role === "ROLE_CUSTOMER" ? navigate("/my-profile") : navigate("/admin/restaurant")
 
@@ -20,7 +17,7 @@ const Navbar = () => {
         <Box bgcolor="secondary.main" className='px-5 sticky top-0 z-50 py-[.8rem] lg:px-20 flex justify-between'>
             <div className="lg:mr-10 cursor-pointer flex items-center space-x-4">
                 <li
-                    onClick={ () => navigate("/") }
+                    onClick={() => navigate("/")}
                     className='logo font-semibold 
                             text-gray-300 text-2xl
                             first-letter:text-red-600 
@@ -53,8 +50,8 @@ const Navbar = () => {
                     }
                 </div>
                 <div className="">
-                    <IconButton>
-                        <Badge color='primary' badgeContent={2}>
+                    <IconButton onClick={()=>navigate("/cart")}>
+                        <Badge color='primary' badgeContent={cart.cartItems.length}>
                             <ShoppingCartIcon sx={{ fontSize: "1.5rem" }} />
                         </Badge>
                     </IconButton>

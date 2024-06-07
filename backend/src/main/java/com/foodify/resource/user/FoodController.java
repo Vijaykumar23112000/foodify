@@ -11,7 +11,7 @@ import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/api/food")
+@RequestMapping("/api/foods")
 public class FoodController {
 
     private final FoodServiceImpl foodService;
@@ -30,9 +30,9 @@ public class FoodController {
     @GetMapping("/restaurant/{restaurantId}")
     public ResponseEntity<List<Food>> getRestaurantFood (
             @PathVariable Long restaurantId,
-            @RequestParam Boolean isVegetarian,
-            @RequestParam Boolean isSeasonal,
-            @RequestParam Boolean isNonVeg,
+            @RequestParam(required = false) Boolean isVegetarian,
+            @RequestParam(required = false) Boolean isSeasonal,
+            @RequestParam(required = false) Boolean isNonVeg,
             @RequestParam(required = false) String foodCategory,
             @RequestHeader("Authorization") String token) throws Exception
     {

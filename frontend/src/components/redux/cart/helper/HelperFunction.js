@@ -11,7 +11,7 @@ export const handleFindCartAndClearCartSuccess = (state, payload) => (
         ...state,
         loading: false,
         cart: payload,
-        cartItems: payload.items
+        cartItems: payload.item
     }
 )
 

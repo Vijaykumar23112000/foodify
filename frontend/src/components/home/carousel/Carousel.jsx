@@ -18,10 +18,12 @@ const Carousel = () => {
     arrows:false
   }
 
+  var x = 1
+
   return (
     <div>
       <Slider  {...settings}>
-        {topSeller.map(item => <CarouselItem image={item.image} title={item.title} />)}
+        {topSeller.map(item => <CarouselItem key={++x} image={item.image} title={item.title} />)}
       </Slider>
     </div>
   )

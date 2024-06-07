@@ -5,6 +5,7 @@ import AddressCard from './address/AddressCard'
 import AddLocationAltIcon from '@mui/icons-material/AddLocationAlt';
 import { Field, Form, Formik } from 'formik';
 import { validation } from './address/Validation';
+import { useSelector } from 'react-redux';
 
 const Cart = () => {
 
@@ -34,15 +35,20 @@ const Cart = () => {
     const createOrderUsingSelectedAddress = () => { }
 
     const handleOpenAddressModel = () => setOpen(true)
-    
+
     const handleSubmit = (values) => console.log(values)
+
+    var x = 1;
+    var y = 1
+
+    const { cart } = useSelector(store => store)
 
     return (
         <>
             <main className='lg:flex justify-between'>
                 <section className='lg:w-[30%] space-y-6 lg:min-h-screen pt-10'>
                     {
-                        [1, 1, 1].map(item => <CartItem />)
+                        cart.cartItems.map(item => <CartItem key={++x} item={item} />)
                     }
                     <Divider />
                     <div className="billDetails px-5 text-sm">
@@ -50,7 +56,7 @@ const Cart = () => {
                         <div className="space-y-3">
                             <div className="flex justify-between text-gray-400">
                                 <p>Item Total</p>
-                                <p>₹599</p>
+                                <p>₹{cart.cart.total}</p>
                             </div>
                             <div className="flex justify-between text-gray-400">
                                 <p>Delivery Charge</p>
@@ -64,7 +70,7 @@ const Cart = () => {
                         </div>
                         <div className="flex justify-between text-gray-400 pt-2">
                             <p>Total Pay</p>
-                            <p>₹3300</p>
+                            <p>₹{cart.cart.total+33+21}</p>
                         </div>
                     </div>
                 </section>
@@ -74,7 +80,7 @@ const Cart = () => {
                         <Typography variant='h3' className='text-center font-semibold text-2xl py-10' >Choose Delivery Address</Typography>
                         <div className="flex gap-5 flex-wrap justify-center">
                             {
-                                [1, 1, 1, 1, 1].map(item => <AddressCard item={item} showButton={true} handleSelectAddress={createOrderUsingSelectedAddress} />)
+                                [1, 1, 1, 1, 1].map(item => <AddressCard item={item} key={++y} showButton={true} handleSelectAddress={createOrderUsingSelectedAddress} />)
                             }
                             <Card className='flex gap-5 w-64 p-5'>
                                 <AddLocationAltIcon />
