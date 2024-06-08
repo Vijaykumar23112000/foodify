@@ -5,7 +5,7 @@ import RegistrationForm from './RegistrationForm'
 import LoginForm from './LoginForm'
 
 const Authentication = () => {
-    
+
     const style = {
         position: 'absolute',
         top: '50%',
@@ -17,7 +17,7 @@ const Authentication = () => {
         p: 4,
         outline: "none",
     };
-    
+
     const location = useLocation()
     const navigate = useNavigate()
 
@@ -28,10 +28,10 @@ const Authentication = () => {
                     location.pathname === "/account/register" || location.pathname === "/account/login"
                 }
                 onClose={() => navigate("/")}
-            >   
+            >
                 <Box sx={style}>
                     {
-                       location.pathname === "/account/register" ? <RegistrationForm /> : <LoginForm /> 
+                        location.pathname === "/account/register" ? <RegistrationForm /> : <LoginForm />
                     }
                 </Box>
             </Modal>

@@ -27,10 +27,8 @@ const ProfileNavigation = ({ open, handleClose }) => {
     const navigate = useNavigate()
     const dispatch = useDispatch()
 
-    const handleNavigate = item => {
-        item.title === "Logout" ? dispatch(logoutAction()) : navigate(`/my-profile/${item.title.toLowerCase()}`)
-        navigate("/")
-    }
+    const handleNavigate = item => item.title === "Logout" ? dispatch(logoutAction({ navigate })) : navigate(`/my-profile/${item.title.toLowerCase()}`)
+
     return (
         <div>
             <Drawer

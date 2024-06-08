@@ -57,10 +57,11 @@ export const addToFavoriteAction = ({ restaurantId, token }) => async (dispatch)
         })
 }
 
-export const logoutAction = () => async (dispatch) => {
+export const logoutAction = ({navigate}) => async (dispatch) => {
     try {
         localStorage.clear()
         dispatch({ type: actionTypes.LOGOUT })
+        navigate("/")
         console.log("Authentication.Action => Logout Success")
     } catch (error) {
         console.log("Authentication.Action => Logout failed : ", error);

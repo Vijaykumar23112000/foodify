@@ -54,15 +54,13 @@ const Cart = () => {
         setOpen(false)
     }
 
-    var x = 1
-    var y = 1
 
     return (
         <>
             <main className='lg:flex justify-between'>
                 <section className='lg:w-[30%] space-y-6 lg:min-h-screen pt-10'>
                     {
-                        cart.cartItems.map(item => <CartItem key={++x} item={item} />)
+                        cart.cartItems.map((item, i) => <CartItem key={i} item={item} />)
                     }
                     <Divider />
                     <div className="billDetails px-5 text-sm">
@@ -94,7 +92,7 @@ const Cart = () => {
                         <Typography variant='h3' className='text-center font-semibold text-2xl py-10' >Choose Delivery Address</Typography>
                         <div className="flex gap-5 flex-wrap justify-center">
                             {
-                                [1, 1, 1, 1, 1].map(item => <AddressCard item={item} key={++y} showButton={true} handleSelectAddress={createOrderUsingSelectedAddress} />)
+                                [1, 1, 1, 1, 1].map((item, i) => <AddressCard item={item} key={i} showButton={true} handleSelectAddress={createOrderUsingSelectedAddress} />)
                             }
                             <Card className='flex gap-5 w-64 p-5'>
                                 <AddLocationAltIcon />
@@ -129,7 +127,6 @@ const Cart = () => {
                                         fullWidth
                                         variant="outlined"
                                     />
-                                    {/* {errors.streetAddress && <span>{errors.streetAddress}</span>} */}
                                 </Grid>
                                 <Grid item xs={6}>
                                     <Field
@@ -139,7 +136,6 @@ const Cart = () => {
                                         fullWidth
                                         variant="outlined"
                                     />
-                                    {/* {errors.state && <span>{errors.state}</span>} */}
                                 </Grid>
                                 <Grid item xs={6}>
                                     <Field
@@ -149,7 +145,6 @@ const Cart = () => {
                                         fullWidth
                                         variant="outlined"
                                     />
-                                    {/* {errors.pincode && <span>{errors.pincode}</span>} */}
                                 </Grid>
                                 <Grid item xs={12}>
                                     <Field
@@ -159,7 +154,6 @@ const Cart = () => {
                                         fullWidth
                                         variant="outlined"
                                     />
-                                    {/* {errors.city && <span>{errors.city}</span>} */}
                                 </Grid>
                                 <Grid item xs={12}>
                                     <Button fullWidth variant='contained' type='submit' color='primary'>Deliver Here</Button>

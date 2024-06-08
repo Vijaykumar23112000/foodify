@@ -8,14 +8,14 @@ import { loginUserAction } from '../redux/authentication/Action'
 const LoginForm = () => {
 
     const initialValues = {
-        email:"",
-        password:""
+        email: "",
+        password: ""
     }
 
     const dispatch = useDispatch()
     const navigate = useNavigate()
 
-    const handleSubmit = values => dispatch(loginUserAction({userData: values,navigate}))
+    const handleSubmit = values => dispatch(loginUserAction({ userData: values, navigate }))
 
     return (
         <div>
@@ -25,7 +25,7 @@ const LoginForm = () => {
                 onSubmit={handleSubmit}
             >
                 <Form>
-                    <Field 
+                    <Field
                         as={TextField}
                         name="email"
                         label="E-mail"
@@ -33,7 +33,7 @@ const LoginForm = () => {
                         variant="outlined"
                         margin="normal"
                     />
-                    <Field 
+                    <Field
                         as={TextField}
                         name="password"
                         label="Password"
@@ -42,19 +42,19 @@ const LoginForm = () => {
                         margin="normal"
                         type="password"
                     />
-                    <Button 
-                        sx={{marginTop:2 , padding:"1rem"}}
-                        fullWidth 
-                        type='submit' 
+                    <Button
+                        sx={{ marginTop: 2, padding: "1rem" }}
+                        fullWidth
+                        type='submit'
                         variant='contained'
                     >
                         Login
                     </Button>
                 </Form>
             </Formik>
-            <Typography variant='body2' align='center' sx={{marginTop:3}}>
+            <Typography variant='body2' align='center' sx={{ marginTop: 3 }}>
                 Dont Have An Account ?
-                <Button size='small' onClick={()=>navigate("/account/register")}>Register</Button>    
+                <Button size='small' onClick={() => navigate("/account/register")}>Register</Button>
             </Typography>
         </div>
     )

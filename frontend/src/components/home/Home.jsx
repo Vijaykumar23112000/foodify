@@ -10,8 +10,6 @@ const Home = () => {
     const dispatch = useDispatch()
     const token = localStorage.getItem("token")
     const { restaurant } = useSelector(store => store)
-    console.log("Restaurants from store : => ", restaurant)
-    var x = 1
 
     useEffect(() => {
         dispatch(getAllRestaurantsAction(token))
@@ -41,7 +39,7 @@ const Home = () => {
                 <h1 className='text-2xl font-semibold text-gray-300 pb-8'>Discover culinary bliss with our specially chosen favorites!</h1>
                 <div className='flex flex-wrap items-center justify-around  gap-4'>
                     {
-                        restaurant.restaurants.map(item => <RestaurantCard key={++x} item={item} />)
+                        restaurant.restaurants.map((item, i) => <RestaurantCard key={i} item={item} />)
                     }
                 </div>
             </section>

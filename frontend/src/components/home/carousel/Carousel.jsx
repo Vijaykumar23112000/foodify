@@ -18,13 +18,11 @@ const Carousel = () => {
     arrows: false
   }
 
-  var x = 1
-
   return (
-    <div> 
+    <div>
       <Slider  {...settings}>
         {
-          topSeller.map(item => <CarouselItem key={++x} image={item.image} title={item.title} />)
+          topSeller.map((item, i) => <CarouselItem key={i} image={item.image} title={item.title} />)
         }
       </Slider>
     </div>

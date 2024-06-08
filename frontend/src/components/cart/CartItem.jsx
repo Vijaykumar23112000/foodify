@@ -2,17 +2,14 @@ import { Chip, IconButton } from '@mui/material'
 import React from 'react'
 import RemoveCircleOutlineIcon from '@mui/icons-material/RemoveCircleOutline';
 import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
-import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { removeCartItemAction, updateCartItemAction } from '../redux/cart/Action';
 
 const CartItem = ({ item }) => {
 
     const { authentication } = useSelector(store => store)
-    const navigate = useNavigate()
     const dispatch = useDispatch()
     const token = localStorage.getItem("token")
-    var x = 1;
 
     const handleUpdateCartItem = value => {
         if (value === -1 && item.quantity === 1) handleRemoveCartItem()
@@ -56,7 +53,7 @@ const CartItem = ({ item }) => {
             </div>
             <div className="pt-3 space-x-2">
                 {
-                    item.ingredients.map(ingredient => <Chip key={++x} label={ingredient} />)
+                    item.ingredients.map((ingredient, i) => <Chip key={i} label={ingredient} />)
                 }
             </div>
         </div>

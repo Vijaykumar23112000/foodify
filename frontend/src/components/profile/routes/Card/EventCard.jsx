@@ -5,10 +5,10 @@ import DeleteIcon from '@mui/icons-material/Delete';
 const EventCard = () => {
     return (
         <div>
-            <Card sx={{width:345}}>
-                <CardMedia 
-                    sx={{height:345}}
-                    image='https://images.pexels.com/photos/6210708/pexels-photo-6210708.jpeg?auto=compress&cs=tinysrgb&w=600' 
+            <Card sx={{ width: 345 }}>
+                <CardMedia
+                    sx={{ height: 345 }}
+                    image='https://images.pexels.com/photos/6210708/pexels-photo-6210708.jpeg?auto=compress&cs=tinysrgb&w=600'
                 />
                 <CardContent>
                     <Typography
@@ -31,12 +31,12 @@ const EventCard = () => {
                 </CardContent>
                 {
                     true && (
-                                <CardActions>
-                                    <IconButton>
-                                        <DeleteIcon />
-                                    </IconButton>
-                                </CardActions>
-                            )
+                        <CardActions>
+                            <IconButton>
+                                <DeleteIcon />
+                            </IconButton>
+                        </CardActions>
+                    )
                 }
             </Card>
         </div>
