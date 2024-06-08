@@ -32,25 +32,26 @@ public class OrderServiceImpl implements OrderService {
     public Order createOrder(OrderRequestDto order, User user) throws Exception {
         var shippingAddress = order.getDeliveryAddress();
         var savedAddress = addressRepository.save(shippingAddress);
-        if(!user.getAddresses().contains(savedAddress)) {
+        if (!user.getAddresses().contains(savedAddress)) {
             user.getAddresses().add(savedAddress);
             userRepository.save(user);
         }
         var restaurant = restaurantService.findRestaurantById(order.getRestaurantId());
-        var createdOrder = createOrder.apply(user , savedAddress , restaurant);
         var cart = cartService.findCartByUserId(user.getId());
         var orderItems = new ArrayList<OrderItem>();
-        for(CartItem cartItem : cart.getItem()){
+        for (CartItem cartItem : cart.getItem()) {
             var orderItem = createOrderItem.apply(cartItem);
             var savedOrderItem = orderItemRepository.save(orderItem);
             orderItems.add(savedOrderItem);
         }
+        var createdOrder = createOrder.apply(user, savedAddress, restaurant);
         createdOrder.setItems(orderItems);
         createdOrder.setTotalPrice(cartService.calculateCartTotals(cart));
         var savedOrder = orderRepository.save(createdOrder);
         restaurant.getOrders().add(savedOrder);
-        return createdOrder;
+        return savedOrder;
     }
+
 
     @Override
     public Order updateOrder(Long orderId, String orderStatus) throws Exception {

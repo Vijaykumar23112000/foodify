@@ -13,3 +13,9 @@ server:
 
 jwt:
   secret: ${SECRET_KEY}
+
+razorpay:
+  api:
+    test:
+      key_id: ${RAZORPAY_KEY_ID}
+      key_secret: ${RAZORPAY_KEY_SECRET}

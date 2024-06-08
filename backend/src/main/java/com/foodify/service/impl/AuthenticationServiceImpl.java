@@ -6,7 +6,7 @@ import com.foodify.dto.authentication.LoginRequestDto;
 import com.foodify.dto.user.UserRequestDto;
 import com.foodify.repository.Cart.CartRepository;
 import com.foodify.repository.user.UserRepository;
-import com.foodify.dto.response.AuthenticationResponse;
+import com.foodify.dto.authentication.AuthenticationResponse;
 import com.foodify.service.AuthenticationService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.AuthenticationManager;
