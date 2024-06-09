@@ -1,6 +1,7 @@
 package com.foodify.service.impl;
 
 import com.foodify.dto.order.OrderRequestDto;
+import com.foodify.dto.payment.PaymentLinkResponse;
 import com.foodify.entity.*;
 import com.foodify.repository.Address.AddressRepository;
 import com.foodify.repository.order.OrderItemRepository;
@@ -28,8 +29,11 @@ public class OrderServiceImpl implements OrderService {
     private final RestaurantServiceImpl restaurantService;
     private final CartServiceImpl cartService;
 
+    private final PaymentServiceImpl paymentService;
+
+
     @Override
-    public Order createOrder(OrderRequestDto order, User user) throws Exception {
+    public PaymentLinkResponse createOrder(OrderRequestDto order, User user) throws Exception {
         var shippingAddress = order.getDeliveryAddress();
         var savedAddress = addressRepository.save(shippingAddress);
         if (!user.getAddresses().contains(savedAddress)) {
@@ -49,7 +53,7 @@ public class OrderServiceImpl implements OrderService {
         createdOrder.setTotalPrice(cartService.calculateCartTotals(cart));
         var savedOrder = orderRepository.save(createdOrder);
         restaurant.getOrders().add(savedOrder);
-        return savedOrder;
+        return paymentService.createPayment(savedOrder);
     }
 
 

@@ -41,10 +41,9 @@ const Cart = () => {
             order: {
                 restaurantId: cart.cartItems[0].food?.restaurant.id,
                 deliveryAddress: {
-                    fullName: authentication.user?.fullName,
                     streetAddress: values.streetAddress,
                     city: values.city,
-                    state: values.state,
+                    stateProvince: values.state,
                     postalCode: values.pincode,
                     country: "India"
                 }

@@ -41,6 +41,6 @@ public class Order {
     @OneToMany
     private List<OrderItem> items;
 
-//    private Payment payment;
+//    private Payment paymentDetails;
 
 }

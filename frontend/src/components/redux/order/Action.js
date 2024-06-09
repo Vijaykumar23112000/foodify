@@ -1,12 +1,17 @@
 import { api } from "../../config/Api";
 import * as actionTypes from './ActionType'
 
-export const createOrderAction = requestData => async (dispatch) => {
+export const createOrderAction = ({token , order}) => async (dispatch) => {
     dispatch({ type: actionTypes.CREATE_ORDER_REQUEST })
-    await api.post(`/api/order`, requestData.order, { headers: { Authorization: `Bearer ${requestData.token}` } })
+    await api.post(`/api/order`, order, { headers: { Authorization: `Bearer ${token}` } })
         .then(res => {
-            dispatch({ type: actionTypes.CREATE_ORDER_SUCCESS, payload: res.data })
-            console.log("Order.Action => Create Order Success : ", res.data);
+            console.log("Order.Action => Create Order Processing : ", res.data);
+            if (res.data.paymentLinkUrl) {
+                window.location.href = res.data.paymentLinkUrl;
+            } else {
+                dispatch({ type: actionTypes.CREATE_ORDER_SUCCESS, payload: res.data });
+                console.log("Order.Action => Create Order Success : ", res.data);
+            }
         })
         .catch (error => {
             dispatch({ type: actionTypes.CREATE_ORDER_FAILED, payload: error })

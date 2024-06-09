@@ -2,8 +2,10 @@ package com.foodify.resource.user;
 
 import com.foodify.dto.mapper.UserAndUserResponseDtoMapper;
 import com.foodify.dto.order.OrderRequestDto;
+import com.foodify.dto.payment.PaymentLinkResponse;
 import com.foodify.entity.Order;
 import com.foodify.service.impl.OrderServiceImpl;
+import com.foodify.service.impl.PaymentServiceImpl;
 import com.foodify.service.impl.UserServiceImpl;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -23,14 +25,14 @@ public class OrderController {
 
 
     @PostMapping("/order")
-    public ResponseEntity<Order> createOrder(
+    public ResponseEntity<PaymentLinkResponse> createOrder(
             @RequestBody OrderRequestDto request ,
             @RequestHeader("Authorization") String token ) throws Exception
     {
 
         var user = userMapper.toENTITY.apply(userService.findUserByJwtToken(token.substring(7).trim()));
-        var paymentResponseDto = orderService.createOrder(request , user);
-        return ResponseEntity.status(HttpStatus.CREATED).body(paymentResponseDto);
+        var paymentLinkResponse = orderService.createOrder(request , user);
+        return ResponseEntity.status(HttpStatus.CREATED).body(paymentLinkResponse);
 
     }
 

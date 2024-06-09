@@ -10,7 +10,7 @@ import java.util.Date;
 
 public class OrderUtil {
 
-    public static QuadFunction<User , Address , Restaurant , Order> createOrder = (user , savedAddress , restaurant) ->
+    public static QuadFunction<User , Address , Restaurant , Order> createOrder = (user , savedAddress , restaurant ) ->
             Order
                     .builder()
                     .customer(user)
