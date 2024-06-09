@@ -28,8 +28,8 @@ public class PaymentServiceImpl implements PaymentService{
         paymentLinkRequest.put("amount", order.getTotalPrice() * 100);
         paymentLinkRequest.put("currency", "INR");
 
-        paymentLinkRequest.put("callback_url", "http://localhost:3000/payment/" + order.getId() + "/success");
-//        paymentLinkRequest.put("callback_method", "get");
+        paymentLinkRequest.put("callback_url", "http://localhost:3000/payment/success/"+order.getId());
+        paymentLinkRequest.put("callback_method", "get");
 
         PaymentLink payment = razorpayClient.paymentLink.create(paymentLinkRequest);
         return PaymentLinkResponse
