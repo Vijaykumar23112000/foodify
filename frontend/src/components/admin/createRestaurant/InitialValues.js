@@ -1,0 +1,16 @@
+export const initialValues = {
+    name:"",
+    description:"",
+    cuisineType:"",
+    streetAddress:"",
+    city:"",
+    stateProvince:"",
+    postalCode:"",
+    country:"",
+    email:"",
+    mobile:"",
+    twitter:"",
+    instagram:"",
+    openingHours:"Mon-Sun : 9:00 AM - 10:00 PM",
+    images:[],
+}
