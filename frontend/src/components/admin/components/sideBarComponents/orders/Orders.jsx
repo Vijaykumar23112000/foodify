@@ -16,7 +16,7 @@ const Orders = () => {
     return (
         <div className='px-2 mt-5'>
             <Card className="p-5">
-                <Typography sx={{ paddingBottom: "1rem" }} variant='h5' >
+                <Typography sx={{ paddingBottom: "1rem" }} color="primary" variant='h5' >
                     Order Status
                 </Typography>
                 <FormControl>
@@ -27,15 +27,15 @@ const Orders = () => {
                         value={filterValue || "all"}
                     >
                         {
-                            orderStatus.map((item, i) =>
-                                <FormControlLabel
-                                    key={i}
-                                    value={item.value}
-                                    control={<Radio />}
-                                    label={item.label}
-                                    sx={{ color: "gray" }}
-                                />
-                            )
+                            orderStatus.map((item , i)=>
+                                                <FormControlLabel 
+                                                    key={i}
+                                                    value={item.value}
+                                                    control={<Radio />}
+                                                    label={item.label}
+                                                    sx={{color:"gray"}}
+                                                />
+                                            )
                         }
                     </RadioGroup>
                 </FormControl>
