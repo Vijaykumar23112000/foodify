@@ -1,10 +1,10 @@
 import { CssBaseline, ThemeProvider } from '@mui/material';
 import { darkTheme } from './theme/DarkTheme';
-import Router from './components/router/Router';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { getUserAction } from './components/redux/authentication/Action';
 import { findCartAction } from './components/redux/cart/Action';
+import Router from './components/router/Router';
 
 function App() {
 
@@ -14,8 +14,10 @@ function App() {
 
   useEffect(() => {
     const effectiveToken = authentication.token || token;
-    dispatch(getUserAction(effectiveToken));
-    dispatch(findCartAction(effectiveToken));
+    if(effectiveToken){
+      dispatch(getUserAction(effectiveToken));
+      dispatch(findCartAction(effectiveToken));
+    }
 
   }, [dispatch, authentication.token, token]);
 
