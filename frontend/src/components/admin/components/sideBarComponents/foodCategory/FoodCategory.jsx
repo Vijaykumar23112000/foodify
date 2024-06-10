@@ -1,9 +1,10 @@
 import React from 'react'
+import FoodCategoryTable from './FoodCategoryTable'
 
 const FoodCategory = () => {
     return (
-        <div>
-            <h1>Food Category</h1>
+        <div className='px-2 mt-5'>
+            <FoodCategoryTable />
         </div>
     )
 }
