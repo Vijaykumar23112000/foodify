@@ -1,4 +1,4 @@
-import { Button, Grid } from '@mui/material'
+import { Button, Grid, Typography } from '@mui/material'
 import { useFormik } from 'formik'
 import React, { useState } from 'react'
 import { initialValues } from './InitialValues';
@@ -68,7 +68,7 @@ const CreateRestaurantForm = () => {
         <div className='py-10 px-5 lg:flex items-center justify-center
         min-h-screen'>
             <div className="lg:max-w-4xl">
-                <h1 className='font-bold text-2xl text-center py-2'>Add New Restaurant</h1>
+                <Typography variant='h5' color="primary" className='text-center py-2'>Add New Restaurant</Typography>
                 <form onSubmit={formik.handleSubmit} className='space-y-4' >
                     <Grid container spacing={2}>
                         <ImageField
@@ -96,7 +96,7 @@ const CreateRestaurantForm = () => {
                             color='primary'
                             type='submit'
                         >
-                            Create Restaurant
+                            Create
                         </Button>
                         <Button
                             variant='outlined'

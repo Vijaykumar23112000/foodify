@@ -6,7 +6,7 @@ import NameField from './fields/NameField';
 import DescriptionField from './fields/DescriptionField';
 import PriceField from './fields/PriceField';
 import CategoryField from './fields/CategoryField';
-import { Button, Grid } from '@mui/material';
+import { Button, Grid, Typography } from '@mui/material';
 import { uploadImageToCloudinary } from '../components/cloudinary/Upload';
 import IngredientsField from './fields/IngredientsField';
 import VegetarianField from './fields/VegetarianField';
@@ -43,7 +43,7 @@ const CreateMenuForm = () => {
         <div className='py-10 px-5 lg:flex items-center justify-center
         min-h-screen'>
             <div className="lg:max-w-4xl">
-                <h1 className='font-bold text-2xl text-center py-2'>Add New Menu</h1>
+                <Typography variant='h5' color="primary" className='text-center py-2'>Add New Menu</Typography>
                 <form onSubmit={formik.handleSubmit} className='space-y-4' >
                     <Grid container spacing={2}>
                         <ImageField
@@ -66,7 +66,7 @@ const CreateMenuForm = () => {
                             color='primary'
                             type='submit'
                         >
-                            Create Restaurant
+                            Create
                         </Button>
                         <Button
                             variant='outlined'
