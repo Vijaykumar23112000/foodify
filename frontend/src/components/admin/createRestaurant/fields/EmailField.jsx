@@ -11,7 +11,7 @@ const EmailField = ({ formik }) => {
                 label="Email"
                 variant='outlined'
                 onChange={formik.handleChange}
-                value={formik.values.name}
+                value={formik.values.email}
             >
             </TextField>
         </Grid>

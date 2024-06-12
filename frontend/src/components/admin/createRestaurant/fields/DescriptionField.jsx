@@ -11,7 +11,7 @@ const DescriptionField = ({ formik }) => {
                 label="Description"
                 variant='outlined'
                 onChange={formik.handleChange}
-                value={formik.values.name}
+                value={formik.values.description}
             >
             </TextField>
         </Grid>

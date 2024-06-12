@@ -11,7 +11,7 @@ const PostalCode = ({ formik }) => {
                 label="Postal Code"
                 variant='outlined'
                 onChange={formik.handleChange}
-                value={formik.values.name}
+                value={formik.values.postalCode}
             >
             </TextField>
         </Grid>

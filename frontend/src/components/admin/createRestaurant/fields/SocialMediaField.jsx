@@ -4,7 +4,7 @@ import React from 'react'
 const SocialMediaField = ({ formik }) => {
     return (
         <>
-            <Grid item xs={12} lg={4}>
+            <Grid item xs={12} lg={6}>
                 <TextField
                     fullWidth
                     id='instagram'
@@ -12,11 +12,11 @@ const SocialMediaField = ({ formik }) => {
                     label="Instagram"
                     variant='outlined'
                     onChange={formik.handleChange}
-                    value={formik.values.name}
+                    value={formik.values.instagram}
                 >
                 </TextField>
             </Grid>
-            <Grid item xs={12} lg={4}>
+            <Grid item xs={12} lg={6}>
                 <TextField
                     fullWidth
                     id='twitter'
@@ -24,19 +24,7 @@ const SocialMediaField = ({ formik }) => {
                     label="Twitter"
                     variant='outlined'
                     onChange={formik.handleChange}
-                    value={formik.values.name}
-                >
-                </TextField>
-            </Grid>
-            <Grid item xs={12} lg={4}>
-                <TextField
-                    fullWidth
-                    id='facebook'
-                    name='facebook'
-                    label="Facebook"
-                    variant='outlined'
-                    onChange={formik.handleChange}
-                    value={formik.values.name}
+                    value={formik.values.twitter}
                 >
                 </TextField>
             </Grid>

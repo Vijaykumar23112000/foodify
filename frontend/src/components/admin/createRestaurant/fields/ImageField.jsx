@@ -1,13 +1,12 @@
 import { Grid, IconButton } from '@mui/material'
-import React, { useState } from 'react'
+import React from 'react'
 import AddPhotoAlternateIcon from '@mui/icons-material/AddPhotoAlternate';
 import CloseIcon from '@mui/icons-material/Close';
 import Loader from '../Loader';
 
 
-const ImageField = ({handleImageChange , handleRemoveImage}) => {
+const ImageField = ({ handleImageChange, handleRemoveImage, formik , uploadImage }) => {
 
-    const [uploadImage, setUploadImage] = useState(false)
 
     return (
         <Grid item xs={12} className='flex flex-wrap gap-5' >
@@ -28,11 +27,11 @@ const ImageField = ({handleImageChange , handleRemoveImage}) => {
             </label>
             <div className="flex flex-wrap gap-2">
                 {
-                    [1, 1, 1, 1].map((item, i) => (
+                    formik.values.images.map((image, i) => (
                         <div className='relative' key={i}>
                             <img
                                 className='w-24 h-24 object-cover'
-                                src="https://images.pexels.com/photos/842571/pexels-photo-842571.jpeg?auto=compress&cs=tinysrgb&w=400"
+                                src={image}
                                 alt="burger"
                             />
                             <IconButton

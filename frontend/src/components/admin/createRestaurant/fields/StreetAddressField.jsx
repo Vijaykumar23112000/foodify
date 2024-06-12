@@ -11,7 +11,7 @@ const StreetAddressField = ({ formik }) => {
                 label="Street Address"
                 variant='outlined'
                 onChange={formik.handleChange}
-                value={formik.values.name}
+                value={formik.values.streetAddress}
             >
             </TextField>
         </Grid>

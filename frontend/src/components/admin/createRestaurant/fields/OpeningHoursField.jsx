@@ -11,7 +11,7 @@ const OpeningHoursField = ({ formik }) => {
                 label="Opening Hours"
                 variant='outlined'
                 onChange={formik.handleChange}
-                value={formik.values.name}
+                value={formik.values.openingHours}
             >
             </TextField>
         </Grid>

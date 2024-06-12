@@ -11,7 +11,7 @@ const CountryField = ({ formik }) => {
                 label="Country"
                 variant='outlined'
                 onChange={formik.handleChange}
-                value={formik.values.name}
+                value={formik.values.country}
             >
             </TextField>
         </Grid>

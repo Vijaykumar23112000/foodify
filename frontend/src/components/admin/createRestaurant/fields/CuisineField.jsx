@@ -11,7 +11,7 @@ const CuisineField = ({ formik }) => {
                 label="Cuisine Type"
                 variant='outlined'
                 onChange={formik.handleChange}
-                value={formik.values.name}
+                value={formik.values.cuisineType}
             >
             </TextField>
         </Grid>
