@@ -8,6 +8,7 @@ import FoodCategory from '../components/sideBarComponents/foodCategory/FoodCateg
 import Ingredients from '../components/sideBarComponents/ingredients/Ingredients'
 import Events from '../components/sideBarComponents/events/Events'
 import RestaurantDetails from '../components/sideBarComponents/restaurantDetails/RestaurantDetails'
+import CreateMenuForm from '../createMenu/CreateMenuForm'
 
 const Admin = () => {
 
@@ -30,6 +31,7 @@ const Admin = () => {
                         <Route path='/ingredients' element={<Ingredients />} />
                         <Route path='/events' element={<Events />} />
                         <Route path='/details' element={<RestaurantDetails />} />
+                        <Route path='/add-menu' element={<CreateMenuForm />} />
                     </Routes>
                 </div>
             </div>

@@ -4,10 +4,7 @@ import AddPhotoAlternateIcon from '@mui/icons-material/AddPhotoAlternate';
 import CloseIcon from '@mui/icons-material/Close';
 import Loader from '../../components/loader/Loader';
 
-
 const ImageField = ({ handleImageChange, handleRemoveImage, formik , uploadImage }) => {
-
-
     return (
         <Grid item xs={12} className='flex flex-wrap gap-5' >
             <input
