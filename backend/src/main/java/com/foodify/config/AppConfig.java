@@ -3,6 +3,7 @@ package com.foodify.config;
 import com.foodify.filter.JwtAuthenticationFilter;
 import com.foodify.service.impl.UserDetailsServiceImpl;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -25,6 +26,7 @@ import static org.springframework.security.config.http.SessionCreationPolicy.*;
 @RequiredArgsConstructor
 @Configuration
 @EnableWebSecurity
+@Slf4j
 public class AppConfig {
 
     private final UserDetailsServiceImpl userDetailsService;

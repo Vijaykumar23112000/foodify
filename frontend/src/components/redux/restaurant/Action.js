@@ -146,7 +146,7 @@ export const getRestaurantEventsAction = ({ restaurantId, token }) => async (dis
 
 export const createCategoryAction = ({ requestData, token }) => async (dispatch) => {
     dispatch({ type: actionTypes.CREATE_CATEGORY_REQUEST })
-    await api.post(`/api/admin/category`, requestData, { headers: { Authorization: `Bearer ${token}` } })
+    await api.post(`/api/admin/category`, requestData.name, { headers: { Authorization: `Bearer ${token}` } })
         .then(res => {
             dispatch({ type: actionTypes.CREATE_CATEGORY_SUCCESS, payload: res.data })
             console.log("Restaurant.Action => Create Category Success : ", res.data);
