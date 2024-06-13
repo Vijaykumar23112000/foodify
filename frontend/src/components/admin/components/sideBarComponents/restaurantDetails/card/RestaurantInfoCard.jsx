@@ -1,7 +1,8 @@
 import { Card, CardContent, CardHeader, Grid } from '@mui/material'
 import React from 'react'
 
-const RestaurantInfoCard = () => {
+const RestaurantInfoCard = ({ restaurant }) => {
+
     return (
         <Grid item xs={12} >
             <Card>
@@ -16,28 +17,28 @@ const RestaurantInfoCard = () => {
                             <p className='w-48'>Owner</p>
                             <p className='w-48 text-gray-400'>
                                 <span className='pr-5'>-</span>
-                                Mathew
+                                { restaurant?.usersRestaurant?.owner.fullName}
                             </p>
                         </div>
                         <div className="flex">
                             <p className='w-48'>Restaurant Name</p>
                             <p className='w-48 text-gray-400'>
                                 <span className='pr-5'>-</span>
-                                Rapsy
+                                {restaurant?.usersRestaurant?.name}
                             </p>
                         </div>
                         <div className="flex">
                             <p className='w-48'>Cuisine Type</p>
                             <p className='w-48 text-gray-400'>
                                 <span className='pr-5'>-</span>
-                                Indian Arabic
+                                {restaurant?.usersRestaurant?.cuisineType}
                             </p>
                         </div>
                         <div className="flex">
                             <p className='w-48'>Opening Hours</p>
                             <p className='w-98 text-gray-400'>
                                 <span className='pr-5'>-</span>
-                                <span>Mon-Sat: 9.00 AM - 10.00 PM</span>
+                                <span>{restaurant?.usersRestaurant?.openingHours}</span>
                             </p>
                         </div>
                         <div className="flex">
@@ -45,7 +46,7 @@ const RestaurantInfoCard = () => {
                             <p className='w-48 text-gray-400'>
                                 <span className='pr-5'>-</span>
                                 {
-                                    true ? <span className='px-5 py-2 rounded-full bg-green-400 text-gray-950'>Open</span> :
+                                    restaurant?.usersRestaurant?.open ? <span className='px-5 py-2 rounded-full bg-green-400 text-gray-950'>Open</span> :
                                         <span className='px-5 py-2 rounded-full bg-red-400 text-gray-950'>Closed</span>
                                 }
                             </p>

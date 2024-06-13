@@ -28,15 +28,15 @@ export const getRestaurantByIdAction = ({ token, restaurantId }) => async (dispa
 }
 
 export const getRestaurantByUserIdAction = token => async (dispatch) => {
-    dispatch({ type: actionTypes.GET_RESTAURANT_BY_ID_REQUEST })
+    dispatch({ type: actionTypes.GET_RESTAURANT_BY_USER_ID_REQUEST })
     await api.get("/api/admin/restaurants/user", { headers: { Authorization: `Bearer ${token}` } })
         .then(res => {
-            dispatch({ type: actionTypes.GET_RESTAURANT_BY_ID_SUCCESS, payload: res.data })
+            dispatch({ type: actionTypes.GET_RESTAURANT_BY_USER_ID_SUCCESS, payload: res.data })
             console.log("Restaurant.Action => Get restaurant by User id Success : ", res.data);
         })
         .catch(error => {
             console.log("Restaurant.Action => Get restaurant by User id Failed : ", error)
-            dispatch({ type: actionTypes.GET_RESTAURANT_BY_ID_FAILED, payload: error })
+            dispatch({ type: actionTypes.GET_RESTAURANT_BY_USER_ID_FAILED, payload: error })
         })
 }
 

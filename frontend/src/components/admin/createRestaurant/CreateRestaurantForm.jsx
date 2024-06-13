@@ -16,8 +16,13 @@ import EmailField from './fields/EmailField';
 import MobileField from './fields/MobileField';
 import SocialMediaField from './fields/SocialMediaField';
 import { uploadImageToCloudinary } from '../components/cloudinary/Upload';
+import { useDispatch } from 'react-redux';
+import { createRestaurantAction } from '../../redux/restaurant/Action';
 
 const CreateRestaurantForm = () => {
+
+    const dispatch = useDispatch()
+    const token = localStorage.getItem("token")
 
     const formik = useFormik({
         initialValues,
@@ -41,8 +46,8 @@ const CreateRestaurantForm = () => {
                 },
                 openingHours: values.openingHours,
                 images: values.images
-            }
-            console.log("Data from restaurant form => ", data);
+            }            
+            dispatch(createRestaurantAction({data , token}))
         }
     })
 

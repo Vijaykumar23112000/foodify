@@ -1,7 +1,8 @@
 import { Card, CardContent, CardHeader, Grid } from '@mui/material'
 import React from 'react'
 
-const AddressCard = () => {
+const AddressCard = ({ restaurant }) => {
+
     return (
         <Grid item xs={12} lg={6} >
             <Card>
@@ -15,29 +16,29 @@ const AddressCard = () => {
                         <div className="flex">
                             <p className='w-48'>Country</p>
                             <p className='w-48 text-gray-400'>
-                                <span className='pr-55'>-</span>
-                                India
+                                <span className='pr-5'>-</span>
+                                {restaurant?.usersRestaurant?.address.country}
                             </p>
                         </div>
                         <div className="flex">
                             <p className='w-48'>City</p>
                             <p className='w-48 text-gray-400'>
-                                <span className='pr-55'>-</span>
-                                Munnar
+                                <span className='pr-5'>-</span>
+                                {restaurant?.usersRestaurant?.address.city}
                             </p>
                         </div>
                         <div className="flex">
                             <p className='w-48'>Postal Code</p>
                             <p className='w-48 text-gray-400'>
-                                <span className='pr-55'>-</span>
-                                685616
+                                <span className='pr-5'>-</span>
+                                {restaurant?.usersRestaurant?.address.postalCode}
                             </p>
                         </div>
                         <div className="flex">
                             <p className='w-48'>Street Address</p>
                             <p className='w-48 text-gray-400'>
-                                <span className='pr-55'>-</span>
-                                2nd Street
+                                <span className='pr-5'>-</span>
+                                {restaurant?.usersRestaurant?.address.streetAddress}
                             </p>
                         </div>
                     </div>
