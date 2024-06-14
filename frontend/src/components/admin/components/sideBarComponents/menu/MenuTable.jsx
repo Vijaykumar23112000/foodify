@@ -1,10 +1,10 @@
 import { Avatar, Box, Card, CardHeader, Chip, IconButton, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from '@mui/material'
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import AddIcon from '@mui/icons-material/Add';
 import { Delete } from '@mui/icons-material';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { getAllRestaurantsFood } from '../../../../redux/menu/Action';
+import { deleteFoodAction, getAllRestaurantsFood } from '../../../../redux/menu/Action';
 
 const MenuTable = () => {
 
@@ -12,12 +12,15 @@ const MenuTable = () => {
     const { restaurant, menu } = useSelector(store => store)
     const restaurantId = restaurant.usersRestaurant.id
     const token = localStorage.getItem("token")
+    const [updateTrigger, setUpdateTrigger] = useState(false);
 
     useEffect(() => {
-        dispatch(getAllRestaurantsFood({ restaurantId, token }))
-    }, [dispatch, restaurantId, token, menu.menuItems.length])
+        dispatch(getAllRestaurantsFood({ restaurantId, token })).then(() => setUpdateTrigger(prev => !prev))
+    }, [dispatch, restaurantId, token, updateTrigger])
 
     const navigate = useNavigate()
+
+    const handleDelete = id => dispatch(deleteFoodAction({ foodId: id, token })).then(() => setUpdateTrigger(prev => !prev))
 
     return (
         <Box>
@@ -63,7 +66,7 @@ const MenuTable = () => {
                                         <TableCell align="left">{item.isAvailable ? "Available" : "Out Of Stock"}</TableCell>
                                         <TableCell align="left">
                                             <IconButton>
-                                                <Delete color='error' />
+                                                <Delete onClick={() =>handleDelete(item.id)} color='error' />
                                             </IconButton>
                                         </TableCell>
                                     </TableRow>
