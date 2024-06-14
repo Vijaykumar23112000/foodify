@@ -9,10 +9,10 @@ const VegetarianField = ({ formik }) => {
                 <Select
                     labelId="demo-simple-select-label"
                     id="demo-simple-select"
-                    value={formik.values.vegetarian}
+                    value={formik.values.isVegetarian}
                     label="Is Vegetarian"
                     onChange={formik.handleChange}
-                    name="vegetarian"
+                    name="isVegetarian"
                 >
                     <MenuItem value={true}>Yes</MenuItem>
                     <MenuItem value={false}>No</MenuItem>

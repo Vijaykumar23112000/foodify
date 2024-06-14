@@ -1,7 +1,7 @@
 import { Box, Chip, FormControl, Grid, InputLabel, MenuItem, OutlinedInput, Select } from '@mui/material'
 import React from 'react'
 
-const IngredientsField = ({ formik }) => {
+const IngredientsField = ({ formik, ingredients }) => {
 
     return (
         <Grid item xs={12}>
@@ -18,20 +18,13 @@ const IngredientsField = ({ formik }) => {
                     renderValue={(selected) => (
                         <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 0.5 }}>
                             {selected.map((value) => (
-                                <Chip key={value} label={value} />
+                                <Chip key={value.id} label={value.name} />
                             ))}
                         </Box>
                     )}
                 >
                     {
-                        ["bread", "sauce", "apple"].map((name, i) => (
-                            <MenuItem
-                                key={i}
-                                value={name}
-                            >
-                                {name}
-                            </MenuItem>
-                        ))
+                        ingredients.ingredients?.map((item, i) => <MenuItem key={i} value={item}>{item.name}</MenuItem>)
                     }
                 </Select>
             </FormControl>

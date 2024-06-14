@@ -10,8 +10,7 @@ import Events from '../components/sideBarComponents/events/Events'
 import RestaurantDetails from '../components/sideBarComponents/restaurantDetails/RestaurantDetails'
 import CreateMenuForm from '../createMenu/CreateMenuForm'
 import { useDispatch, useSelector } from 'react-redux'
-import { getRestaurantByIdAction, getRestaurantCategoryAction } from '../../redux/restaurant/Action'
-import { getMenuItemsByRestaurantIdAction } from '../../redux/menu/Action'
+import { getRestaurantCategoryAction } from '../../redux/restaurant/Action'
 import { fetchRestaurantsOrderAction } from '../../redux/restaurantOrder/Action'
 
 const Admin = () => {
@@ -24,13 +23,11 @@ const Admin = () => {
     const handleClose = () => { }
 
     useEffect(() => {
-        dispatch(getRestaurantCategoryAction({ restaurantId, token })) 
-            dispatch(fetchRestaurantsOrderAction({ 
-                restaurantId, token
-            }))
-        // dispatch(getMenuItemsByRestaurantIdAction())
-        // dispatch(getRestaurantByIdAction())
-    }, [])
+        dispatch(getRestaurantCategoryAction({ restaurantId, token }))
+        dispatch(fetchRestaurantsOrderAction({
+            restaurantId, token
+        }))
+    }, [dispatch, restaurantId, token])
 
     return (
         <div>

@@ -1,5 +1,5 @@
 import { useFormik } from 'formik';
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { initialValues } from './InitialValues';
 import ImageField from './fields/ImageField';
 import NameField from './fields/NameField';
@@ -11,15 +11,31 @@ import { uploadImageToCloudinary } from '../components/cloudinary/Upload';
 import IngredientsField from './fields/IngredientsField';
 import VegetarianField from './fields/VegetarianField';
 import SeasonalField from './fields/SeasonalField';
+import { useDispatch, useSelector } from 'react-redux';
+import { createMenuItemAction } from '../../redux/menu/Action';
+import { getIngredientsOfRestaurantAction } from '../../redux/ingredients/Action';
+import { useNavigate } from 'react-router-dom';
 
 const CreateMenuForm = () => {
+
+    const { restaurant, ingredients } = useSelector(store => store)
+    const token = localStorage.getItem("token")
+    const dispatch = useDispatch()
+    const restaurantId = restaurant.usersRestaurant.id
+    const navigate = useNavigate()
+
     const formik = useFormik({
         initialValues,
         onSubmit: (values) => {
             values.restaurantId = 1
-            console.log("Data from restaurant form => ", values);
+            dispatch(createMenuItemAction({ menu: values, token }))
+            navigate("/admin/restaurant/menu")
         },
     })
+
+    useEffect(() => {
+        dispatch(getIngredientsOfRestaurantAction({ id: restaurantId, token }))
+    }, [dispatch, token, restaurantId])
 
     const [uploadImage, setUploadImage] = useState(false)
 
@@ -55,8 +71,8 @@ const CreateMenuForm = () => {
                         <NameField formik={formik} />
                         <DescriptionField formik={formik} />
                         <PriceField formik={formik} />
-                        <CategoryField formik={formik} />
-                        <IngredientsField formik={formik} />
+                        <CategoryField formik={formik} restaurant={restaurant} />
+                        <IngredientsField formik={formik} ingredients={ingredients} />
                         <VegetarianField formik={formik} />
                         <SeasonalField formik={formik} />
                     </Grid>

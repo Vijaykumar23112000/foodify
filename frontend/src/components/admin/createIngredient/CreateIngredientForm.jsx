@@ -1,20 +1,27 @@
 import { Button, FormControl, InputLabel, MenuItem, Select, TextField, Typography } from '@mui/material'
 import React, { useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import { createIngredientAction } from '../../redux/ingredients/Action'
 
-const CreateIngredientForm = () => {
+const CreateIngredientForm = ({ handleClose }) => {
+
+    const dispatch = useDispatch()
+    const token = localStorage.getItem("token")
+    const { restaurant, ingredients } = useSelector(store => store)
+
     const [formData, setFormData] = useState({
         name: "",
-        ingredientCategoryId: ""
+        categoryId: ""
     })
 
-    const handleSubmit = () => {
+    const handleSubmit = e => {
+        e.preventDefault()
         const data = {
-            name: formData.name,
-            ingredientCategoryId: {
-                id: 1
-            }
+            ...formData,
+            restaurantId: restaurant.usersRestaurant.id
         }
-        console.log(data)
+        dispatch(createIngredientAction({ ingredientData: data, token }))
+        handleClose()
     }
 
     const handleInputChange = (e) => {
@@ -31,7 +38,7 @@ const CreateIngredientForm = () => {
                         fullWidth
                         id='name'
                         name='name'
-                        label="Category Name"
+                        label="Ingredient Name"
                         variant='outlined'
                         onChange={handleInputChange}
                         value={formData.name}
@@ -42,14 +49,14 @@ const CreateIngredientForm = () => {
                         <Select
                             labelId="demo-simple-select-label"
                             id="demo-simple-select"
-                            value={formData.ingredientCategoryId}
+                            value={formData.categoryId}
                             label="Category"
                             onChange={handleInputChange}
-                            name="ingredientCategoryId"
+                            name="categoryId"
                         >
-                            <MenuItem value={"Bread"}>Bread</MenuItem>
-                            <MenuItem value={"Tomato"}>Tomato</MenuItem>
-                            <MenuItem value={"Pickle"}>Pickle</MenuItem>
+                            {
+                                ingredients.category.map((item, i) => <MenuItem key={i} value={item.id}>{item.name}</MenuItem>)
+                            }
                         </Select>
                     </FormControl>
                     <Button

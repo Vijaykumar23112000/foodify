@@ -11,6 +11,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/api/admin/food")
@@ -50,6 +52,15 @@ public class AdminFoodController {
 
         var food = foodService.updateAvailabilityStatus(id);
         return ResponseEntity.status(HttpStatus.OK).body(food);
+
+    }
+
+    @GetMapping("/restaurant/{id}")
+    public ResponseEntity<List<FoodResponseDto>> getAllFoods(
+            @PathVariable Long id,
+            @RequestHeader("Authorization") String token ) throws Exception {
+        var restaurant = restaurantService.findRestaurantById(id);
+        return ResponseEntity.status(HttpStatus.OK).body(foodService.getAllRestaurantsFood(id , restaurant));
 
     }
 

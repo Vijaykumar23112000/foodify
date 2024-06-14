@@ -1,13 +1,24 @@
 import { Box, Card, CardHeader, IconButton, Modal, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from '@mui/material'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import AddIcon from '@mui/icons-material/Add';
 import CreateFoodCategoryForm from '../../../createFoodCategory/CreateFoodCategoryForm';
+import { useDispatch, useSelector } from 'react-redux';
+import { getRestaurantCategoryAction } from '../../../../redux/restaurant/Action';
 
 const FoodCategoryTable = () => {
 
     const [open, setOpen] = useState(false);
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
+    const dispatch = useDispatch()
+    const token = localStorage.getItem("token")
+    const { restaurant } = useSelector(store => store)
+    const restaurantId = restaurant.usersRestaurant?.id
+
+    useEffect(() => {
+        dispatch(getRestaurantCategoryAction({ restaurantId, token }))
+    }, [restaurantId, dispatch, token])
+
 
     const style = {
         position: 'absolute',
@@ -42,15 +53,17 @@ const FoodCategoryTable = () => {
                             </TableRow>
                         </TableHead>
                         <TableBody>
-                            {[1, 1, 1, 1, 1, 1, 1, 1].map((row, i) => (
-                                <TableRow
-                                    key={i}
-                                    sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
-                                >
-                                    <TableCell align='left' component="th" scope="row">{1}</TableCell>
-                                    <TableCell align="left">{"Feba"}</TableCell>
-                                </TableRow>
-                            ))}
+                            {
+                                restaurant.categories.map((item, i) => (
+                                    <TableRow
+                                        key={i}
+                                        sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+                                    >
+                                        <TableCell align='left' component="th" scope="row">{i+1}</TableCell>
+                                        <TableCell align="left">{item.name}</TableCell>
+                                    </TableRow>
+                                ))
+                            }
                         </TableBody>
                     </Table>
                 </TableContainer>
@@ -62,7 +75,7 @@ const FoodCategoryTable = () => {
                 aria-describedby="modal-modal-description"
             >
                 <Box sx={style}>
-                    <CreateFoodCategoryForm />
+                    <CreateFoodCategoryForm handleClose={handleClose} />
                 </Box>
             </Modal>
         </Box>

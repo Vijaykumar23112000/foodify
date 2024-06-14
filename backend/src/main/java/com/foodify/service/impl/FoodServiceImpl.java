@@ -16,6 +16,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 import static com.foodify.Utils.food.FoodFilterUtil.*;
 import static com.foodify.Utils.food.FoodUtil.createFood;
@@ -39,7 +40,7 @@ public class FoodServiceImpl implements FoodService {
         List<IngredientsItemResponseDto> dtos = ingredients.stream()
                 .map(ingredientsMapper.toDTO)
                 .toList();
-        return FoodResponseDtoUtil.createFoodResponseDtoUtil.apply(savedFood , restaurantResponseDto , dtos);
+         return FoodResponseDtoUtil.createFoodResponseDtoUtil.apply(savedFood , restaurantResponseDto , dtos);
     }
 
     @Override
@@ -76,6 +77,20 @@ public class FoodServiceImpl implements FoodService {
         var food = findFoodById(foodId);
         food.setAvailable(!food.getAvailable());
         return foodRepository.save(food);
+    }
+
+    @Override
+    public List<FoodResponseDto> getAllRestaurantsFood(Long restaurantId , Restaurant restaurant){
+        var restaurantResponseDto = restaurantMapper.toDTO.apply(restaurant, userService.findUserByEmail(restaurant.getOwner().getEmail()));
+        return foodRepository.findByRestaurantId(restaurantId).stream()
+                    .map(food -> {
+                        List<IngredientsItemResponseDto> dtos = food.getIngredients().stream()
+                                .map(ingredientsMapper.toDTO)
+                                .collect(Collectors.toList());
+                        return FoodResponseDtoUtil.createFoodResponseDtoUtil.apply(food, restaurantResponseDto, dtos);
+                    })
+                    .collect(Collectors.toList());
+
     }
 
 }

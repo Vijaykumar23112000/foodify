@@ -9,10 +9,10 @@ const SeasonalField = ({ formik }) => {
                 <Select
                     labelId="demo-simple-select-label"
                     id="demo-simple-select"
-                    value={formik.values.seasonal}
+                    value={formik.values.isSeasonable}
                     label="Is Seasonal"
                     onChange={formik.handleChange}
-                    name="seasonal"
+                    name="isSeasonable"
                 >
                     <MenuItem value={true}>Yes</MenuItem>
                     <MenuItem value={false}>No</MenuItem>

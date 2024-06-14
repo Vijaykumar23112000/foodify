@@ -16,14 +16,12 @@ export const createMenuItemAction = ({ menu, token }) => async (dispatch) => {
 
 export const getMenuItemsByRestaurantIdAction = requestData => async (dispatch) => {
     dispatch({ type: actionTypes.GET_MENU_ITEMS_BY_RESTAURANT_ID_REQUEST })
-    
     const queryParams = new URLSearchParams({
-        isVegetarian: requestData.isVegetarian,
-        isNonVeg: requestData.isNonVeg,
-        isSeasonal: requestData.isSeasonal,
-        foodCategory: requestData.foodCategory.toString()
-    })
-
+        isVegetarian: requestData.isVegetarian ?? false,
+        isNonVeg: requestData.isNonVeg ?? false,
+        isSeasonal: requestData.isSeasonal ?? false,
+        foodCategory: requestData.foodCategory
+    });
     await api.get(`api/foods/restaurant/${requestData.restaurantId}?${queryParams}`,{ headers: { Authorization: `Bearer ${requestData.token}` } })
         .then(res => {
             dispatch({ type: actionTypes.GET_MENU_ITEMS_BY_RESTAURANT_ID_SUCCESS, payload: res.data })
@@ -71,5 +69,18 @@ export const deleteFoodAction = ({ foodId, token }) => async (dispatch) => {
         .catch(error => {
             dispatch({ type: actionTypes.DELETE_MENU_ITEM_FAILED, payload: error })
             console.log("Menu.Action => Delete Food Failed : ", error);
+        })
+}
+
+export const getAllRestaurantsFood = ({restaurantId , token }) => async (dispatch) => {
+    dispatch({ type: actionTypes.GET_ALL_MENU_ITEMS_OF_RESTAURANT_REQUEST })
+    await api.get(`api/admin/food/restaurant/${restaurantId}`, { headers: { Authorization: `Bearer ${token}` } })
+        .then(res => {
+            dispatch({ type: actionTypes.GET_ALL_MENU_ITEMS_OF_RESTAURANT_SUCCESS, payload: res.data })
+            console.log("Menu.Action => Get ALl Restaurants Food Success : ", res.data);
+        })
+        .catch(error => {
+            dispatch({ type: actionTypes.GET_ALL_MENU_ITEMS_OF_RESTAURANT_FAILED, payload: error })
+            console.log("Menu.Action => Get ALl Restaurants Food Failed : ", error);
         })
 }

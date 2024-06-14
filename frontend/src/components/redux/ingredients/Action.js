@@ -29,7 +29,7 @@ export const createIngredientAction = ({ ingredientData, token }) => async (disp
 
 export const createIngredientCategoryAction = ({ ingredientCategoryData, token }) => async (dispatch) => {
     dispatch({ type: actionTypes.CREATE_INGREDIENT_CATEGORY_REQUEST })
-    await api.post(`/api/admin/ingredients`, ingredientCategoryData, { headers: { Authorization: `Bearer ${token}` } })
+    await api.post(`/api/admin/ingredients/category`, ingredientCategoryData, { headers: { Authorization: `Bearer ${token}` } })
         .then(res => {
             dispatch({ type: actionTypes.CREATE_INGREDIENT_CATEGORY_SUCCESS, payload: res.data })
             console.log("Ingredients.Action => Create Ingredient Category Success : ", res.data);
@@ -42,7 +42,7 @@ export const createIngredientCategoryAction = ({ ingredientCategoryData, token }
 
 export const getIngredientCategoryAction = ({ id, token }) => async (dispatch) => {
     dispatch({ type: actionTypes.GET_INGREDIENT_CATEGORY_REQUEST })
-    await api.post(`/api/admin/ingredients/restaurant/${id}/category`, ingredientData, { headers: { Authorization: `Bearer ${token}` } })
+    await api.get(`/api/admin/ingredients/restaurant/${id}/category`, { headers: { Authorization: `Bearer ${token}` } })
         .then(res => {
             dispatch({ type: actionTypes.GET_INGREDIENT_CATEGORY_SUCCESS, payload: res.data })
             console.log("Ingredients.Action => Get Ingredient Category Success : ", res.data);

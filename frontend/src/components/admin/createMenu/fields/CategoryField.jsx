@@ -1,7 +1,7 @@
 import { FormControl, Grid, InputLabel, MenuItem, Select } from '@mui/material'
 import React from 'react'
 
-const CategoryField = ({ formik }) => {
+const CategoryField = ({ formik, restaurant }) => {
     return (
         <Grid item xs={12} lg={6}>
             <FormControl fullWidth>
@@ -14,9 +14,10 @@ const CategoryField = ({ formik }) => {
                     onChange={formik.handleChange}
                     name="category"
                 >
-                    <MenuItem value={10}>Ten</MenuItem>
-                    <MenuItem value={20}>Twenty</MenuItem>
-                    <MenuItem value={30}>Thirty</MenuItem>
+                    {
+                        restaurant.categories?.map((item, i) => <MenuItem key={i} value={item}>{item.name}</MenuItem>)
+                    }
+
                 </Select>
             </FormControl>
         </Grid>

@@ -4,8 +4,8 @@ export const initialValues = {
     price:"",
     category:"",
     restaurantId:"",
-    vegetarian:"",
-    seasonal:"",
+    isVegetarian:"",
+    isSeasonable:"",
     ingredients:[],
     images:[],
 }

@@ -15,4 +15,5 @@ public interface FoodService {
     List<Food> searchFood(String keyword);
     Food findFoodById(Long foodId) throws Exception;
     Food updateAvailabilityStatus(Long foodId) throws Exception;
+    List<FoodResponseDto> getAllRestaurantsFood(Long restaurantId , Restaurant restaurant);
 }

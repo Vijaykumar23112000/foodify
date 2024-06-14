@@ -10,12 +10,14 @@ export const menuItemReducer = (state = initialState , action) => {
         case actionTypes.DELETE_MENU_ITEM_REQUEST:
         case actionTypes.SEARCH_MENU_ITEM_REQUEST:
         case actionTypes.UPDATE_MENU_ITEMS_AVAILABILITY_REQUEST:
+        case actionTypes.GET_ALL_MENU_ITEMS_OF_RESTAURANT_REQUEST:
             return helper.handleRequest(state)
         
         case actionTypes.CREATE_MENU_ITEM_SUCCESS:
             return helper.handleCreateMenuItemSuccess(state , action.payload)
         
         case actionTypes.GET_MENU_ITEMS_BY_RESTAURANT_ID_SUCCESS:
+        case actionTypes.GET_ALL_MENU_ITEMS_OF_RESTAURANT_SUCCESS:
             return helper.handleGetMenuItemsByRestaurantIdSuccess(state , action.payload)
 
         case actionTypes.DELETE_MENU_ITEM_SUCCESS:
@@ -32,6 +34,7 @@ export const menuItemReducer = (state = initialState , action) => {
         case actionTypes.DELETE_MENU_ITEM_FAILED:
         case actionTypes.SEARCH_MENU_ITEM_FAILED:
         case actionTypes.UPDATE_MENU_ITEMS_AVAILABILITY_FAILED:
+        case actionTypes.GET_ALL_MENU_ITEMS_OF_RESTAURANT_FAILED:
             return helper.handleFailed(state , action.payload)
         
         default:
