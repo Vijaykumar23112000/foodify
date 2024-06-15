@@ -15,7 +15,7 @@ const MenuTable = () => {
     const [updateTrigger, setUpdateTrigger] = useState(false);
 
     useEffect(() => {
-        dispatch(getAllRestaurantsFood({ restaurantId, token })).then(() => setUpdateTrigger(prev => !prev))
+        dispatch(getAllRestaurantsFood({ restaurantId, token }))
     }, [dispatch, restaurantId, token, updateTrigger])
 
     const navigate = useNavigate()
@@ -62,11 +62,11 @@ const MenuTable = () => {
                                                 item.ingredients?.map((ingredient, i) => <Chip key={i} label={ingredient.name} />)
                                             }
                                         </TableCell>
-                                        <TableCell align="left">{item.price}</TableCell>
+                                        <TableCell align="left">₹{item.price}</TableCell>
                                         <TableCell align="left">{item.isAvailable ? "Available" : "Out Of Stock"}</TableCell>
                                         <TableCell align="left">
-                                            <IconButton>
-                                                <Delete onClick={() =>handleDelete(item.id)} color='error' />
+                                            <IconButton onClick={() =>handleDelete(item.id)}>
+                                                <Delete color='error' />
                                             </IconButton>
                                         </TableCell>
                                     </TableRow>
